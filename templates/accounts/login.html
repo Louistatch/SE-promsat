@@ -1,33 +1,85 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Connexion - ProSMAT{% endblock %}
+
+{% block extra_css %}
+<style>
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .login-card {
+        animation: slideInUp 0.6s ease-out;
+    }
+    
+    .login-logo {
+        animation: slideInUp 0.8s ease-out;
+        transition: transform 0.3s ease;
+    }
+    
+    .login-logo:hover {
+        transform: scale(1.1);
+    }
+    
+    .login-icon {
+        animation: rotate 2s ease-in-out infinite;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-5">
-            <div class="card shadow">
+            <div class="card shadow login-card">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <i class="bi bi-graph-up-arrow text-primary" style="font-size: 3rem;"></i>
-                        <h2 class="mt-3">ProSMAT</h2>
+                        <img src="{% static 'images/logo_prosmat.jpg' %}" alt="ProSMAT Logo" class="login-logo mb-3" style="height: 100px; width: auto; border-radius: 12px;">
+                        <h2 class="mt-3 fw-bold">ProSMAT</h2>
                         <p class="text-muted">Système de Suivi & Évaluation</p>
+                        <p class="text-muted small">Projet de Soutien à la Promotion du Maraîchage Agroécologique au Togo</p>
                     </div>
                     
                     <form method="post">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <label for="username" class="form-label">
+                                <i class="bi bi-person"></i> Nom d'utilisateur
+                            </label>
                             <input type="text" class="form-control" id="username" name="username" required autofocus>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Mot de passe</label>
+                            <label for="password" class="form-label">
+                                <i class="bi bi-lock"></i> Mot de passe
+                            </label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">
+                        <button type="submit" class="btn btn-primary w-100 py-2">
                             <i class="bi bi-box-arrow-in-right"></i> Se connecter
                         </button>
                     </form>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted small mb-0">Financé par GAFSP & FIDA</p>
+                        <p class="text-muted small">République du Togo</p>
+                    </div>
                 </div>
             </div>
         </div>
