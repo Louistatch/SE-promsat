@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════════════════════
+  PROSMAT - LIENS DIRECTS POUR TÉLÉCHARGER LES LOGOS
+═══════════════════════════════════════════════════════════════
+
+📥 INSTRUCTIONS:
+1. Cliquez sur chaque lien ci-dessous
+2. Téléchargez l'image en haute résolution (PNG transparent)
+3. Renommez le fichier selon le nom indiqué
+4. Placez le fichier dans: static\images\
+
+═══════════════════════════════════════════════════════════════
+
+🔵 LOGO 1: FIDA/IFAD
+───────────────────────────────────────────────────────────────
+Lien principal:
+https://seeklogo.com/vector-logo/70024/ifad
+
+Liens alternatifs:
+https://freebiesupply.com/logos/ifad-logo-2/
+https://iconlogovector.com/logo/ifad
+
+📁 Nom du fichier: logo_ifad.png
+📍 Emplacement: static\images\logo_ifad.png
+
+═══════════════════════════════════════════════════════════════
+
+🟢 LOGO 2: GAFSP
+───────────────────────────────────────────────────────────────
+Lien principal:
+https://www.gafspfund.org/
+
+Instructions:
+- Visitez le site officiel GAFSP
+- Cherchez le logo dans le footer ou la page "About Us"
+- Clic droit > Enregistrer l'image sous
+- OU contactez GAFSP pour obtenir le logo officiel
+
+📁 Nom du fichier: logo_gafsp.png
+📍 Emplacement: static\images\logo_gafsp.png
+
+═══════════════════════════════════════════════════════════════
+
+🔴 LOGO 3: ARMOIRIES DU TOGO
+───────────────────────────────────────────────────────────────
+Lien principal:
+https://brandeps.com/logo/C/Coat-of-arms-of-Togo-01
+
+Liens alternatifs:
+https://incubator.wikimedia.org/wiki/File:Armoiries_du_Togo.svg
+https://seeklogo.com/vector-logo/140614/togo
+
+📁 Nom du fichier: armoiries_togo.png
+📍 Emplacement: static\images\armoiries_togo.png
+
+═══════════════════════════════════════════════════════════════
+
+🟡 LOGO 4 (OPTIONNEL): DRAPEAU DU TOGO
+───────────────────────────────────────────────────────────────
+Lien principal:
+https://iconlogovector.com/vector/togo
+
+Liens alternatifs:
+https://freebiesupply.com/s/flag-of-togo-logo-png/
+
+📁 Nom du fichier: drapeau_togo.png
+📍 Emplacement: static\images\drapeau_togo.png
+
+═══════════════════════════════════════════════════════════════
+
+✅ VÉRIFICATION FINALE
+───────────────────────────────────────────────────────────────
+Après téléchargement, votre dossier devrait contenir:
+
+static\images\
+├── logo_ifad.png ✅
+├── logo_gafsp.png ✅
+├── armoiries_togo.png ✅
+└── drapeau_togo.png (optionnel)
+
+═══════════════════════════════════════════════════════════════
+
+📖 PROCHAINES ÉTAPES
+───────────────────────────────────────────────────────────────
+1. Téléchargez les 3 logos principaux
+2. Consultez GUIDE_INTEGRATION_LOGOS.md pour l'intégration
+3. Utilisez EXEMPLE_HEADER_LOGOS.html comme modèle
+4. Testez l'affichage sur http://localhost:8000
+
+═══════════════════════════════════════════════════════════════
+
+💡 CONSEILS
+───────────────────────────────────────────────────────────────
+- Préférez les formats PNG avec transparence
+- Résolution minimum: 500x500px
+- Pour les exports PDF: 300 DPI minimum
+- Gardez les proportions originales des logos
+
+═══════════════════════════════════════════════════════════════
+
+Date: 8 février 2026
+Projet: ProSMAT - Système de Suivi-Évaluation

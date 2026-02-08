@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard Avancé - ProSMAT{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chart-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .chart-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #366092;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #366092;
+        padding-bottom: 10px;
+    }
+    
+    .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .metric-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .metric-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+    }
+    
+    .heatmap-cell {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .heatmap-cell:hover {
+        transform: scale(1.05);
+        z-index: 10;
+    }
+    
+    .sparkline {
+        height: 40px;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <h1 class="display-4 mb-4">
+        <i class="fas fa-chart-area"></i> Dashboard Avancé
+    </h1>
+    
+    <!-- Métriques Rapides -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="metric-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <div class="metric-label">Taux de Complétion</div>
+                <div class="metric-value">{{ taux_completion }}%</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="metric-label">Indicateurs Actifs</div>
+                <div class="metric-value">{{ nb_indicateurs }}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="metric-label">Réalisations</div>
+                <div class="metric-value">{{ nb_realisations }}</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <div class="metric-label">Alertes Actives</div>
+                <div class="metric-value">{{ nb_alertes }}</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Graphiques Avancés -->
+    <div class="row mt-4">
+        <!-- Graphique Radar -->
+        <div class="col-md-6">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="fas fa-radar"></i> Performance Multi-Dimensionnelle
+                </div>
+                <canvas id="radarChart" height="300"></canvas>
+            </div>
+        </div>
+        
+        <!-- Graphique Jauge -->
+        <div class="col-md-6">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="fas fa-tachometer-alt"></i> Performance Globale
+                </div>
+                <canvas id="gaugeChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <!-- Heatmap Région × Composante -->
+        <div class="col-md-8">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="fas fa-th"></i> Heatmap: Performance par Région et Composante
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Région</th>
+                                {% for comp in composantes %}
+                                <th>{{ comp.nom|truncatechars:10 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for region, performances in heatmap_data.items %}
+                            <tr>
+                                <td><strong>{{ region }}</strong></td>
+                                {% for perf in performances %}
+                                <td class="heatmap-cell" 
+                                    style="background-color: {{ perf.color }}; color: {{ perf.text_color }};"
+                                    title="{{ perf.value }}%">
+                                    {{ perf.value|floatformat:0 }}%
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sparklines -->
+        <div class="col-md-4">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="fas fa-chart-line"></i> Tendances Rapides
+                </div>
+                {% for region in regions %}
+                <div class="mb-3">
+                    <strong>{{ region }}</strong>
+                    <canvas id="sparkline-{{ region }}" class="sparkline"></canvas>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Graphique de Comparaison Temporelle -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i class="fas fa-chart-bar"></i> Comparaison Temporelle par Région
+                </div>
+                <canvas id="timeComparisonChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+    // Données
+    const chartData = {{ chart_data_json|safe }};
+    
+    // Configuration commune
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom'
+            }
+        }
+    };
+    
+    // 1. Graphique Radar
+    const radarCtx = document.getElementById('radarChart').getContext('2d');
+    new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+            labels: chartData.radar.labels,
+            datasets: chartData.radar.datasets
+        },
+        options: {
+            ...commonOptions,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+    
+    // 2. Graphique Jauge (Doughnut modifié)
+    const gaugeCtx = document.getElementById('gaugeChart').getContext('2d');
+    const gaugeValue = chartData.gauge.value;
+    new Chart(gaugeCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Atteint', 'Restant'],
+            datasets: [{
+                data: [gaugeValue, 100 - gaugeValue],
+                backgroundColor: [
+                    gaugeValue >= 75 ? '#38ef7d' : gaugeValue >= 50 ? '#ffc107' : '#dc3545',
+                    '#e0e0e0'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            ...commonOptions,
+            rotation: -90,
+            circumference: 180,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            }
+        },
+        plugins: [{
+            afterDraw: function(chart) {
+                const ctx = chart.ctx;
+                const centerX = chart.chartArea.left + (chart.chartArea.right - chart.chartArea.left) / 2;
+                const centerY = chart.chartArea.bottom;
+                
+                ctx.save();
+                ctx.font = 'bold 48px Arial';
+                ctx.fillStyle = '#366092';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText(gaugeValue + '%', centerX, centerY - 20);
+                ctx.restore();
+            }
+        }]
+    });
+    
+    // 3. Sparklines
+    chartData.sparklines.forEach(sparkline => {
+        const ctx = document.getElementById('sparkline-' + sparkline.region).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: sparkline.labels,
+                datasets: [{
+                    data: sparkline.data,
+                    borderColor: '#366092',
+                    backgroundColor: 'rgba(54, 96, 146, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: false
+                    },
+                    y: {
+                        display: false
+                    }
+                }
+            }
+        });
+    });
+    
+    // 4. Graphique de Comparaison Temporelle
+    const timeCtx = document.getElementById('timeComparisonChart').getContext('2d');
+    new Chart(timeCtx, {
+        type: 'bar',
+        data: {
+            labels: chartData.temporal.labels,
+            datasets: chartData.temporal.datasets
+        },
+        options: {
+            ...commonOptions,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

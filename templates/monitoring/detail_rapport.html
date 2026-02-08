@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ rapport.titre }} - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-file-text"></i> {{ rapport.titre }}</h1>
+        </div>
+        <div class="col-auto">
+            {% if rapport.fichier %}
+            <a href="{{ rapport.fichier.url }}" target="_blank" class="btn btn-success">
+                <i class="bi bi-download"></i> Télécharger
+            </a>
+            {% endif %}
+            <a href="{% url 'monitoring:liste_rapports' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Retour
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Contenu du Rapport</h5>
+                </div>
+                <div class="card-body">
+                    <div style="white-space: pre-wrap;">{{ rapport.contenu }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Informations</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <th>Type:</th>
+                            <td>
+                                <span class="badge bg-info">
+                                    {{ rapport.get_type_rapport_display }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% if rapport.periode %}
+                        <tr>
+                            <th>Période:</th>
+                            <td>{{ rapport.periode }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if rapport.region %}
+                        <tr>
+                            <th>Région:</th>
+                            <td>{{ rapport.get_region_display }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Auteur:</th>
+                            <td>{{ rapport.auteur.get_full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de création:</th>
+                            <td>{{ rapport.date_creation|date:"d F Y à H:i" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dernière modification:</th>
+                            <td>{{ rapport.date_modification|date:"d F Y à H:i" }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

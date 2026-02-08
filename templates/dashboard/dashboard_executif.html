@@ -1,0 +1,498 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard Exécutif - ProSMAT{% endblock %}
+
+{% block extra_css %}
+<style>
+    .kpi-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .kpi-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .kpi-card.success {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+    
+    .kpi-card.warning {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    
+    .kpi-card.info {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    .kpi-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    
+    .kpi-label {
+        font-size: 0.95rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+    }
+    
+    .kpi-progress {
+        margin-top: 10px;
+    }
+    
+    .chart-container {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+    
+    .chart-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #366092;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #366092;
+        padding-bottom: 10px;
+    }
+    
+    .chart-wrapper {
+        position: relative;
+        height: 350px;
+        width: 100%;
+    }
+    
+    .chart-wrapper-small {
+        position: relative;
+        height: 250px;
+        width: 100%;
+    }
+    
+    .alert-item {
+        border-left: 4px solid #dc3545;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background: #fff3cd;
+        border-radius: 5px;
+        font-size: 0.9rem;
+    }
+    
+    .alert-item.critique {
+        border-left-color: #dc3545;
+        background: #f8d7da;
+    }
+    
+    .alert-item.important {
+        border-left-color: #ffc107;
+        background: #fff3cd;
+    }
+    
+    .alert-item.mineur {
+        border-left-color: #17a2b8;
+        background: #d1ecf1;
+    }
+    
+    .export-buttons {
+        margin-bottom: 20px;
+    }
+    
+    .performance-table {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    
+    .alertes-container {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-4">
+            <i class="fas fa-chart-line"></i> Dashboard Exécutif
+        </h1>
+        <div class="export-buttons">
+            <a href="{% url 'monitoring:export_excel' %}" class="btn btn-success btn-lg">
+                <i class="fas fa-file-excel"></i> Export Excel
+            </a>
+            <a href="{% url 'monitoring:export_pdf' %}" class="btn btn-danger btn-lg">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </a>
+        </div>
+    </div>
+    
+    <!-- KPI Cards -->
+    <div class="row mb-4">
+        <!-- Bénéficiaires -->
+        <div class="col-md-4">
+            <div class="kpi-card success">
+                <div class="kpi-label">
+                    <i class="fas fa-users"></i> Bénéficiaires Directs
+                </div>
+                <div class="kpi-value">
+                    {{ kpis.beneficiaires.valeur|floatformat:0 }}
+                </div>
+                <div class="kpi-progress">
+                    <div class="progress" style="height: 20px; background: rgba(255,255,255,0.3);">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ kpis.beneficiaires.pourcentage }}%; background: rgba(255,255,255,0.9);"
+                             aria-valuenow="{{ kpis.beneficiaires.pourcentage }}" 
+                             aria-valuemin="0" aria-valuemax="100">
+                            <strong>{{ kpis.beneficiaires.pourcentage }}%</strong>
+                        </div>
+                    </div>
+                    <small class="mt-1 d-block" style="font-size: 0.85rem;">
+                        Cible: {{ kpis.beneficiaires.cible|floatformat:0 }} | 
+                        Femmes: {{ kpis.beneficiaires.pct_femmes }}%
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Emplois -->
+        <div class="col-md-4">
+            <div class="kpi-card warning">
+                <div class="kpi-label">
+                    <i class="fas fa-briefcase"></i> Emplois Créés (ETP)
+                </div>
+                <div class="kpi-value">
+                    {{ kpis.emplois.valeur|floatformat:0 }}
+                </div>
+                <div class="kpi-progress">
+                    <div class="progress" style="height: 20px; background: rgba(255,255,255,0.3);">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ kpis.emplois.pourcentage }}%; background: rgba(255,255,255,0.9);"
+                             aria-valuenow="{{ kpis.emplois.pourcentage }}" 
+                             aria-valuemin="0" aria-valuemax="100">
+                            <strong>{{ kpis.emplois.pourcentage }}%</strong>
+                        </div>
+                    </div>
+                    <small class="mt-1 d-block" style="font-size: 0.85rem;">
+                        Cible: {{ kpis.emplois.cible|floatformat:0 }}
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance Globale -->
+        <div class="col-md-4">
+            <div class="kpi-card info">
+                <div class="kpi-label">
+                    <i class="fas fa-chart-pie"></i> Performance Globale
+                </div>
+                <div class="kpi-value">
+                    {{ kpis.performance.pourcentage }}%
+                </div>
+                <div class="kpi-progress">
+                    <div class="progress" style="height: 20px; background: rgba(255,255,255,0.3);">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ kpis.performance.pourcentage }}%; background: rgba(255,255,255,0.9);"
+                             aria-valuenow="{{ kpis.performance.pourcentage }}" 
+                             aria-valuemin="0" aria-valuemax="100">
+                            <strong>{{ kpis.performance.pourcentage }}%</strong>
+                        </div>
+                    </div>
+                    <small class="mt-1 d-block" style="font-size: 0.85rem;">
+                        Moyenne de tous les indicateurs
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Graphiques Principaux -->
+    <div class="row">
+        <!-- Performance par Région -->
+        <div class="col-lg-6 mb-4">
+            <div class="chart-container">
+                <div class="chart-title">
+                    <i class="fas fa-map-marked-alt"></i> Performance par Région
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="chartRegions"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance par Composante -->
+        <div class="col-lg-6 mb-4">
+            <div class="chart-container">
+                <div class="chart-title">
+                    <i class="fas fa-layer-group"></i> Performance par Composante
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="chartComposantes"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Évolution et Alertes -->
+    <div class="row">
+        <!-- Évolution Temporelle -->
+        <div class="col-lg-8 mb-4">
+            <div class="chart-container">
+                <div class="chart-title">
+                    <i class="fas fa-chart-line"></i> Évolution Temporelle des Réalisations
+                </div>
+                <div class="chart-wrapper-small">
+                    <canvas id="chartEvolution"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alertes Récentes -->
+        <div class="col-lg-4 mb-4">
+            <div class="chart-container">
+                <div class="chart-title">
+                    <i class="fas fa-exclamation-triangle"></i> Alertes Récentes
+                </div>
+                {% if alertes_recentes %}
+                    <div class="alertes-container">
+                        {% for alerte in alertes_recentes %}
+                        <div class="alert-item {{ alerte.severite|lower }}">
+                            <strong>{{ alerte.realisation.region }}</strong><br>
+                            <small>{{ alerte.realisation.indicateur.code }}</small><br>
+                            <span class="badge badge-{{ alerte.severite|lower }}">
+                                {{ alerte.get_type_alerte_display }}
+                            </span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center mt-5">
+                        <i class="fas fa-check-circle fa-3x text-success"></i>
+                        <p class="text-muted mt-3">Aucune alerte</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tableau Performance Régions -->
+    <div class="row">
+        <div class="col-12">
+            <div class="chart-container">
+                <div class="chart-title">
+                    <i class="fas fa-table"></i> Détail Performance par Région
+                </div>
+                <div class="performance-table">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark" style="position: sticky; top: 0; z-index: 10;">
+                            <tr>
+                                <th style="width: 20%;">Région</th>
+                                <th style="width: 50%;">Performance (%)</th>
+                                <th style="width: 15%;">Réalisations</th>
+                                <th style="width: 15%;">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for region in performance_regions %}
+                            <tr>
+                                <td><strong>{{ region.region }}</strong></td>
+                                <td>
+                                    <div class="progress" style="height: 25px;">
+                                        <div class="progress-bar 
+                                            {% if region.pourcentage >= 75 %}bg-success
+                                            {% elif region.pourcentage >= 50 %}bg-warning
+                                            {% else %}bg-danger{% endif %}"
+                                             role="progressbar" 
+                                             style="width: {{ region.pourcentage }}%"
+                                             aria-valuenow="{{ region.pourcentage }}" 
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            <strong>{{ region.pourcentage }}%</strong>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">{{ region.nb_realisations }}</td>
+                                <td>
+                                    {% if region.pourcentage >= 75 %}
+                                        <span class="badge badge-success">Excellent</span>
+                                    {% elif region.pourcentage >= 50 %}
+                                        <span class="badge badge-warning">Moyen</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">Faible</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+    // Données des graphiques
+    const chartData = {{ chart_data_json|safe }};
+    
+    // Configuration commune
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    padding: 15,
+                    font: {
+                        size: 12
+                    }
+                }
+            }
+        }
+    };
+    
+    // Graphique Performance par Région
+    const ctxRegions = document.getElementById('chartRegions').getContext('2d');
+    new Chart(ctxRegions, {
+        type: 'bar',
+        data: {
+            labels: chartData.regions.labels,
+            datasets: [{
+                label: 'Performance (%)',
+                data: chartData.regions.data,
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            ...commonOptions,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Graphique Performance par Composante
+    const ctxComposantes = document.getElementById('chartComposantes').getContext('2d');
+    new Chart(ctxComposantes, {
+        type: 'doughnut',
+        data: {
+            labels: chartData.composantes.labels,
+            datasets: [{
+                label: 'Performance (%)',
+                data: chartData.composantes.data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            ...commonOptions,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        padding: 10,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Graphique Évolution Temporelle
+    const ctxEvolution = document.getElementById('chartEvolution').getContext('2d');
+    new Chart(ctxEvolution, {
+        type: 'line',
+        data: {
+            labels: chartData.evolution.labels,
+            datasets: [{
+                label: 'Total Réalisé',
+                data: chartData.evolution.data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            ...commonOptions,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

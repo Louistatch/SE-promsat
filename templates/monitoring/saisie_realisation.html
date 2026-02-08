@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Saisie de Réalisation - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-pencil-square"></i> Saisie de Réalisation</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="indicateur" class="form-label">Indicateur *</label>
+                            <select class="form-select" id="indicateur" name="indicateur" required>
+                                <option value="">Sélectionner un indicateur</option>
+                                {% for indicateur in indicateurs %}
+                                <option value="{{ indicateur.id }}">
+                                    {{ indicateur.code }} - {{ indicateur.libelle|truncatewords:10 }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="periode" class="form-label">Période *</label>
+                            <select class="form-select" id="periode" name="periode" required>
+                                <option value="">Sélectionner une période</option>
+                                {% for periode in periodes %}
+                                <option value="{{ periode.id }}">{{ periode }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        {% if not user.has_region_access %}
+                        <div class="mb-3">
+                            <label for="region" class="form-label">Région *</label>
+                            <select class="form-select" id="region" name="region" required>
+                                <option value="">Sélectionner une région</option>
+                                <option value="MARITIME">Région Maritime</option>
+                                <option value="PLATEAUX">Région des Plateaux</option>
+                                <option value="CENTRALE">Région Centrale</option>
+                                <option value="KARA">Région de la Kara</option>
+                                <option value="SAVANES">Région des Savanes</option>
+                            </select>
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label for="valeur" class="form-label">Valeur Réalisée * <small class="text-muted">(Total)</small></label>
+                            <input type="number" step="0.01" class="form-control" id="valeur" name="valeur" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="hommes" class="form-label">👨 Hommes</label>
+                                    <input type="number" step="0.01" class="form-control" id="hommes" name="hommes" value="0">
+                                    <small class="text-muted">Désagrégation par genre</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="femmes" class="form-label">👩 Femmes</label>
+                                    <input type="number" step="0.01" class="form-control" id="femmes" name="femmes" value="0">
+                                    <small class="text-muted">Désagrégation par genre</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle"></i> <strong>Note:</strong> Si applicable, la somme Hommes + Femmes doit égaler la Valeur Réalisée.
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="commentaire" class="form-label">Commentaire</label>
+                            <textarea class="form-control" id="commentaire" name="commentaire" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fichier" class="form-label">Fichier Justificatif</label>
+                            <input type="file" class="form-control" id="fichier" name="fichier">
+                            <small class="text-muted">PDF, Word, Excel, Image (max 10MB)</small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Enregistrer
+                            </button>
+                            <a href="{% url 'monitoring:liste_realisations' %}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5><i class="bi bi-info-circle"></i> Aide</h5>
+                    <p class="small">
+                        Saisissez les réalisations pour chaque indicateur par période et par région.
+                    </p>
+                    <ul class="small">
+                        <li>Sélectionnez l'indicateur concerné</li>
+                        <li>Choisissez la période de reporting</li>
+                        <li>Entrez la valeur réalisée</li>
+                        <li>Ajoutez un commentaire si nécessaire</li>
+                        <li>Joignez un justificatif si disponible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

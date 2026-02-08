@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistiques - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-bar-chart"></i> Statistiques</h1>
+        </div>
+    </div>
+
+    {% if stats_regions %}
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="bi bi-geo-alt"></i> Statistiques par Région</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Région</th>
+                            <th>Réalisations</th>
+                            <th>Activités</th>
+                            <th>Budget Exécuté</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in stats_regions %}
+                        <tr>
+                            <td><strong>{{ stat.region }}</strong></td>
+                            <td>{{ stat.realisations }}</td>
+                            <td>{{ stat.activites }}</td>
+                            <td>{{ stat.budget_execute|floatformat:0 }} FCFA</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0"><i class="bi bi-calendar3"></i> Statistiques par Période</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Période</th>
+                            <th>Réalisations Saisies</th>
+                            <th>Réalisations Validées</th>
+                            <th>Taux de Validation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in stats_periodes %}
+                        <tr>
+                            <td><strong>{{ stat.periode }}</strong></td>
+                            <td>{{ stat.realisations }}</td>
+                            <td>{{ stat.validees }}</td>
+                            <td>
+                                {% if stat.realisations > 0 %}
+                                {% widthratio stat.validees stat.realisations 100 %}%
+                                {% else %}
+                                0%
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Aucune donnée disponible</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}Tableau de Bord - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-speedometer2"></i> Tableau de Bord</h1>
+            <p class="text-muted">
+                Bienvenue {{ user.get_full_name|default:user.username }} - {{ user.get_role_display }}
+                {% if user.region %} - {{ user.get_region_display }}{% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-list-check"></i> Indicateurs</h5>
+                    <h2>{{ stats.total_indicateurs }}</h2>
+                    <p class="mb-0">Indicateurs actifs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-check-circle"></i> Réalisations</h5>
+                    <h2>{{ stats.total_realisations }}</h2>
+                    <p class="mb-0">Total saisies</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-clipboard-check"></i> Validées</h5>
+                    <h2>{{ stats.realisations_validees }}</h2>
+                    <p class="mb-0">Réalisations validées</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-activity"></i> Activités</h5>
+                    <h2>{{ stats.activites_en_cours }}</h2>
+                    <p class="mb-0">En cours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-clock-history"></i> Dernières Réalisations</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Indicateur</th>
+                                    <th>Période</th>
+                                    <th>Valeur</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for realisation in dernieres_realisations %}
+                                <tr>
+                                    <td>{{ realisation.indicateur.code }}</td>
+                                    <td>{{ realisation.periode }}</td>
+                                    <td>{{ realisation.valeur_realisee }}</td>
+                                    <td>
+                                        {% if realisation.valide %}
+                                        <span class="badge bg-success">Validé</span>
+                                        {% else %}
+                                        <span class="badge bg-warning">En attente</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">Aucune réalisation</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Activités Récentes</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Activité</th>
+                                    <th>Région</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for activite in activites_recentes %}
+                                <tr>
+                                    <td>{{ activite.titre|truncatewords:5 }}</td>
+                                    <td>{{ activite.get_region_display }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ activite.statut|lower }}">
+                                            {{ activite.get_statut_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ activite.date_debut_prevue|date:"d/m/Y" }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">Aucune activité</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

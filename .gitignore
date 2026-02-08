@@ -1,0 +1,46 @@
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+__pycache__/
+*.pyc
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+/static_root
+
+# Virtual Environment
+venv/
+venv_prosmat/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.secret
+*.key
+
+# Excel files (données sensibles)
+*.xlsx
+*.xls
+
+# Uploads
+media/
+justificatifs/
+rapports/
