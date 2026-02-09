@@ -13,7 +13,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY - Variables d'environnement
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-CHANGEZ-MOI-EN-PRODUCTION')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+# ALLOWED_HOSTS - Accepter tous les domaines Render
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+if '*' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('*')  # Fallback pour éviter les erreurs
 
 # Application definition
 INSTALLED_APPS = [
