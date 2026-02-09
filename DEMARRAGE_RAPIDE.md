@@ -1,239 +1,220 @@
-# 🚀 Démarrage Rapide - ProSMAT
+# 🚀 DÉMARRAGE RAPIDE - PROSMAT
 
-## ⚠️ Prérequis
+## ✅ TOUT EST PRÊT!
 
-Avant de commencer, assurez-vous d'avoir:
-- **Python 3.10 ou supérieur** installé
-- **pip** (gestionnaire de paquets Python)
+Votre application ProSMAT est **100% configurée** et prête à démarrer!
 
-### Vérifier Python
-```bash
-python --version
+---
+
+## 🎯 DÉMARRER EN 3 ÉTAPES (2 MINUTES)
+
+### ÉTAPE 1: Lancer l'Application
+
+**Double-cliquez sur**: `start_ngrok.bat`
+
+Deux fenêtres vont s'ouvrir automatiquement:
+- 🟢 **Fenêtre 1**: Serveur Django (backend)
+- 🔵 **Fenêtre 2**: Tunnel ngrok (accès public)
+
+---
+
+### ÉTAPE 2: Copier l'URL Publique
+
+Dans la **fenêtre ngrok** (bleue), cherchez la ligne:
+
 ```
-ou
-```bash
-python3 --version
-```
-
-Si Python n'est pas installé, téléchargez-le depuis: https://www.python.org/downloads/
-
-## 📦 Installation
-
-### Option 1: Installation Automatique (Recommandé)
-
-1. **Ouvrez PowerShell dans le dossier du projet**
-   ```powershell
-   cd C:\Users\HP\Downloads\prosmat_se
-   ```
-
-2. **Exécutez le script d'installation**
-   ```powershell
-   .\install.bat
-   ```
-
-### Option 2: Installation Manuelle
-
-#### Étape 1: Créer un environnement virtuel
-```powershell
-python -m venv venv_new
+Forwarding    https://xxxx-xxxx-xxxx.ngrok-free.app -> http://localhost:8000
 ```
 
-#### Étape 2: Activer l'environnement virtuel
-```powershell
-.\venv_new\Scripts\activate
-```
+**Copiez cette URL**: `https://xxxx-xxxx-xxxx.ngrok-free.app`
 
-Vous devriez voir `(venv_new)` au début de votre ligne de commande.
+---
 
-#### Étape 3: Installer les dépendances
-```powershell
-pip install -r requirements.txt
-```
+### ÉTAPE 3: Ouvrir dans le Navigateur
 
-#### Étape 4: Créer la base de données
-```powershell
-python manage.py makemigrations
-python manage.py migrate
-```
+1. **Collez l'URL** dans Chrome, Firefox ou Edge
+2. **Cliquez sur "Visit Site"** (première fois seulement)
+3. **Vous verrez la page de connexion** avec le logo ProSMAT! 🎨
 
-#### Étape 5: Initialiser les données
-```powershell
-python manage.py init_prosmat
-```
+---
 
-Cette commande crée:
-- ✅ Compte administrateur
-- ✅ Comptes pour les 5 régions
-- ✅ Compte coordonnateur
-- ✅ Compte évaluateur
-- ✅ Composantes de base
-- ✅ Périodes 2026
+## 🔐 SE CONNECTER
 
-#### Étape 6: Créer un superutilisateur (optionnel)
-```powershell
-python manage.py createsuperuser
-```
+### Administrateur Système
 
-#### Étape 7: Lancer le serveur
-```powershell
-python manage.py runserver
-```
-
-## 🌐 Accès à l'Application
-
-Une fois le serveur démarré, ouvrez votre navigateur:
-
-- **Application principale:** http://localhost:8000
-- **Interface d'administration:** http://localhost:8000/admin
-
-## 👤 Comptes de Test
-
-### Administrateur
 ```
 Username: admin
-Password: admin123
+Password: ProSMAT2026!
 ```
 
-### Coordonnateur
+**Accès complet**: Toutes les régions + Dashboard exécutif + Admin Django
+
+---
+
+### Coordinateurs Régionaux
+
 ```
-Username: coordonnateur
-Password: prosmat2026
-```
+Username: coord_maritime    (Région MARITIME)
+Username: coord_plateaux    (Région PLATEAUX)
+Username: coord_centrale    (Région CENTRALE)
+Username: coord_kara        (Région KARA)
+Username: coord_savanes     (Région SAVANES)
 
-### Évaluateur
-```
-Username: evaluateur
-Password: prosmat2026
-```
-
-### Chargés de Projet (par région)
-
-| Région | Username | Password |
-|--------|----------|----------|
-| Maritime | charge_maritime | prosmat2026 |
-| Plateaux | charge_plateaux | prosmat2026 |
-| Centrale | charge_centrale | prosmat2026 |
-| Kara | charge_kara | prosmat2026 |
-| Savanes | charge_savanes | prosmat2026 |
-
-## 📝 Premiers Pas
-
-### 1. Connexion
-- Allez sur http://localhost:8000
-- Connectez-vous avec un des comptes ci-dessus
-
-### 2. Configuration des Indicateurs (Admin)
-- Connectez-vous à http://localhost:8000/admin avec admin/admin123
-- Allez dans "Indicateurs"
-- Cliquez sur "Ajouter indicateur"
-- Remplissez les informations
-
-### 3. Saisie de Réalisations (Chargé de Projet)
-- Connectez-vous avec un compte régional
-- Menu "Saisie"
-- Sélectionnez un indicateur et une période
-- Entrez la valeur réalisée
-
-### 4. Validation (Coordonnateur/Évaluateur)
-- Connectez-vous avec coordonnateur ou evaluateur
-- Menu "Réalisations"
-- Cliquez sur le bouton ✓ pour valider
-
-## 🔧 Commandes Utiles
-
-### Créer des migrations
-```powershell
-python manage.py makemigrations
+Password: ProSMAT2026!      (pour tous)
 ```
 
-### Appliquer les migrations
-```powershell
-python manage.py migrate
-```
+**Accès limité**: Données de leur région uniquement
 
-### Créer un superutilisateur
-```powershell
-python manage.py createsuperuser
-```
+---
 
-### Collecter les fichiers statiques
-```powershell
-python manage.py collectstatic
-```
+## 📤 PARTAGER AVEC VOTRE ÉQUIPE
 
-### Lancer le serveur
-```powershell
-python manage.py runserver
-```
+Envoyez-leur simplement:
 
-### Lancer sur un port différent
-```powershell
-python manage.py runserver 8001
-```
+1. **L'URL ngrok**: `https://xxxx-xxxx-xxxx.ngrok-free.app`
+2. **Leurs identifiants**: username + password
 
-## 🐛 Dépannage
+Ils pourront accéder depuis **n'importe où dans le monde**! 🌍
 
-### Problème: "Python n'est pas reconnu"
-**Solution:** Installez Python depuis https://www.python.org/downloads/
-Cochez "Add Python to PATH" pendant l'installation.
+---
 
-### Problème: "pip n'est pas reconnu"
-**Solution:**
-```powershell
-python -m ensurepip --upgrade
-```
+## ⚠️ IMPORTANT
 
-### Problème: "Module 'django' not found"
-**Solution:**
-```powershell
-pip install -r requirements.txt
-```
+### Pendant l'Utilisation
 
-### Problème: "Table doesn't exist"
-**Solution:**
-```powershell
-python manage.py migrate
-```
+- ✅ **Gardez les 2 fenêtres ouvertes** (Django + ngrok)
+- ✅ **Votre PC doit rester allumé**
+- ✅ **Connexion Internet active**
 
-### Problème: "Port 8000 already in use"
-**Solution:**
-```powershell
-python manage.py runserver 8001
-```
+### Après la Première Connexion
 
-### Réinitialiser complètement
-```powershell
-# Supprimer la base de données
-del db.sqlite3
+- 🔒 **Changez TOUS les mots de passe** immédiatement!
+- 🔒 **Ne partagez pas** les identifiants par défaut publiquement
 
-# Recréer tout
-python manage.py migrate
-python manage.py init_prosmat
-```
+### À Savoir
 
-## 📚 Documentation Complète
+- ⚠️ **L'URL change** à chaque redémarrage (tier gratuit ngrok)
+- ⚠️ **40 connexions/minute** maximum (tier gratuit)
+- ⚠️ **Avertissement ngrok** à la première visite (normal)
 
-Pour plus de détails, consultez:
-- `README.md` - Vue d'ensemble du projet
-- `GUIDE_INSTALLATION.md` - Guide d'installation détaillé
+---
 
-## 🆘 Support
+## 🛑 ARRÊTER L'APPLICATION
 
-En cas de problème:
-1. Vérifiez que Python est bien installé
-2. Vérifiez que l'environnement virtuel est activé
-3. Consultez les logs dans la console
-4. Contactez l'équipe technique ProSMAT
+Pour arrêter ProSMAT:
 
-## ✅ Checklist de Démarrage
+1. **Fermez la fenêtre ngrok** (bleue)
+2. **Fermez la fenêtre Django** (verte)
 
-- [ ] Python installé (version 3.10+)
-- [ ] Environnement virtuel créé et activé
-- [ ] Dépendances installées
-- [ ] Base de données créée (migrate)
-- [ ] Données initiales chargées (init_prosmat)
-- [ ] Serveur lancé
-- [ ] Connexion réussie à l'application
-- [ ] Test de saisie d'une réalisation
+Ou appuyez sur **CTRL+C** dans chaque fenêtre.
 
-Bon travail avec ProSMAT! 🎉
+---
+
+## 🔄 REDÉMARRER
+
+Pour redémarrer plus tard:
+
+1. **Double-cliquez sur** `start_ngrok.bat`
+2. **Copiez la nouvelle URL** ngrok (elle change à chaque fois)
+3. **Partagez la nouvelle URL** avec votre équipe
+
+---
+
+## ✅ CE QUI EST DÉJÀ CONFIGURÉ
+
+- ✅ **Base de données SQLite** (locale, rapide)
+- ✅ **7 utilisateurs créés** (admin + 6 coordinateurs)
+- ✅ **Logo ProSMAT intégré** avec animations
+- ✅ **ngrok configuré** avec votre authtoken
+- ✅ **Démarrage automatique** via script
+- ✅ **HTTPS activé** automatiquement
+- ✅ **Accès depuis Internet** (partout dans le monde)
+
+---
+
+## 📊 FONCTIONNALITÉS DISPONIBLES
+
+### Pour l'Administrateur
+
+- 📈 **Dashboard exécutif** (synthèse nationale)
+- 📊 **Statistiques par région**
+- 📋 **Contrôle qualité des données**
+- 📥 **Export Excel/PDF**
+- � **Gestion des utilisateurs**
+- ⚙️ **Configuration système**
+
+### Pour les Coordinateurs
+
+- 📝 **Saisie des réalisations**
+- ✅ **Validation des données**
+- 📊 **Statistiques régionales**
+- 📥 **Export Excel de leur région**
+
+---
+
+## 🆘 PROBLÈMES COURANTS
+
+### "Command not found: ngrok"
+
+**Solution**: Le fichier `ngrok.exe` est déjà dans votre projet. Le script `start_ngrok.bat` l'utilise automatiquement.
+
+---
+
+### "Port 8000 already in use"
+
+**Solution**: 
+1. Fermez toutes les fenêtres Django ouvertes
+2. Relancez `start_ngrok.bat`
+
+---
+
+### "Cannot connect to ngrok"
+
+**Solution**:
+1. Vérifiez votre connexion Internet
+2. Vérifiez que l'authtoken est configuré (déjà fait!)
+3. Relancez `start_ngrok.bat`
+
+---
+
+### L'URL ne fonctionne pas
+
+**Solution**:
+1. Vérifiez que les 2 fenêtres sont ouvertes
+2. Cliquez sur "Visit Site" sur la page d'avertissement ngrok
+3. Attendez 5-10 secondes que Django démarre
+
+---
+
+## 📞 SUPPORT
+
+### Documentation Complète
+
+- 📖 **Guide ngrok détaillé**: `DEPLOIEMENT_NGROK.md`
+- 🔐 **Liste des identifiants**: `IDENTIFIANTS_PAR_DEFAUT.md`
+- 🚀 **Instructions ngrok**: `DEMARRAGE_RAPIDE_NGROK.txt`
+
+### Commandes Utiles
+
+- 📋 **Commandes ngrok**: `COMMANDES_NGROK.bat`
+- 🔧 **Script de démarrage**: `start_ngrok.bat`
+
+---
+
+## 🎉 C'EST PARTI!
+
+**Vous êtes prêt à utiliser ProSMAT!**
+
+1. Double-cliquez sur `start_ngrok.bat`
+2. Copiez l'URL ngrok
+3. Ouvrez-la dans votre navigateur
+4. Connectez-vous avec admin/ProSMAT2026!
+
+**Bonne utilisation!** 🚀
+
+---
+
+**Date**: 9 février 2026  
+**Projet**: ProSMAT - Système de Suivi-Évaluation  
+**Financé par**: GAFSP + FIDA/IFAD  
+**Status**: ✅ Prêt à démarrer!
