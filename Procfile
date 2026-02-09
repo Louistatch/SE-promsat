@@ -1,2 +1,2 @@
-web: gunicorn config.wsgi --log-file - --bind 0.0.0.0:$PORT
-release: python manage.py migrate --noinput && python manage.py init_users
+web: bash start.sh
+release: python manage.py migrate --noinput && python manage.py init_users && python manage.py collectstatic --noinput
