@@ -152,10 +152,11 @@ class Command(BaseCommand):
             status = '✓ Créé' if created else '✓ Existe'
             self.stdout.write(f'   {status}: {per}')
         
-        # 5. Créer un utilisateur admin
-        self.stdout.write('\n5. Création de l\'utilisateur admin...')
-        admin_email = "admin@prosmat.tg"
+        # 5. Créer les utilisateurs admin
+        self.stdout.write('\n5. Création des utilisateurs admin...')
         
+        # Admin principal
+        admin_email = "admin@prosmat.tg"
         if User.objects.filter(email=admin_email).exists():
             self.stdout.write(f'   ✓ Existe: {admin_email}')
         else:
@@ -170,6 +171,34 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'   ✓ Créé: {admin_email}'))
             self.stdout.write(self.style.WARNING(f'   📧 Email: {admin_email}'))
             self.stdout.write(self.style.WARNING(f'   🔑 Mot de passe: ProSMAT2026!'))
+        
+        # Admin tatchida (pour Firebase)
+        tatchida_email = "tatchida@gmail.com"
+        if User.objects.filter(email=tatchida_email).exists():
+            # Mettre à jour pour s'assurer qu'il est admin
+            user = User.objects.get(email=tatchida_email)
+            if user.role != 'ADMIN':
+                user.role = 'ADMIN'
+                user.is_staff = True
+                user.is_superuser = True
+                user.save()
+                self.stdout.write(self.style.SUCCESS(f'   ✓ Mis à jour: {tatchida_email} → ADMIN'))
+            else:
+                self.stdout.write(f'   ✓ Existe: {tatchida_email} (déjà ADMIN)')
+        else:
+            # Créer le compte (sera complété lors de la première connexion Firebase)
+            tatchida = User.objects.create_user(
+                username="tatchida",
+                email=tatchida_email,
+                first_name="Louis",
+                last_name="Tatchida",
+            )
+            tatchida.role = 'ADMIN'
+            tatchida.is_staff = True
+            tatchida.is_superuser = True
+            tatchida.save()
+            self.stdout.write(self.style.SUCCESS(f'   ✓ Créé: {tatchida_email}'))
+            self.stdout.write(self.style.WARNING(f'   📧 Se connectera via Firebase'))
         
         self.stdout.write('\n' + '=' * 60)
         self.stdout.write(self.style.SUCCESS('✅ DONNÉES INITIALES CHARGÉES AVEC SUCCÈS!'))

@@ -100,6 +100,20 @@ class FirebaseAuthenticationBackend(BaseBackend):
                     first_name = name_parts[0] if name_parts else ''
                     last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
                 
+                # Déterminer le rôle par défaut
+                # Liste des emails qui doivent être admin automatiquement
+                admin_emails = ['tatchida@gmail.com', 'admin@prosmat.tg']
+                
+                if email.lower() in admin_emails:
+                    default_role = 'ADMIN'
+                    is_staff = True
+                    is_superuser = True
+                    logger.info(f"Email {email} reconnu comme admin automatique")
+                else:
+                    default_role = 'CHARGE_PROJET'
+                    is_staff = False
+                    is_superuser = False
+                
                 # Créer l'utilisateur
                 user = User.objects.create_user(
                     username=username,
@@ -107,7 +121,14 @@ class FirebaseAuthenticationBackend(BaseBackend):
                     first_name=first_name,
                     last_name=last_name,
                 )
-                logger.info(f"Nouvel utilisateur créé: {user.email} (username: {user.username})")
+                
+                # Attribuer le rôle et les permissions
+                user.role = default_role
+                user.is_staff = is_staff
+                user.is_superuser = is_superuser
+                user.save()
+                
+                logger.info(f"Nouvel utilisateur créé: {user.email} (username: {user.username}, role: {user.role})")
             
             return user
             
