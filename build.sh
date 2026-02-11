@@ -25,4 +25,8 @@ python manage.py collectstatic --no-input
 echo "🗄️  Exécution des migrations..."
 python manage.py migrate
 
+# Charger les données initiales (seulement si la base est vide)
+echo "📊 Chargement des données initiales..."
+python manage.py charger_donnees
+
 echo "✅ Build terminé avec succès!"
