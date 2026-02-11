@@ -211,5 +211,5 @@ class Command(BaseCommand):
         self.stdout.write(f'   - Utilisateurs: {User.objects.count()}')
         self.stdout.write('\nVous pouvez maintenant:')
         self.stdout.write('   1. Vous connecter avec: admin@prosmat.tg / ProSMAT2026!')
-        self.stdout.write('   2. Créer d'autres utilisateurs')
+        self.stdout.write("   2. Créer d'autres utilisateurs")
         self.stdout.write('   3. Saisir des réalisations\n')
