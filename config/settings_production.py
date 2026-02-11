@@ -1,70 +1,80 @@
 """
-Configuration de production pour ProSMAT
-Copiez ce fichier et renommez-le en settings_local.py
-Puis modifiez les valeurs selon votre environnement
+Configuration Django pour la production sur Render
 """
-
 from .settings import *
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'CHANGEZ-CETTE-CLE-SECRETE-EN-PRODUCTION'
+import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['votre-domaine.com', 'www.votre-domaine.com', 'localhost']
+# Allowed hosts
+ALLOWED_HOSTS = [
+    '.onrender.com',
+    'prosmat.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-# Exemple avec PostgreSQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prosmat_db',
-        'USER': 'prosmat_user',
-        'PASSWORD': 'votre_mot_de_passe',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+# CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'https://prosmat.onrender.com',
+]
 
-# Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'votre-email@gmail.com'
-EMAIL_HOST_PASSWORD = 'votre-mot-de-passe-app'
-DEFAULT_FROM_EMAIL = 'ProSMAT <noreply@prosmat.tg>'
-
-# Security Settings
+# Security settings
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Database - PostgreSQL via Neon
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
 
 # Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
         },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'accounts': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
