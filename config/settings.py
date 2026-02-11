@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,12 +95,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Utiliser PostgreSQL si DATABASE_URL est défini (production), sinon SQLite (développement)
 if os.environ.get('DATABASE_URL'):
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
 else:
     DATABASES = {
         'default': {
@@ -151,7 +153,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_URL = 'accounts:login'
+LOGIN_URL = 'accounts:login'  # Utilise Firebase par défaut
 LOGIN_REDIRECT_URL = 'dashboard:home'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 
@@ -206,3 +208,74 @@ DEFAULT_FROM_EMAIL = 'prosmat@example.com'
 # Static files configuration for production
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Firebase Configuration
+FIREBASE_CONFIG = {
+    'apiKey': config('FIREBASE_API_KEY', default=''),
+    'authDomain': config('FIREBASE_AUTH_DOMAIN', default=''),
+    'projectId': config('FIREBASE_PROJECT_ID', default=''),
+    'storageBucket': config('FIREBASE_STORAGE_BUCKET', default=''),
+    'messagingSenderId': config('FIREBASE_MESSAGING_SENDER_ID', default=''),
+    'appId': config('FIREBASE_APP_ID', default=''),
+    'measurementId': config('FIREBASE_MEASUREMENT_ID', default=''),
+}
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'accounts.firebase_auth.FirebaseAuthenticationBackend',  # Firebase
+    'django.contrib.auth.backends.ModelBackend',  # Django par défaut
+]
+
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'django.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'accounts': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+    },
+}
+
+# Cache Configuration (pour rate limiting)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# Session Security
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True  # HTTPS uniquement en production
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True

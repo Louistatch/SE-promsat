@@ -1,80 +1,221 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ rapport.titre }} - ProSMAT{% endblock %}
 
+{% block extra_css %}
+<style>
+    .rapport-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .info-card {
+        border-left: 4px solid #667eea;
+        transition: transform 0.2s;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .rapport-content {
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+    
+    .rapport-content h1, .rapport-content h2, .rapport-content h3 {
+        color: #667eea;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    
+    .rapport-content ul, .rapport-content ol {
+        margin-left: 20px;
+    }
+    
+    .rapport-content hr {
+        border-top: 2px solid #667eea;
+        margin: 30px 0;
+    }
+    
+    .action-buttons .btn {
+        margin: 5px;
+    }
+    
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+        .rapport-content {
+            font-size: 12pt;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="row mb-4">
-        <div class="col">
-            <h1><i class="bi bi-file-text"></i> {{ rapport.titre }}</h1>
-        </div>
-        <div class="col-auto">
-            {% if rapport.fichier %}
-            <a href="{{ rapport.fichier.url }}" target="_blank" class="btn btn-success">
-                <i class="bi bi-download"></i> Télécharger
-            </a>
-            {% endif %}
-            <a href="{% url 'monitoring:liste_rapports' %}" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Retour
-            </a>
+<div class="container-fluid">
+    <!-- En-tête du rapport -->
+    <div class="rapport-header no-print">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-2"><i class="bi bi-file-earmark-text"></i> {{ rapport.titre }}</h1>
+                <p class="mb-0">
+                    <span class="badge bg-light text-dark me-2">
+                        <i class="bi bi-tag"></i> {{ rapport.get_type_rapport_display }}
+                    </span>
+                    {% if rapport.periode %}
+                    <span class="badge bg-light text-dark me-2">
+                        <i class="bi bi-calendar3"></i> {{ rapport.periode }}
+                    </span>
+                    {% endif %}
+                    {% if rapport.region %}
+                    <span class="badge bg-light text-dark">
+                        <i class="bi bi-geo-alt"></i> {{ rapport.get_region_display }}
+                    </span>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-4 text-end action-buttons">
+                <button onclick="window.print()" class="btn btn-light">
+                    <i class="bi bi-printer"></i> Imprimer
+                </button>
+                {% if rapport.fichier %}
+                <a href="{{ rapport.fichier.url }}" target="_blank" class="btn btn-success">
+                    <i class="bi bi-download"></i> Télécharger
+                </a>
+                {% endif %}
+                <a href="{% url 'monitoring:liste_rapports' %}" class="btn btn-outline-light">
+                    <i class="bi bi-arrow-left"></i> Retour
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Contenu du Rapport</h5>
-                </div>
-                <div class="card-body">
-                    <div style="white-space: pre-wrap;">{{ rapport.contenu }}</div>
+        <!-- Contenu principal -->
+        <div class="col-lg-9">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="rapport-content">
+                        {{ rapport.contenu|linebreaks }}
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Informations</h5>
+        <!-- Barre latérale d'informations -->
+        <div class="col-lg-3 no-print">
+            <!-- Informations générales -->
+            <div class="card info-card mb-3">
+                <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h6 class="mb-0"><i class="bi bi-info-circle"></i> Informations</h6>
                 </div>
                 <div class="card-body">
-                    <table class="table table-sm table-borderless">
-                        <tr>
-                            <th>Type:</th>
-                            <td>
-                                <span class="badge bg-info">
-                                    {{ rapport.get_type_rapport_display }}
-                                </span>
-                            </td>
-                        </tr>
-                        {% if rapport.periode %}
-                        <tr>
-                            <th>Période:</th>
-                            <td>{{ rapport.periode }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if rapport.region %}
-                        <tr>
-                            <th>Région:</th>
-                            <td>{{ rapport.get_region_display }}</td>
-                        </tr>
-                        {% endif %}
-                        <tr>
-                            <th>Auteur:</th>
-                            <td>{{ rapport.auteur.get_full_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Date de création:</th>
-                            <td>{{ rapport.date_creation|date:"d F Y à H:i" }}</td>
-                        </tr>
-                        <tr>
-                            <th>Dernière modification:</th>
-                            <td>{{ rapport.date_modification|date:"d F Y à H:i" }}</td>
-                        </tr>
-                    </table>
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Type de rapport</small>
+                        <span class="badge {% if rapport.type_rapport == 'TRIMESTRIEL' %}bg-primary{% elif rapport.type_rapport == 'ANNUEL' %}bg-success{% elif rapport.type_rapport == 'MISSION' %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                            {{ rapport.get_type_rapport_display }}
+                        </span>
+                    </div>
+                    
+                    {% if rapport.periode %}
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Période</small>
+                        <strong>{{ rapport.periode }}</strong>
+                    </div>
+                    {% endif %}
+                    
+                    {% if rapport.region %}
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Région</small>
+                        <strong>{{ rapport.get_region_display }}</strong>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Auteur</small>
+                        <strong>{{ rapport.auteur.get_full_name }}</strong>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Date de création</small>
+                        <strong>{{ rapport.date_creation|date:"d/m/Y à H:i" }}</strong>
+                    </div>
+                    
+                    <div>
+                        <small class="text-muted d-block">Dernière modification</small>
+                        <strong>{{ rapport.date_modification|date:"d/m/Y à H:i" }}</strong>
+                    </div>
                 </div>
             </div>
+
+            <!-- Actions rapides -->
+            <div class="card info-card">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="bi bi-lightning"></i> Actions rapides</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button onclick="window.print()" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-printer"></i> Imprimer
+                        </button>
+                        
+                        {% if rapport.fichier %}
+                        <a href="{{ rapport.fichier.url }}" target="_blank" class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-download"></i> Télécharger PDF
+                        </a>
+                        {% endif %}
+                        
+                        <button onclick="navigator.clipboard.writeText(window.location.href)" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-link-45deg"></i> Copier le lien
+                        </button>
+                        
+                        <a href="{% url 'monitoring:liste_rapports' %}" class="btn btn-sm btn-outline-dark">
+                            <i class="bi bi-arrow-left"></i> Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques du rapport -->
+            {% if rapport.periode %}
+            <div class="card info-card mt-3">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="bi bi-graph-up"></i> Statistiques</h6>
+                </div>
+                <div class="card-body">
+                    <small class="text-muted">Données de la période {{ rapport.periode }}</small>
+                    <hr>
+                    <div class="text-center">
+                        <a href="{% url 'dashboard:statistiques' %}" class="btn btn-sm btn-primary">
+                            <i class="bi bi-bar-chart"></i> Voir les statistiques
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
+
+<!-- Script pour copier le lien -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Notification après copie du lien
+    const copyButtons = document.querySelectorAll('[onclick*="clipboard"]');
+    copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            setTimeout(() => {
+                alert('Lien copié dans le presse-papiers!');
+            }, 100);
+        });
+    });
+});
+</script>
 {% endblock %}

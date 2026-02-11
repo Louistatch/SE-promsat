@@ -1,0 +1,195 @@
+═══════════════════════════════════════════════════════════════════
+  🎭 GUIDE RAPIDE - GESTION DES RÔLES FIREBASE
+═══════════════════════════════════════════════════════════════════
+
+✅ Système de gestion des rôles créé!
+
+
+═══════════════════════════════════════════════════════════════════
+  🎯 3 MÉTHODES POUR ATTRIBUER LES RÔLES
+═══════════════════════════════════════════════════════════════════
+
+Méthode 1: Interface d'Administration Django (Recommandé)
+  URL: http://localhost:8000/admin/accounts/user/
+  
+  Étapes:
+  1. Connectez-vous en tant qu'admin
+  2. Allez dans "Accounts" > "Utilisateurs"
+  3. Cliquez sur l'utilisateur
+  4. Modifiez "Rôle" et "Région"
+  5. Cliquez "Enregistrer"
+
+Méthode 2: Interface de Gestion des Utilisateurs
+  URL: http://localhost:8000/accounts/manage-users/
+  
+  Fonctionnalités:
+  • Vue d'ensemble avec statistiques
+  • Liste complète des utilisateurs
+  • Modification rapide du rôle et région
+  • Badges colorés par rôle
+
+Méthode 3: Script Python (Migration en Masse)
+  Fichier: attribuer_roles.py
+  
+  Commande:
+  python attribuer_roles.py
+
+
+═══════════════════════════════════════════════════════════════════
+  📊 RÔLES DISPONIBLES
+═══════════════════════════════════════════════════════════════════
+
+1. CHARGE_PROJET (Chargé de Projet)
+   • Accès: Limité à sa région
+   • Région: Obligatoire
+   • Badge: 🔵 Bleu
+
+2. COORDONNATEUR (Coordonnateur)
+   • Accès: Toutes les régions
+   • Région: Optionnelle
+   • Badge: 🟢 Vert
+
+3. EVALUATEUR (Évaluateur)
+   • Accès: Toutes les régions
+   • Région: Optionnelle
+   • Badge: 🟡 Jaune
+
+4. ADMIN (Administrateur)
+   • Accès: Complet
+   • Région: Non applicable
+   • Badge: 🔴 Rouge
+
+
+═══════════════════════════════════════════════════════════════════
+  🔄 WORKFLOW POUR UN NOUVEL UTILISATEUR FIREBASE
+═══════════════════════════════════════════════════════════════════
+
+1. L'utilisateur se connecte via Firebase
+   → Compte créé automatiquement dans Django
+   → Rôle par défaut: CHARGE_PROJET
+   → Région: null
+
+2. L'administrateur attribue le rôle
+   → Via /admin/ ou /accounts/manage-users/
+   → Sélectionne le rôle approprié
+   → Définit la région si nécessaire
+
+3. L'utilisateur se reconnecte
+   → Les permissions sont appliquées
+   → Accès selon son rôle
+
+
+═══════════════════════════════════════════════════════════════════
+  🚀 DÉMARRAGE RAPIDE
+═══════════════════════════════════════════════════════════════════
+
+Étape 1: Modifier le script attribuer_roles.py
+  • Ouvrez le fichier
+  • Section "roles_mapping"
+  • Ajoutez vos utilisateurs:
+    'email@example.com': ('ROLE', 'REGION'),
+
+Étape 2: Exécuter le script
+  python attribuer_roles.py
+
+Étape 3: Vérifier
+  • Allez sur /admin/accounts/user/
+  • Vérifiez que les rôles sont corrects
+
+
+═══════════════════════════════════════════════════════════════════
+  📝 EXEMPLE DE CONFIGURATION
+═══════════════════════════════════════════════════════════════════
+
+Dans attribuer_roles.py:
+
+roles_mapping = {
+    # Administrateur
+    'tatchida@gmail.com': ('ADMIN', None),
+    
+    # Coordonnateurs
+    'coordo1@prosmat.tg': ('COORDONNATEUR', None),
+    'coordo2@prosmat.tg': ('COORDONNATEUR', None),
+    
+    # Chargés de Projet par région
+    'maritime@prosmat.tg': ('CHARGE_PROJET', 'MARITIME'),
+    'plateaux@prosmat.tg': ('CHARGE_PROJET', 'PLATEAUX'),
+    'centrale@prosmat.tg': ('CHARGE_PROJET', 'CENTRALE'),
+    'kara@prosmat.tg': ('CHARGE_PROJET', 'KARA'),
+    'savanes@prosmat.tg': ('CHARGE_PROJET', 'SAVANES'),
+}
+
+
+═══════════════════════════════════════════════════════════════════
+  🔐 PERMISSIONS
+═══════════════════════════════════════════════════════════════════
+
+Qui peut gérer les rôles?
+
+Via /admin/:
+  • Utilisateurs avec is_staff=True
+  • Superusers
+
+Via /accounts/manage-users/:
+  • Utilisateurs avec role=ADMIN
+
+
+═══════════════════════════════════════════════════════════════════
+  📋 FICHIERS CRÉÉS
+═══════════════════════════════════════════════════════════════════
+
+1. accounts/views.py
+   → Vues pour la gestion des utilisateurs
+   → API pour mettre à jour les rôles
+
+2. accounts/admin.py
+   → Interface d'admin personnalisée
+   → Actions en masse pour les rôles
+
+3. templates/accounts/manage_users.html
+   → Interface de gestion des utilisateurs
+   → Statistiques et tableau
+
+4. attribuer_roles.py
+   → Script pour attribution en masse
+   → Configuration simple
+
+5. GESTION_ROLES_FIREBASE.md
+   → Documentation complète
+   → Exemples et workflows
+
+6. GUIDE_RAPIDE_ROLES.txt
+   → Ce fichier
+
+
+═══════════════════════════════════════════════════════════════════
+  ✅ CHECKLIST
+═══════════════════════════════════════════════════════════════════
+
+□ Script attribuer_roles.py configuré
+□ Rôles attribués aux utilisateurs existants
+□ Interface /admin/ testée
+□ Interface /accounts/manage-users/ testée
+□ Permissions vérifiées
+□ Documentation lue
+
+
+═══════════════════════════════════════════════════════════════════
+  🎉 RÉSULTAT
+═══════════════════════════════════════════════════════════════════
+
+Vous pouvez maintenant:
+  ✅ Attribuer des rôles aux utilisateurs Firebase
+  ✅ Gérer les régions des chargés de projet
+  ✅ Modifier les rôles facilement
+  ✅ Voir les statistiques par rôle
+  ✅ Faire des modifications en masse
+
+
+═══════════════════════════════════════════════════════════════════
+
+Date: 11 février 2026
+Projet: ProSMAT
+Statut: ✅ Système de gestion des rôles opérationnel
+
+═══════════════════════════════════════════════════════════════════

@@ -10,6 +10,7 @@ urlpatterns = [
     path('realisation/<int:pk>/valider/', views.valider_realisation_view, name='valider_realisation'),
     path('rapports/', views.liste_rapports_view, name='liste_rapports'),
     path('rapport/<int:pk>/', views.detail_rapport_view, name='detail_rapport'),
+    path('generer-rapport/', views.generer_rapport_view, name='generer_rapport'),
     
     # Phase 1 - Nouvelles fonctionnalités
     path('synthese-nationale/', views.synthese_nationale_view, name='synthese_nationale'),

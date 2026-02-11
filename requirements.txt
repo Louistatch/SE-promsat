@@ -1,17 +1,41 @@
+# Core Django
 Django==5.2.11
-Pillow==11.0.0
-openpyxl==3.1.5
-reportlab==4.0.7
-xlsxwriter==3.1.9
-django-crispy-forms>=2.3
-crispy-bootstrap5==2024.10
 djangorestframework==3.16.1
 django-cors-headers==4.9.0
 django-filter==25.2
+django-crispy-forms==2.5
+crispy-bootstrap5==2025.6
 
-# Production
-gunicorn==21.2.0
+# Database
 psycopg2-binary==2.9.9
-whitenoise==6.6.0
-python-decouple==3.8
 dj-database-url==3.1.0
+
+# Firebase Authentication
+firebase-admin==7.1.0
+
+# Configuration
+python-decouple==3.8
+
+# Static Files
+whitenoise==6.6.0
+
+# Image Processing
+Pillow==11.0.0
+
+# Excel/PDF Export
+openpyxl==3.1.5
+XlsxWriter==3.1.9
+reportlab==4.0.7
+pandas==3.0.0
+numpy==2.4.2
+
+# Server (Production)
+gunicorn==21.2.0
+
+# HTTP Client
+httpx==0.28.1
+requests==2.32.5
+
+# Utilities
+python-dateutil==2.9.0.post0
+pytz==2025.2

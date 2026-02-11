@@ -1,0 +1,386 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Administration ProSMAT{% endblock %}
+
+{% block branding %}
+<div class="prosmat-branding">
+    <img src="{% static 'images/logo_prosmat.jpg' %}" alt="ProSMAT Logo" class="admin-logo">
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">ProSMAT Administration</a>
+    </h1>
+    <p class="admin-subtitle">Système de Suivi & Évaluation</p>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Couleurs principales inspirées de la page de connexion */
+    :root {
+        --primary-color: #667eea;
+        --primary-dark: #5568d3;
+        --secondary-color: #764ba2;
+        --accent-color: #667eea;
+        --text-color: #333;
+        --light-bg: #f5f5f5;
+        --white: #ffffff;
+    }
+
+    /* Header principal */
+    #header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: var(--white);
+        padding: 15px 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Branding avec logo */
+    .prosmat-branding {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .admin-logo {
+        height: 60px;
+        width: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .admin-logo:hover {
+        transform: scale(1.05);
+    }
+
+    #site-name {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #site-name a {
+        color: var(--white);
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+    }
+
+    #site-name a:hover {
+        opacity: 0.9;
+    }
+
+    .admin-subtitle {
+        margin: 0;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+    }
+
+    /* User tools */
+    #user-tools {
+        color: var(--white);
+        text-align: right;
+        padding: 10px 0;
+    }
+
+    #user-tools a {
+        color: var(--white);
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    #user-tools a:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+        background: var(--light-bg);
+        padding: 12px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .breadcrumbs a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumbs a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+    }
+
+    /* Content area */
+    #content {
+        padding: 20px;
+        background: var(--white);
+    }
+
+    /* Modules sur la page d'accueil */
+    .module {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .module:hover {
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    }
+
+    .module h2 {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: var(--white);
+        padding: 12px 15px;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .module caption {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: var(--white);
+        padding: 12px 15px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    /* Boutons */
+    .button, input[type=submit], input[type=button], .submit-row input, button {
+        background: var(--primary-color);
+        color: var(--white);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+    }
+
+    .button:active, input[type=submit]:active, input[type=button]:active, .submit-row input:active, button:active {
+        transform: translateY(0);
+    }
+
+    /* Liens d'action */
+    .addlink, .changelink, .deletelink {
+        padding: 8px 12px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .addlink {
+        background: var(--primary-color);
+        color: var(--white) !important;
+    }
+
+    .addlink:hover {
+        background: var(--primary-dark);
+    }
+
+    /* Tables */
+    #result_list {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    #result_list thead th {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: var(--white);
+        padding: 12px;
+        font-weight: 600;
+    }
+
+    #result_list tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+    }
+
+    /* Formulaires */
+    .form-row {
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .form-row label {
+        color: var(--text-color);
+        font-weight: 500;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], 
+    input[type="number"], input[type="date"], textarea, select {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 8px 12px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus,
+    input[type="number"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+
+    /* Messages */
+    .messagelist {
+        margin: 0 0 20px 0;
+        padding: 0;
+    }
+
+    .messagelist li {
+        padding: 12px 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+
+    .messagelist .success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 4px solid #28a745;
+    }
+
+    .messagelist .warning {
+        background: #fff3cd;
+        color: #856404;
+        border-left: 4px solid #ffc107;
+    }
+
+    .messagelist .error {
+        background: #f8d7da;
+        color: #721c24;
+        border-left: 4px solid #dc3545;
+    }
+
+    /* Sidebar */
+    #content-related {
+        background: var(--light-bg);
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+    #content-related h3 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-top: 0;
+    }
+
+    /* Footer */
+    #footer {
+        background: var(--light-bg);
+        color: var(--text-color);
+        padding: 15px 20px;
+        text-align: center;
+        border-top: 1px solid #ddd;
+        margin-top: 30px;
+    }
+
+    /* Dashboard modules */
+    .dashboard .module table {
+        width: 100%;
+    }
+
+    .dashboard .module table th {
+        text-align: left;
+        padding: 10px;
+        background: rgba(102, 126, 234, 0.1);
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .dashboard .module table td {
+        padding: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .dashboard .module table tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+    }
+
+    /* Pagination */
+    .paginator {
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    .paginator a, .paginator span {
+        padding: 8px 12px;
+        margin: 0 2px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: var(--primary-color);
+        transition: all 0.3s ease;
+    }
+
+    .paginator a:hover {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    .paginator .this-page {
+        background: var(--primary-color);
+        color: var(--white);
+        font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .prosmat-branding {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .admin-logo {
+            height: 50px;
+        }
+
+        #site-name {
+            font-size: 20px;
+        }
+    }
+
+    /* Animation au chargement */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .module {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Amélioration des icônes */
+    .addlink::before, .changelink::before, .deletelink::before {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block footer %}
+<div id="footer">
+    <p>
+        <strong>ProSMAT</strong> - Projet de Soutien à la Promotion du Maraîchage Agroécologique au Togo<br>
+        Financé par GAFSP & FIDA | République du Togo
+    </p>
+</div>
+{% endblock %}

@@ -136,15 +136,51 @@ def valider_realisation_view(request, pk):
 
 @login_required
 def liste_rapports_view(request):
+    # Filtrer selon le rôle
     if request.user.has_region_access():
         rapports = Rapport.objects.filter(region=request.user.region)
     else:
         rapports = Rapport.objects.all()
     
+    # Appliquer les filtres
+    type_rapport = request.GET.get('type')
+    if type_rapport:
+        rapports = rapports.filter(type_rapport=type_rapport)
+    
+    region = request.GET.get('region')
+    if region:
+        rapports = rapports.filter(region=region)
+    
+    periode_id = request.GET.get('periode')
+    if periode_id:
+        rapports = rapports.filter(periode_id=periode_id)
+    
+    search_query = request.GET.get('q')
+    if search_query:
+        rapports = rapports.filter(titre__icontains=search_query)
+    
     rapports = rapports.select_related('periode', 'auteur').order_by('-date_creation')
+    
+    # Calculer les statistiques
+    if request.user.has_region_access():
+        all_rapports = Rapport.objects.filter(region=request.user.region)
+    else:
+        all_rapports = Rapport.objects.all()
+    
+    stats = {
+        'trimestriels': all_rapports.filter(type_rapport='TRIMESTRIEL').count(),
+        'annuels': all_rapports.filter(type_rapport='ANNUEL').count(),
+        'missions': all_rapports.filter(type_rapport='MISSION').count(),
+        'total': all_rapports.count(),
+    }
+    
+    # Liste des périodes pour les filtres
+    periodes = Periode.objects.all().order_by('-annee', '-trimestre')[:8]
     
     context = {
         'rapports': rapports,
+        'stats': stats,
+        'periodes': periodes,
     }
     
     return render(request, 'monitoring/liste_rapports.html', context)
@@ -777,3 +813,165 @@ def export_pdf_view(request):
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     
     return response
+
+
+@login_required
+def generer_rapport_view(request):
+    """
+    Génère automatiquement un rapport avec les données de la période sélectionnée
+    """
+    if not request.user.has_full_access():
+        messages.error(request, "Vous n'avez pas les permissions pour générer des rapports.")
+        return redirect('monitoring:liste_rapports')
+    
+    if request.method == 'POST':
+        from django.db.models import Sum, Count, Avg
+        from datetime import datetime
+        
+        type_rapport = request.POST.get('type_rapport')
+        periode_id = request.POST.get('periode')
+        region = request.POST.get('region', '')
+        titre = request.POST.get('titre')
+        
+        periode = get_object_or_404(Periode, id=periode_id)
+        
+        # Filtrer les réalisations selon la région
+        if region:
+            realisations = Realisation.objects.filter(periode=periode, region=region, valide=True)
+            region_display = dict(Realisation._meta.get_field('region').choices).get(region, region)
+        else:
+            realisations = Realisation.objects.filter(periode=periode, valide=True)
+            region_display = "National"
+            region = 'NATIONAL'
+        
+        # Générer le contenu du rapport
+        contenu_parts = []
+        
+        # En-tête
+        contenu_parts.append(f"# {titre}\n")
+        contenu_parts.append(f"**Période:** {periode}\n")
+        contenu_parts.append(f"**Région:** {region_display}\n")
+        contenu_parts.append(f"**Date de génération:** {datetime.now().strftime('%d/%m/%Y à %H:%M')}\n")
+        contenu_parts.append(f"**Généré par:** {request.user.get_full_name()}\n\n")
+        contenu_parts.append("---\n\n")
+        
+        # 1. Synthèse Exécutive
+        contenu_parts.append("## 1. SYNTHÈSE EXÉCUTIVE\n\n")
+        
+        total_realisations = realisations.count()
+        total_indicateurs = Indicateur.objects.filter(actif=True).count()
+        
+        # Bénéficiaires
+        beneficiaires_total = realisations.aggregate(Sum('valeur_realisee'))['valeur_realisee__sum'] or 0
+        beneficiaires_femmes = realisations.aggregate(Sum('femmes'))['femmes__sum'] or 0
+        beneficiaires_hommes = realisations.aggregate(Sum('hommes'))['hommes__sum'] or 0
+        
+        contenu_parts.append(f"- **Nombre d'indicateurs suivis:** {total_indicateurs}\n")
+        contenu_parts.append(f"- **Nombre de réalisations saisies:** {total_realisations}\n")
+        contenu_parts.append(f"- **Total bénéficiaires:** {int(beneficiaires_total):,}\n")
+        contenu_parts.append(f"  - Femmes: {int(beneficiaires_femmes):,} ({(beneficiaires_femmes/beneficiaires_total*100) if beneficiaires_total > 0 else 0:.1f}%)\n")
+        contenu_parts.append(f"  - Hommes: {int(beneficiaires_hommes):,} ({(beneficiaires_hommes/beneficiaires_total*100) if beneficiaires_total > 0 else 0:.1f}%)\n\n")
+        
+        # 2. Performance par Composante
+        contenu_parts.append("## 2. PERFORMANCE PAR COMPOSANTE\n\n")
+        
+        from monitoring.models import Composante
+        composantes = Composante.objects.all()
+        
+        for comp in composantes:
+            indicateurs_comp = Indicateur.objects.filter(
+                sous_composante__composante=comp,
+                actif=True
+            )
+            
+            realisations_comp = realisations.filter(indicateur__in=indicateurs_comp)
+            nb_real = realisations_comp.count()
+            
+            if nb_real > 0:
+                contenu_parts.append(f"### {comp.nom}\n\n")
+                contenu_parts.append(f"- Nombre d'indicateurs: {indicateurs_comp.count()}\n")
+                contenu_parts.append(f"- Nombre de réalisations: {nb_real}\n")
+                
+                # Top 3 indicateurs
+                contenu_parts.append("\n**Principaux indicateurs:**\n\n")
+                for ind in indicateurs_comp[:3]:
+                    real_ind = realisations_comp.filter(indicateur=ind)
+                    if real_ind.exists():
+                        total = real_ind.aggregate(Sum('valeur_realisee'))['valeur_realisee__sum'] or 0
+                        contenu_parts.append(f"- {ind.libelle[:100]}: {total:.0f} {ind.unite_mesure}\n")
+                
+                contenu_parts.append("\n")
+        
+        # 3. Répartition Régionale (si national)
+        if not region or region == 'NATIONAL':
+            contenu_parts.append("## 3. RÉPARTITION RÉGIONALE\n\n")
+            
+            regions = ['MARITIME', 'PLATEAUX', 'CENTRALE', 'KARA', 'SAVANES']
+            for reg in regions:
+                real_region = Realisation.objects.filter(periode=periode, region=reg, valide=True)
+                nb_real_region = real_region.count()
+                
+                if nb_real_region > 0:
+                    region_name = dict(Realisation._meta.get_field('region').choices).get(reg, reg)
+                    contenu_parts.append(f"### {region_name}\n\n")
+                    contenu_parts.append(f"- Réalisations saisies: {nb_real_region}\n")
+                    
+                    benef = real_region.aggregate(Sum('valeur_realisee'))['valeur_realisee__sum'] or 0
+                    contenu_parts.append(f"- Bénéficiaires: {int(benef):,}\n\n")
+        
+        # 4. Alertes Qualité
+        contenu_parts.append("## 4. CONTRÔLE QUALITÉ\n\n")
+        
+        alertes = AlerteQualite.objects.filter(
+            realisation__periode=periode,
+            resolue=False
+        )
+        
+        if region and region != 'NATIONAL':
+            alertes = alertes.filter(realisation__region=region)
+        
+        nb_alertes = alertes.count()
+        contenu_parts.append(f"- **Nombre d'alertes actives:** {nb_alertes}\n\n")
+        
+        if nb_alertes > 0:
+            alertes_par_type = alertes.values('type_alerte').annotate(count=Count('id'))
+            for alerte_type in alertes_par_type:
+                type_display = dict(AlerteQualite.TYPE_CHOICES).get(alerte_type['type_alerte'], alerte_type['type_alerte'])
+                contenu_parts.append(f"- {type_display}: {alerte_type['count']}\n")
+        
+        contenu_parts.append("\n")
+        
+        # 5. Recommandations
+        contenu_parts.append("## 5. RECOMMANDATIONS\n\n")
+        
+        if nb_alertes > 0:
+            contenu_parts.append("- Résoudre les alertes qualité identifiées\n")
+        
+        if total_realisations < total_indicateurs:
+            contenu_parts.append("- Compléter la saisie des réalisations pour tous les indicateurs\n")
+        
+        if beneficiaires_total > 0:
+            pct_femmes = (beneficiaires_femmes / beneficiaires_total * 100)
+            if pct_femmes < 40:
+                contenu_parts.append("- Renforcer le ciblage des femmes bénéficiaires\n")
+        
+        contenu_parts.append("\n---\n\n")
+        contenu_parts.append("*Rapport généré automatiquement par le système ProSMAT*\n")
+        
+        # Assembler le contenu
+        contenu = "".join(contenu_parts)
+        
+        # Créer le rapport
+        rapport = Rapport.objects.create(
+            titre=titre,
+            type_rapport=type_rapport,
+            periode=periode,
+            region=region if region else None,
+            contenu=contenu,
+            auteur=request.user
+        )
+        
+        messages.success(request, f'Rapport "{titre}" généré avec succès!')
+        return redirect('monitoring:detail_rapport', pk=rapport.pk)
+    
+    return redirect('monitoring:liste_rapports')

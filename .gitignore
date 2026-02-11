@@ -35,6 +35,8 @@ Thumbs.db
 .env
 *.secret
 *.key
+firebase-credentials.json
+*firebase-adminsdk*.json
 
 # Excel files (données sensibles)
 *.xlsx

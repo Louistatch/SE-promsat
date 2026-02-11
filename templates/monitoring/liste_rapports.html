@@ -2,65 +2,328 @@
 
 {% block title %}Rapports - ProSMAT{% endblock %}
 
+{% block extra_css %}
+<style>
+    .stat-card {
+        border-left: 4px solid;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .stat-card.trimestriel { border-left-color: #0d6efd; }
+    .stat-card.annuel { border-left-color: #198754; }
+    .stat-card.mission { border-left-color: #ffc107; }
+    .stat-card.total { border-left-color: #6c757d; }
+    
+    .rapport-card {
+        transition: all 0.3s;
+        border-left: 4px solid transparent;
+    }
+    .rapport-card:hover {
+        border-left-color: #667eea;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        transform: translateX(5px);
+    }
+    
+    .filter-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .badge-type {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
-    <div class="row mb-4">
-        <div class="col">
-            <h1><i class="bi bi-file-text"></i> Rapports</h1>
+    <!-- En-tête avec boutons d'action -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6">
+            <h1><i class="bi bi-file-text"></i> Gestion des Rapports</h1>
+            <p class="text-muted">Consultez et générez vos rapports de suivi-évaluation</p>
+        </div>
+        <div class="col-md-6 text-end">
+            {% if user.has_full_access %}
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#genererRapportModal">
+                    <i class="bi bi-plus-circle"></i> Générer un rapport
+                </button>
+                <button type="button" class="btn btn-success" onclick="window.location.href='{% url 'monitoring:export_excel' %}'">
+                    <i class="bi bi-file-earmark-excel"></i> Export Excel
+                </button>
+                <button type="button" class="btn btn-danger" onclick="window.location.href='{% url 'monitoring:export_pdf' %}'">
+                    <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                </button>
+            </div>
+            {% endif %}
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Titre</th>
-                            <th>Type</th>
-                            <th>Période</th>
-                            <th>Région</th>
-                            <th>Auteur</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for rapport in rapports %}
-                        <tr>
-                            <td><strong>{{ rapport.titre }}</strong></td>
-                            <td>
-                                <span class="badge bg-info">
-                                    {{ rapport.get_type_rapport_display }}
-                                </span>
-                            </td>
-                            <td>{{ rapport.periode|default:"-" }}</td>
-                            <td>{{ rapport.get_region_display|default:"National" }}</td>
-                            <td>{{ rapport.auteur.get_full_name }}</td>
-                            <td>{{ rapport.date_creation|date:"d/m/Y" }}</td>
-                            <td>
-                                <a href="{% url 'monitoring:detail_rapport' rapport.pk %}" 
-                                   class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i> Voir
-                                </a>
-                                {% if rapport.fichier %}
-                                <a href="{{ rapport.fichier.url }}" target="_blank" 
-                                   class="btn btn-sm btn-outline-success">
-                                    <i class="bi bi-download"></i>
-                                </a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="7" class="text-center text-muted py-4">
-                                <i class="bi bi-inbox" style="font-size: 2rem;"></i>
-                                <p>Aucun rapport disponible</p>
-                            </td>
-                        </tr>
+    <!-- Statistiques des rapports -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card stat-card trimestriel">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-1">Rapports Trimestriels</h6>
+                            <h3 class="mb-0">{{ stats.trimestriels }}</h3>
+                        </div>
+                        <div class="text-primary" style="font-size: 2.5rem;">
+                            <i class="bi bi-calendar3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card annuel">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-1">Rapports Annuels</h6>
+                            <h3 class="mb-0">{{ stats.annuels }}</h3>
+                        </div>
+                        <div class="text-success" style="font-size: 2.5rem;">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card mission">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-1">Rapports de Mission</h6>
+                            <h3 class="mb-0">{{ stats.missions }}</h3>
+                        </div>
+                        <div class="text-warning" style="font-size: 2.5rem;">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card total">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-1">Total Rapports</h6>
+                            <h3 class="mb-0">{{ stats.total }}</h3>
+                        </div>
+                        <div class="text-secondary" style="font-size: 2.5rem;">
+                            <i class="bi bi-files"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtres -->
+    <div class="filter-section">
+        <form method="get" id="filterForm">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-funnel"></i> Type de rapport</label>
+                    <select name="type" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                        <option value="">Tous les types</option>
+                        <option value="TRIMESTRIEL" {% if request.GET.type == 'TRIMESTRIEL' %}selected{% endif %}>Trimestriel</option>
+                        <option value="ANNUEL" {% if request.GET.type == 'ANNUEL' %}selected{% endif %}>Annuel</option>
+                        <option value="MISSION" {% if request.GET.type == 'MISSION' %}selected{% endif %}>Mission</option>
+                        <option value="AUTRE" {% if request.GET.type == 'AUTRE' %}selected{% endif %}>Autre</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-geo-alt"></i> Région</label>
+                    <select name="region" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                        <option value="">Toutes les régions</option>
+                        <option value="MARITIME" {% if request.GET.region == 'MARITIME' %}selected{% endif %}>Maritime</option>
+                        <option value="PLATEAUX" {% if request.GET.region == 'PLATEAUX' %}selected{% endif %}>Plateaux</option>
+                        <option value="CENTRALE" {% if request.GET.region == 'CENTRALE' %}selected{% endif %}>Centrale</option>
+                        <option value="KARA" {% if request.GET.region == 'KARA' %}selected{% endif %}>Kara</option>
+                        <option value="SAVANES" {% if request.GET.region == 'SAVANES' %}selected{% endif %}>Savanes</option>
+                        <option value="NATIONAL" {% if request.GET.region == 'NATIONAL' %}selected{% endif %}>National</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-calendar-range"></i> Période</label>
+                    <select name="periode" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                        <option value="">Toutes les périodes</option>
+                        {% for periode in periodes %}
+                        <option value="{{ periode.id }}" {% if request.GET.periode == periode.id|stringformat:"s" %}selected{% endif %}>
+                            {{ periode }}
+                        </option>
                         {% endfor %}
-                    </tbody>
-                </table>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"><i class="bi bi-search"></i> Recherche</label>
+                    <input type="text" name="q" class="form-control" placeholder="Titre du rapport..." 
+                           value="{{ request.GET.q }}" onkeyup="if(event.key==='Enter') document.getElementById('filterForm').submit()">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="submit" class="btn btn-light">
+                        <i class="bi bi-search"></i> Filtrer
+                    </button>
+                    <a href="{% url 'monitoring:liste_rapports' %}" class="btn btn-outline-light">
+                        <i class="bi bi-x-circle"></i> Réinitialiser
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Liste des rapports -->
+    <div class="row">
+        {% for rapport in rapports %}
+        <div class="col-md-6 mb-3">
+            <div class="card rapport-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-file-earmark-text text-primary"></i>
+                            {{ rapport.titre }}
+                        </h5>
+                        <span class="badge badge-type {% if rapport.type_rapport == 'TRIMESTRIEL' %}bg-primary{% elif rapport.type_rapport == 'ANNUEL' %}bg-success{% elif rapport.type_rapport == 'MISSION' %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                            {{ rapport.get_type_rapport_display }}
+                        </span>
+                    </div>
+                    
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <small class="text-muted">
+                                <i class="bi bi-calendar3"></i> Période
+                            </small>
+                            <p class="mb-0"><strong>{{ rapport.periode|default:"Non spécifiée" }}</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">
+                                <i class="bi bi-geo-alt"></i> Région
+                            </small>
+                            <p class="mb-0"><strong>{{ rapport.get_region_display|default:"National" }}</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">
+                                <i class="bi bi-person"></i> Auteur
+                            </small>
+                            <p class="mb-0"><strong>{{ rapport.auteur.get_full_name }}</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">
+                                <i class="bi bi-clock"></i> Date
+                            </small>
+                            <p class="mb-0"><strong>{{ rapport.date_creation|date:"d/m/Y" }}</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'monitoring:detail_rapport' rapport.pk %}" 
+                           class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="bi bi-eye"></i> Consulter
+                        </a>
+                        {% if rapport.fichier %}
+                        <a href="{{ rapport.fichier.url }}" target="_blank" 
+                           class="btn btn-sm btn-outline-success flex-fill">
+                            <i class="bi bi-download"></i> Télécharger
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-inbox" style="font-size: 4rem; color: #ccc;"></i>
+                    <h4 class="mt-3 text-muted">Aucun rapport disponible</h4>
+                    <p class="text-muted">
+                        {% if request.GET %}
+                        Aucun rapport ne correspond à vos critères de recherche.
+                        {% else %}
+                        Commencez par générer votre premier rapport.
+                        {% endif %}
+                    </p>
+                    {% if user.has_full_access %}
+                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#genererRapportModal">
+                        <i class="bi bi-plus-circle"></i> Générer un rapport
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal Générer Rapport -->
+<div class="modal fade" id="genererRapportModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h5 class="modal-title"><i class="bi bi-magic"></i> Générer un Rapport Automatique</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'monitoring:generer_rapport' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Type de rapport</label>
+                        <select name="type_rapport" class="form-select" required>
+                            <option value="TRIMESTRIEL">Rapport Trimestriel</option>
+                            <option value="ANNUEL">Rapport Annuel</option>
+                            <option value="MISSION">Rapport de Mission</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Période</label>
+                        <select name="periode" class="form-select" required>
+                            {% for periode in periodes %}
+                            <option value="{{ periode.id }}">{{ periode }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Région</label>
+                        <select name="region" class="form-select">
+                            <option value="">National (toutes les régions)</option>
+                            <option value="MARITIME">Région Maritime</option>
+                            <option value="PLATEAUX">Région des Plateaux</option>
+                            <option value="CENTRALE">Région Centrale</option>
+                            <option value="KARA">Région de la Kara</option>
+                            <option value="SAVANES">Région des Savanes</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Titre du rapport</label>
+                        <input type="text" name="titre" class="form-control" 
+                               placeholder="Ex: Rapport Trimestriel T1 2026 - Région Maritime" required>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i>
+                        Le rapport sera généré automatiquement avec toutes les données de la période sélectionnée.
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-magic"></i> Générer le rapport
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

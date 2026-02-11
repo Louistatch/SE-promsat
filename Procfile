@@ -1,2 +1,0 @@
-web: bash start.sh
-release: python manage.py migrate --noinput && python manage.py init_users && python manage.py collectstatic --noinput

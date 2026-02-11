@@ -1,0 +1,265 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              🔧 DEPANNAGE NGROK - SOLUTIONS RAPIDES                          ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ ERREUR: "authentication failed: Your account is limited to 1 simultaneous 
+           ngrok agent sessions"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Vous avez déjà une session ngrok active quelque part.
+  Le plan gratuit ne permet qu'une seule session à la fois.
+
+SOLUTION 1: ARRETER TOUTES LES SESSIONS (RECOMMANDE)
+  
+  Double-cliquer sur: ARRETER_NGROK.bat
+  
+  Le script va:
+    ✅ Arrêter tous les processus ngrok
+    ✅ Arrêter le serveur Django
+    ✅ Nettoyer tout
+  
+  Puis relancer: DEMARRER_NGROK.bat
+
+SOLUTION 2: MANUEL
+  
+  1. Ouvrir le Gestionnaire des tâches (CTRL+SHIFT+ESC)
+  2. Chercher "ngrok.exe"
+  3. Clic droit → Fin de tâche
+  4. Chercher "python.exe" (serveur Django)
+  5. Clic droit → Fin de tâche
+  6. Relancer DEMARRER_NGROK.bat
+
+SOLUTION 3: DASHBOARD NGROK
+  
+  1. Aller sur: https://dashboard.ngrok.com/agents
+  2. Voir toutes les sessions actives
+  3. Arrêter les sessions non utilisées
+  4. Relancer DEMARRER_NGROK.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ ERREUR: "ngrok.exe not found"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Le fichier ngrok.exe n'est pas dans le dossier du projet.
+
+SOLUTION:
+  
+  1. Télécharger ngrok:
+     https://ngrok.com/download
+  
+  2. Extraire le fichier ngrok.exe
+  
+  3. Placer ngrok.exe dans le dossier:
+     C:\Users\HP\Downloads\prosmat_se\
+  
+  4. Vérifier que le fichier est bien là:
+     C:\Users\HP\Downloads\prosmat_se\ngrok.exe
+  
+  5. Relancer DEMARRER_NGROK.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ ERREUR: "Failed to complete tunnel connection"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Problème de connexion Internet ou serveurs ngrok temporairement indisponibles.
+
+SOLUTION:
+  
+  1. Vérifier votre connexion Internet
+  
+  2. Attendre 30 secondes
+  
+  3. Relancer DEMARRER_NGROK.bat
+  
+  4. Si le problème persiste:
+     - Redémarrer votre routeur
+     - Vérifier votre pare-feu
+     - Essayer plus tard
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ ERREUR: "Invalid Host header"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Django n'accepte pas le domaine ngrok.
+
+SOLUTION:
+  
+  Déjà configuré dans config/settings.py:
+  
+  ALLOWED_HOSTS = ['*']  ✅
+  
+  Si le problème persiste, vérifier que cette ligne existe bien.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ ERREUR CSRF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Django bloque les requêtes CSRF depuis le domaine ngrok.
+
+SOLUTION:
+  
+  Déjà configuré dans config/settings.py:
+  
+  CSRF_TRUSTED_ORIGINS = [
+      'https://*.ngrok-free.app',
+      'https://*.ngrok.io',
+  ]
+  
+  Si le problème persiste, ajouter votre URL spécifique:
+  
+  CSRF_TRUSTED_ORIGINS = [
+      'https://abc123.ngrok-free.app',  # Votre URL
+      'https://*.ngrok-free.app',
+  ]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ ERREUR: "Port 8000 already in use"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Un autre serveur Django est déjà en cours d'exécution sur le port 8000.
+
+SOLUTION:
+  
+  1. Double-cliquer sur: ARRETER_NGROK.bat
+  
+  2. Ou manuellement:
+     taskkill /F /IM python.exe /T
+  
+  3. Relancer DEMARRER_NGROK.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ PAGE "Visit Site" à chaque fois
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  C'est normal avec le plan gratuit de ngrok.
+
+SOLUTION:
+  
+  Cliquer simplement sur "Visit Site" à chaque fois.
+  
+  Pour éviter cette page:
+    - Passer à un plan payant ngrok
+    - Ou utiliser localhost pour le développement
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ URL CHANGE à chaque redémarrage
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  C'est normal avec le plan gratuit de ngrok.
+
+SOLUTION:
+  
+  À chaque redémarrage:
+    1. Copier la nouvelle URL ngrok
+    2. Mettre à jour Firebase Console (Authorized domains)
+    3. Utiliser la nouvelle URL
+  
+  Pour une URL fixe:
+    - Passer à un plan payant ngrok
+    - Vous aurez une URL comme: prosmat.ngrok.io
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ SERVEUR DJANGO NE DEMARRE PAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAUSE:
+  Erreur dans le code Django ou base de données.
+
+SOLUTION:
+  
+  1. Regarder la fenêtre "Django Server" pour voir l'erreur
+  
+  2. Tester manuellement:
+     venv_prosmat\Scripts\activate
+     python manage.py runserver 8000
+  
+  3. Corriger l'erreur affichée
+  
+  4. Relancer DEMARRER_NGROK.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ WORKFLOW RECOMMANDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AVANT DE DEMARRER:
+  1. Fermer toutes les sessions ngrok existantes
+  2. Arrêter tous les serveurs Django
+  3. Vérifier que ngrok.exe est dans le dossier
+
+DEMARRAGE:
+  1. Double-clic: DEMARRER_NGROK.bat
+  2. Attendre que ngrok démarre
+  3. Copier l'URL
+  4. Configurer Firebase
+  5. Utiliser l'application
+
+ARRET:
+  1. CTRL+C dans la fenêtre ngrok
+  2. Fermer la fenêtre Django Server
+  3. Ou utiliser: ARRETER_NGROK.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 VERIFIER LES SESSIONS ACTIVES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+METHODE 1: Dashboard ngrok
+  https://dashboard.ngrok.com/agents
+  
+  Vous verrez toutes vos sessions actives.
+
+METHODE 2: Gestionnaire des tâches
+  CTRL+SHIFT+ESC
+  Chercher: ngrok.exe et python.exe
+
+METHODE 3: Ligne de commande
+  tasklist | findstr ngrok
+  tasklist | findstr python
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 SCRIPTS DISPONIBLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DEMARRER_NGROK.bat      - Démarrer avec ngrok
+ARRETER_NGROK.bat       - Arrêter toutes les sessions
+LANCER_MAINTENANT.bat   - Démarrer en local uniquement (sans ngrok)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 CONSEILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Toujours arrêter proprement avec CTRL+C ou ARRETER_NGROK.bat
+✅ Ne pas fermer brutalement les fenêtres
+✅ Vérifier qu'aucune session n'est active avant de redémarrer
+✅ Noter l'URL ngrok si vous devez la partager
+✅ Utiliser localhost pour le développement quotidien
+✅ Utiliser ngrok uniquement pour les tests externes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🆘 BESOIN D'AIDE?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Documentation ngrok:  https://ngrok.com/docs
+Dashboard ngrok:      https://dashboard.ngrok.com
+Support ngrok:        https://ngrok.com/support
+
+Documentation locale:
+  - GUIDE_NGROK.md
+  - DEMARRER_AVEC_NGROK.txt
+  - DEPANNAGE_NGROK.txt (ce fichier)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Date: 11 février 2026
+Version: 1.0
+Status: ✅ Guide de dépannage complet
+
+═══════════════════════════════════════════════════════════════════════════════
