@@ -89,25 +89,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
+# Database - Utiliser Neon PostgreSQL partout (développement et production)
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# Utiliser PostgreSQL si DATABASE_URL est défini (production), sinon SQLite (développement)
-if os.environ.get('DATABASE_URL'):
-    DATABASES = {
+DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
     )
 }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
 
 
 # Password validation

@@ -40,7 +40,7 @@ class Indicateur(models.Model):
         ('EXTRANT', 'Extrant'),
     ]
     
-    sous_composante = models.ForeignKey(SousComposante, on_delete=models.CASCADE, related_name='indicateurs')
+    sous_composante = models.ForeignKey(SousComposante, on_delete=models.CASCADE, related_name='indicateurs', null=True, blank=True)
     code = models.CharField(max_length=50, unique=True)
     libelle = models.TextField()
     type_indicateur = models.CharField(max_length=20, choices=TYPE_CHOICES)
