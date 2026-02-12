@@ -24,17 +24,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-*%b%9fw_)g-969c9m#6_*qk(*j5hbit8ye6l1)5d+33z8_ij=d')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-*%b%9fw_)g-969c9m#6_*qk(*j5hbit8ye6l1)5d+33z8_ij=d')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = config('DEBUG', default='True', cast=bool)
 
-ALLOWED_HOSTS = ['*']  # Accepter tous les domaines (ngrok, localhost, etc.)
+# ALLOWED_HOSTS - Configurable via variable d'environnement
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
 
-# CSRF trusted origins for ngrok
+# CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
     'https://*.ngrok-free.app',
     'https://*.ngrok.io',
+    'https://*.onrender.com',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
