@@ -23,10 +23,10 @@ class SousComposanteAdmin(admin.ModelAdmin):
 
 @admin.register(Indicateur)
 class IndicateurAdmin(admin.ModelAdmin):
-    list_display = ['code', 'libelle_court', 'type_indicateur', 'niveau', 'sous_composante', 'actif']
+    list_display = ['code', 'libelle_court', 'type_indicateur', 'niveau', 'valeur_reference', 'cible_finale', 'unite_mesure', 'actif']
     list_filter = ['type_indicateur', 'niveau', 'actif', 'sous_composante__composante']
     search_fields = ['code', 'libelle', 'unite_mesure']
-    list_editable = ['actif']
+    list_editable = ['actif', 'cible_finale']  # ✅ Permet de modifier la cible directement dans la liste
     
     fieldsets = (
         ('Identification', {
