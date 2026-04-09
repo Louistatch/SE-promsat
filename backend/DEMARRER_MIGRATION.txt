@@ -1,0 +1,155 @@
+================================================================================
+                MIGRATION VERS NEON + FIREBASE - DEMARRAGE RAPIDE
+================================================================================
+
+ETAPE 1: PREPARATION (5 min)
+================================================================================
+
+1. Lire le guide complet:
+   GUIDE_MIGRATION_COMPLET.md
+
+2. Creer un compte Neon:
+   https://neon.tech
+
+3. Creer un projet Firebase:
+   https://console.firebase.google.com
+
+
+ETAPE 2: CONFIGURATION (10 min)
+================================================================================
+
+1. Executer le script de configuration:
+   python setup_neon_firebase.py
+
+2. Suivre les instructions et entrer:
+   - Chaine de connexion Neon
+   - Identifiants Firebase
+
+3. Telecharger firebase-credentials.json depuis Firebase Console
+
+
+ETAPE 3: MIGRATION (10 min)
+================================================================================
+
+1. Sauvegarder les donnees actuelles:
+   python manage.py dumpdata > backup.json
+
+2. Executer la migration:
+   python migrer_vers_neon.py
+
+3. Verifier les donnees:
+   python verifier_donnees.py
+
+
+ETAPE 4: TESTS (5 min)
+================================================================================
+
+1. Demarrer l'application:
+   python manage.py runserver
+
+2. Tester la connexion:
+   http://localhost:8000/accounts/login-firebase/
+
+3. Creer un compte et se connecter
+
+
+================================================================================
+FICHIERS IMPORTANTS
+================================================================================
+
+GUIDES:
+  - GUIDE_MIGRATION_COMPLET.md ........ Guide detaille pas a pas
+  - GUIDE_NEON_FIREBASE.md ............ Documentation technique
+
+SCRIPTS:
+  - setup_neon_firebase.py ............ Configuration automatique
+  - migrer_vers_neon.py ............... Migration automatique
+  - verifier_donnees.py ............... Verification
+
+CONFIGURATION:
+  - .env .............................. Variables d'environnement (a creer)
+  - firebase-credentials.json ......... Credentials Firebase (a telecharger)
+  - config/settings_neon.py ........... Configuration Django
+
+
+================================================================================
+CHECKLIST
+================================================================================
+
+AVANT DE COMMENCER:
+  [ ] Compte Neon cree
+  [ ] Projet Firebase cree
+  [ ] Chaine de connexion Neon copiee
+  [ ] Configuration Firebase copiee
+
+CONFIGURATION:
+  [ ] python setup_neon_firebase.py execute
+  [ ] Fichier .env cree
+  [ ] firebase-credentials.json telecharge
+  [ ] Dependencies installees (pip install -r requirements.txt)
+
+MIGRATION:
+  [ ] Donnees SQLite sauvegardees
+  [ ] python migrer_vers_neon.py execute
+  [ ] 75 indicateurs presents dans Neon
+  [ ] Verification reussie
+
+TESTS:
+  [ ] Application demarre sans erreur
+  [ ] Connexion a Neon fonctionne
+  [ ] Authentification Firebase fonctionne
+  [ ] Dashboard accessible
+
+
+================================================================================
+COMMANDES RAPIDES
+================================================================================
+
+Configuration:
+  python setup_neon_firebase.py
+
+Migration:
+  python migrer_vers_neon.py
+
+Verification:
+  python verifier_donnees.py
+
+Demarrage:
+  python manage.py runserver
+
+Test connexion Neon:
+  python manage.py dbshell
+
+
+================================================================================
+AIDE
+================================================================================
+
+En cas de probleme:
+  1. Consulter: GUIDE_MIGRATION_COMPLET.md (section Depannage)
+  2. Verifier: .env (toutes les variables sont remplies)
+  3. Verifier: firebase-credentials.json (present dans le dossier)
+  4. Reinstaller: pip install -r requirements.txt
+
+
+================================================================================
+TEMPS ESTIME
+================================================================================
+
+  Preparation: 5 min
+  Configuration: 10 min
+  Migration: 10 min
+  Tests: 5 min
+  ----------------
+  TOTAL: 30 min
+
+
+================================================================================
+
+Pret? Commencez par:
+  1. Lire: GUIDE_MIGRATION_COMPLET.md
+  2. Executer: python setup_neon_firebase.py
+
+Bon courage! 🚀
+
+================================================================================

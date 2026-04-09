@@ -1,0 +1,251 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Style de la page de connexion admin */
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #container {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        padding: 40px;
+        max-width: 450px;
+        width: 100%;
+        margin: 20px;
+    }
+
+    #header {
+        background: transparent;
+        padding: 0;
+        margin-bottom: 30px;
+    }
+
+    .prosmat-branding {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .admin-logo {
+        height: 80px;
+        margin: 0 auto;
+    }
+
+    #site-name a {
+        color: #667eea;
+        font-size: 28px;
+    }
+
+    .admin-subtitle {
+        color: #666;
+        font-size: 13px;
+    }
+
+    #content {
+        padding: 0;
+    }
+
+    #content-main {
+        width: 100%;
+    }
+
+    .login {
+        margin: 0;
+    }
+
+    .login form {
+        margin: 0;
+    }
+
+    .form-row {
+        padding: 15px 0;
+        border: none;
+    }
+
+    .form-row label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .form-row input[type="text"]:focus,
+    .form-row input[type="password"]:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .submit-row {
+        padding: 20px 0 0 0;
+        margin: 0;
+        text-align: center;
+        border: none;
+    }
+
+    .submit-row input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .submit-row input[type="submit"]:hover {
+        background: #5568d3;
+    }
+
+    .errornote {
+        background: #fee;
+        color: #c33;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        border-left: 4px solid #c33;
+    }
+
+    .errorlist {
+        list-style: none;
+        padding: 0;
+        margin: 5px 0;
+    }
+
+    .errorlist li {
+        background: #fee;
+        color: #c33;
+        padding: 8px 10px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        font-size: 13px;
+    }
+
+    .form-row.errors input {
+        border-color: #c33;
+    }
+
+    #footer {
+        background: transparent;
+        color: white;
+        text-align: center;
+        margin-top: 30px;
+        padding: 20px;
+        border: none;
+    }
+
+    #footer p {
+        color: white;
+        font-size: 12px;
+        margin: 5px 0;
+    }
+
+    .breadcrumbs {
+        display: none;
+    }
+
+    /* Lien vers la page de connexion Firebase */
+    .firebase-link {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    .firebase-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .firebase-link a:hover {
+        color: #5568d3;
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<div class="prosmat-branding">
+    <img src="{% static 'images/logo_prosmat.jpg' %}" alt="ProSMAT Logo" class="admin-logo">
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">ProSMAT</a>
+    </h1>
+    <p class="admin-subtitle">Administration - Système de Suivi & Évaluation</p>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+    Veuillez corriger les erreurs ci-dessous.
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+    <form action="{{ app_path }}" method="post" id="login-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        
+        <div class="form-row">
+            {{ form.username.errors }}
+            <label for="id_username" class="required">{% trans 'Username:' %}</label>
+            {{ form.username }}
+        </div>
+        
+        <div class="form-row">
+            {{ form.password.errors }}
+            <label for="id_password" class="required">{% trans 'Password:' %}</label>
+            {{ form.password }}
+        </div>
+        
+        <div class="submit-row">
+            <input type="submit" value="{% trans 'Log in' %}">
+        </div>
+    </form>
+    
+    <div class="firebase-link">
+        <p>Ou connectez-vous avec Firebase</p>
+        <a href="{% url 'accounts:login' %}">→ Connexion Firebase</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div id="footer">
+    <p><strong>ProSMAT</strong></p>
+    <p>Projet de Soutien à la Promotion du Maraîchage Agroécologique au Togo</p>
+    <p>Financé par GAFSP & FIDA | République du Togo</p>
+</div>
+{% endblock %}

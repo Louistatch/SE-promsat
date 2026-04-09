@@ -1,0 +1,130 @@
+═══════════════════════════════════════════════════════════════════
+  DÉMARRAGE RAPIDE - AUTHENTIFICATION FIREBASE
+═══════════════════════════════════════════════════════════════════
+
+🔥 ÉTAPE 1: CONFIGURATION FIREBASE
+───────────────────────────────────────────────────────────────────
+
+1. Allez sur: https://console.firebase.google.com
+2. Créez un projet ou sélectionnez un projet existant
+3. Cliquez sur l'icône ⚙️ > Paramètres du projet
+4. Descendez à "Vos applications" > Cliquez sur l'icône Web (</>)
+5. Copiez les valeurs de configuration
+
+
+📝 ÉTAPE 2: CRÉER LE FICHIER .env
+───────────────────────────────────────────────────────────────────
+
+1. Copiez le fichier d'exemple:
+   copy .env.example .env
+
+2. Éditez .env et remplissez les valeurs Firebase:
+
+FIREBASE_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+FIREBASE_AUTH_DOMAIN=votre-projet.firebaseapp.com
+FIREBASE_PROJECT_ID=votre-projet-id
+FIREBASE_STORAGE_BUCKET=votre-projet.appspot.com
+FIREBASE_MESSAGING_SENDER_ID=123456789012
+FIREBASE_APP_ID=1:123456789012:web:abcdef123456
+FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
+
+
+🔐 ÉTAPE 3: ACTIVER L'AUTHENTIFICATION
+───────────────────────────────────────────────────────────────────
+
+1. Console Firebase > Authentication
+2. Onglet "Sign-in method"
+3. Activez "Email/Password"
+4. Activez "Google"
+5. Ajoutez vos domaines autorisés:
+   - localhost
+   - 127.0.0.1
+   - Votre domaine ngrok (si utilisé)
+
+
+✅ ÉTAPE 4: TESTER LA CONFIGURATION
+───────────────────────────────────────────────────────────────────
+
+python test_firebase_auth.py
+
+Si tous les tests passent, vous êtes prêt!
+
+
+🚀 ÉTAPE 5: DÉMARRER LE SERVEUR
+───────────────────────────────────────────────────────────────────
+
+python manage.py runserver
+
+Puis ouvrez: http://localhost:8000/accounts/login/
+
+
+🧪 ÉTAPE 6: TESTER LA CONNEXION
+───────────────────────────────────────────────────────────────────
+
+1. Créez un utilisateur dans Firebase Console:
+   Authentication > Users > Add user
+
+2. Testez la connexion avec email/password
+
+3. Testez la connexion avec Google OAuth
+
+
+📊 ÉTAPE 7: VÉRIFIER LES LOGS
+───────────────────────────────────────────────────────────────────
+
+type logs\django.log
+
+Vous devriez voir:
+- INFO accounts.firebase_auth Firebase Admin SDK initialisé
+- INFO accounts.views_firebase Tentative de connexion Firebase
+- INFO accounts.firebase_auth Authentification réussie
+
+
+═══════════════════════════════════════════════════════════════════
+  PROBLÈMES COURANTS
+═══════════════════════════════════════════════════════════════════
+
+❌ "Firebase Admin SDK n'est pas initialisé"
+   → Vérifiez que firebase-admin est installé
+   → pip install firebase-admin==6.4.0
+
+❌ "Token invalide"
+   → Vérifiez que les variables .env sont correctes
+   → Vérifiez que le domaine est autorisé dans Firebase
+
+❌ "Trop de tentatives"
+   → Attendez 1 minute ou effacez le cache:
+   → python manage.py shell
+   >>> from django.core.cache import cache
+   >>> cache.clear()
+
+❌ "Popup bloquée" (Google OAuth)
+   → Autorisez les popups dans votre navigateur
+
+
+═══════════════════════════════════════════════════════════════════
+  DOCUMENTATION COMPLÈTE
+═══════════════════════════════════════════════════════════════════
+
+📖 GUIDE_CORRECTION_FIREBASE.md - Guide pratique détaillé
+📖 CORRECTIONS_FIREBASE_AUTHENTIFICATION.md - Détails techniques
+📖 RESUME_CORRECTIONS_FIREBASE.md - Résumé des corrections
+
+
+═══════════════════════════════════════════════════════════════════
+  SUPPORT
+═══════════════════════════════════════════════════════════════════
+
+En cas de problème:
+1. Vérifiez les logs: type logs\django.log
+2. Lancez les tests: python test_firebase_auth.py
+3. Consultez la documentation ci-dessus
+
+
+═══════════════════════════════════════════════════════════════════
+  PRÊT À DÉMARRER!
+═══════════════════════════════════════════════════════════════════
+
+Suivez les étapes ci-dessus et vous serez opérationnel en 10 minutes!
+
+Bonne chance! 🚀

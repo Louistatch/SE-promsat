@@ -1,0 +1,217 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              🔍 COMMENT TROUVER LA BONNE URL NGROK                           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+❌ ERREUR: DNS_PROBE_FINISHED_NXDOMAIN
+
+CAUSE:
+  L'URL copiée est incorrecte ou incomplète.
+  
+  URL INCORRECTE (ce que vous avez):
+    e4d4-2c0f-f0f8-65d-c400-2078-7ed3-a4
+  
+  URL CORRECTE (ce qu'il faut):
+    https://abc123-def456.ngrok-free.app
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ETAPE 1: REGARDER LA FENETRE NGROK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Dans la fenêtre ngrok, vous devriez voir quelque chose comme:
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ ngrok                                                                       │
+│                                                                             │
+│ Session Status                online                                       │
+│ Account                       Free                                         │
+│ Version                       3.x.x                                        │
+│ Region                        United States (us)                           │
+│ Latency                       50ms                                         │
+│ Web Interface                 http://127.0.0.1:4040                        │
+│ Forwarding                    https://abc123-def456.ngrok-free.app -> ... │
+│                                                                             │
+│ Connections                   ttl     opn     rt1     rt5     p50     p90  │
+│                               0       0       0.00    0.00    0.00    0.00 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+CHERCHER LA LIGNE "Forwarding":
+  Forwarding    https://abc123-def456.ngrok-free.app -> http://localhost:8000
+
+COPIER UNIQUEMENT LA PARTIE HTTPS:
+  ✅ CORRECT: https://abc123-def456.ngrok-free.app
+  ❌ INCORRECT: abc123-def456
+  ❌ INCORRECT: e4d4-2c0f-f0f8-65d-c400-2078-7ed3-a4
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ETAPE 2: UTILISER L'INTERFACE WEB NGROK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Si vous ne voyez pas bien la fenêtre ngrok:
+
+1. Ouvrir votre navigateur
+
+2. Aller sur: http://127.0.0.1:4040
+
+3. Vous verrez l'interface web ngrok avec:
+   - L'URL publique en haut
+   - Toutes les requêtes
+   - Les détails de connexion
+
+4. Copier l'URL publique affichée
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ETAPE 3: VERIFIER LE FORMAT DE L'URL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FORMAT CORRECT:
+  https://[identifiant].ngrok-free.app
+  
+  Exemples:
+    ✅ https://abc123.ngrok-free.app
+    ✅ https://abc123-def456.ngrok-free.app
+    ✅ https://1a2b3c4d.ngrok-free.app
+    ✅ https://happy-elephant-123.ngrok-free.app
+
+FORMAT INCORRECT:
+  ❌ e4d4-2c0f-f0f8-65d-c400-2078-7ed3-a4 (incomplet)
+  ❌ abc123 (sans https:// et sans .ngrok-free.app)
+  ❌ http://abc123.ngrok-free.app (http au lieu de https)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 SOLUTION: REDEMARRER NGROK PROPREMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ARRETER TOUT:
+   Double-clic sur: ARRETER_NGROK.bat
+
+2. REDEMARRER:
+   Double-clic sur: DEMARRER_NGROK.bat
+
+3. ATTENDRE que ngrok démarre complètement (5-10 secondes)
+
+4. REGARDER la fenêtre ngrok et chercher "Forwarding"
+
+5. COPIER l'URL complète qui commence par https://
+
+6. EXEMPLE de ce que vous devriez voir:
+   
+   ┌──────────────────────────────────────────────────────────────────────┐
+   │ Forwarding    https://e4d4-2c0f-f0f8.ngrok-free.app -> localhost    │
+   └──────────────────────────────────────────────────────────────────────┘
+   
+   COPIER: https://e4d4-2c0f-f0f8.ngrok-free.app
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ETAPE 4: TESTER L'URL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Copier l'URL complète (avec https://)
+
+2. Ouvrir un nouvel onglet dans le navigateur
+
+3. Coller l'URL
+
+4. Appuyer sur Entrée
+
+5. Vous devriez voir:
+   - Page d'avertissement ngrok "Visit Site"
+   - Cliquer sur "Visit Site"
+   - Page de connexion ProSMAT apparaît
+
+6. Si vous voyez "DNS_PROBE_FINISHED_NXDOMAIN":
+   - L'URL est incorrecte
+   - Revérifier dans la fenêtre ngrok
+   - Ou utiliser l'interface web: http://127.0.0.1:4040
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ETAPE 5: CONFIGURER FIREBASE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Une fois que vous avez la BONNE URL:
+
+1. Aller sur: https://console.firebase.google.com
+
+2. Projet: prosmat-auth
+
+3. Authentication → Settings → Authorized domains
+
+4. Add domain
+
+5. Coller UNIQUEMENT le domaine (SANS https://):
+   
+   SI L'URL EST: https://e4d4-2c0f-f0f8.ngrok-free.app
+   COLLER: e4d4-2c0f-f0f8.ngrok-free.app
+
+6. Save
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 ASTUCES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Toujours copier l'URL COMPLETE avec https://
+✅ Vérifier que l'URL se termine par .ngrok-free.app
+✅ Utiliser l'interface web (localhost:4040) si la fenêtre est illisible
+✅ Noter l'URL quelque part pour ne pas la perdre
+✅ L'URL change à chaque redémarrage de ngrok
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 EXEMPLE COMPLET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FENETRE NGROK AFFICHE:
+  Forwarding    https://happy-elephant-123.ngrok-free.app -> localhost:8000
+
+COPIER POUR LE NAVIGATEUR:
+  https://happy-elephant-123.ngrok-free.app
+
+COPIER POUR FIREBASE (sans https://):
+  happy-elephant-123.ngrok-free.app
+
+RESULTAT:
+  ✅ Page de connexion ProSMAT s'affiche
+  ✅ Authentification Firebase fonctionne
+  ✅ Application accessible
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🆘 SI CA NE FONCTIONNE TOUJOURS PAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Vérifier que ngrok est bien démarré:
+   - Fenêtre ngrok ouverte
+   - Status: online
+   - Forwarding: URL visible
+
+2. Vérifier que Django est démarré:
+   - Fenêtre "Django Server" ouverte
+   - Pas d'erreur affichée
+
+3. Tester localhost d'abord:
+   http://localhost:8000
+   
+   Si localhost ne fonctionne pas:
+   - Problème avec Django
+   - Regarder les erreurs dans la fenêtre Django Server
+
+4. Utiliser l'interface web ngrok:
+   http://127.0.0.1:4040
+   
+   Vous verrez:
+   - L'URL publique exacte
+   - Les requêtes en temps réel
+   - Les erreurs éventuelles
+
+5. Redémarrer complètement:
+   - ARRETER_NGROK.bat
+   - Attendre 5 secondes
+   - DEMARRER_NGROK.bat
+   - Copier la nouvelle URL
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PROCHAINE ETAPE:
+  1. Ouvrir: http://127.0.0.1:4040
+  2. Copier l'URL publique affichée
+  3. Tester dans le navigateur
+  4. Configurer Firebase avec cette URL
+
+═══════════════════════════════════════════════════════════════════════════════

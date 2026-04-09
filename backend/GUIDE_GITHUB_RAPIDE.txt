@@ -1,0 +1,180 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║              GUIDE RAPIDE - DÉPLOIEMENT SUR GITHUB                   ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📋 PRÉREQUIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Compte GitHub créé
+✅ Git installé sur votre machine
+✅ Projet ProSMAT prêt
+
+
+🚀 MÉTHODE AUTOMATIQUE (RECOMMANDÉE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Double-cliquez sur: deployer_github.bat
+
+2. Suivez les instructions à l'écran
+
+3. Créez un dépôt sur GitHub quand demandé:
+   → https://github.com/new
+   → Nom: prosmat
+   → Visibilité: Private
+   → Ne cochez PAS "Initialize with README"
+
+4. Copiez l'URL du dépôt (ex: https://github.com/username/prosmat.git)
+
+5. Collez l'URL quand le script le demande
+
+6. Authentifiez-vous avec votre Personal Access Token
+
+✅ C'est fait!
+
+
+⚙️ MÉTHODE MANUELLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ouvrez PowerShell dans le dossier du projet:
+
+# 1. Initialiser Git
+git init
+
+# 2. Ajouter les fichiers
+git add .
+
+# 3. Premier commit
+git commit -m "Initial commit: ProSMAT Suivi-Evaluation"
+
+# 4. Créer un dépôt sur GitHub
+→ https://github.com/new
+
+# 5. Connecter au dépôt
+git remote add origin https://github.com/USERNAME/REPO.git
+
+# 6. Renommer la branche
+git branch -M main
+
+# 7. Pousser sur GitHub
+git push -u origin main
+
+
+🔐 CRÉER UN PERSONAL ACCESS TOKEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Allez sur: https://github.com/settings/tokens
+
+2. Cliquez sur "Generate new token" → "Generate new token (classic)"
+
+3. Nom: "ProSMAT Deploy"
+
+4. Cochez: ☑ repo (Full control of private repositories)
+
+5. Cliquez sur "Generate token"
+
+6. COPIEZ LE TOKEN (vous ne pourrez plus le voir!)
+
+7. Utilisez ce token comme mot de passe lors du git push
+
+
+⚠️ FICHIERS SENSIBLES (NE JAMAIS COMMITER)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ces fichiers sont automatiquement exclus par .gitignore:
+
+❌ .env
+❌ firebase-credentials.json
+❌ prosmat-auth-firebase-adminsdk-*.json
+❌ db.sqlite3
+❌ __pycache__/
+❌ *.pyc
+❌ *.log
+❌ media/
+
+→ Vérifiez avec: git status
+
+
+🔄 MODIFICATIONS FUTURES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour envoyer vos modifications sur GitHub:
+
+# 1. Voir les fichiers modifiés
+git status
+
+# 2. Ajouter les fichiers
+git add .
+
+# 3. Créer un commit
+git commit -m "Description de vos modifications"
+
+# 4. Pousser sur GitHub
+git push
+
+
+📝 EXEMPLES DE MESSAGES DE COMMIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+git commit -m "feat: Ajout de la génération automatique de rapports"
+git commit -m "fix: Correction de l'erreur de validation"
+git commit -m "improve: Amélioration de l'interface des rapports"
+git commit -m "docs: Mise à jour du guide d'installation"
+git commit -m "style: Amélioration du design de la page de connexion"
+
+
+✅ VÉRIFICATION APRÈS DÉPLOIEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Allez sur votre dépôt GitHub
+
+2. Vérifiez que tous les fichiers sont présents
+
+3. Vérifiez que le README.md s'affiche correctement
+
+4. IMPORTANT: Vérifiez que les fichiers sensibles ne sont PAS là:
+   ❌ .env
+   ❌ firebase-credentials.json
+   ❌ db.sqlite3
+
+
+🎯 PROCHAINES ÉTAPES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Inviter des collaborateurs:
+   → Settings → Collaborators → Add people
+
+2. Protéger la branche main:
+   → Settings → Branches → Add rule
+
+3. Configurer les Issues:
+   → Issues → New issue
+
+4. Créer un Project:
+   → Projects → New project
+
+
+📞 SUPPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problème: git: command not found
+Solution: Installez Git depuis https://git-scm.com/downloads
+
+Problème: Permission denied
+Solution: Utilisez un Personal Access Token
+
+Problème: rejected - non-fast-forward
+Solution: git pull origin main --rebase && git push
+
+Problème: Fichiers sensibles apparaissent
+Solution: Vérifiez .gitignore
+
+
+📚 DOCUMENTATION COMPLÈTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour plus de détails, consultez:
+→ DEPLOIEMENT_GITHUB.md
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    BONNE CHANCE! 🚀                                  ║
+╚══════════════════════════════════════════════════════════════════════╝

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Indicateurs - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-list-check"></i> Indicateurs du Projet</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Code</th>
+                            <th>Libellé</th>
+                            <th>Type</th>
+                            <th>Niveau</th>
+                            <th>Unité</th>
+                            <th>Référence</th>
+                            <th>Cible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for indicateur in indicateurs %}
+                        <tr>
+                            <td><strong>{{ indicateur.code }}</strong></td>
+                            <td>{{ indicateur.libelle|truncatewords:10 }}</td>
+                            <td>
+                                <span class="badge bg-info">
+                                    {{ indicateur.get_type_indicateur_display }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-secondary">
+                                    {{ indicateur.get_niveau_display }}
+                                </span>
+                            </td>
+                            <td>{{ indicateur.unite_mesure }}</td>
+                            <td>{{ indicateur.valeur_reference|default:"-" }}</td>
+                            <td><strong>{{ indicateur.cible_finale|default:"-" }}</strong></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">
+                                <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                                <p>Aucun indicateur disponible</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

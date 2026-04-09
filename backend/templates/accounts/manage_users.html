@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gestion des Utilisateurs - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="fas fa-users"></i> Gestion des Utilisateurs
+                </h2>
+                <a href="{% url 'admin:accounts_user_add' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Ajouter un utilisateur
+                </a>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3>{{ users|length }}</h3>
+                            <p class="text-muted">Total Utilisateurs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3>{{ users|selectattr:'role', 'equalto', 'CHARGE_PROJET'|length }}</h3>
+                            <p class="text-muted">Chargés de Projet</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3>{{ users|selectattr:'role', 'equalto', 'COORDONNATEUR'|length }}</h3>
+                            <p class="text-muted">Coordonnateurs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3>{{ users|selectattr:'role', 'equalto', 'ADMIN'|length }}</h3>
+                            <p class="text-muted">Administrateurs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table des utilisateurs -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Liste des Utilisateurs</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Rôle</th>
+                                    <th>Région</th>
+                                    <th>Statut</th>
+                                    <th>Créé le</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ user.get_full_name|default:user.username }}</strong>
+                                    </td>
+                                    <td>{{ user.email }}</td>
+                                    <td>
+                                        <span class="badge badge-role-{{ user.role|lower }}">
+                                            {{ user.get_role_display }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if user.region %}
+                                            {{ user.get_region_display }}
+                                        {% else %}
+                                            <span class="text-muted">-</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_active %}
+                                            <span class="badge badge-success">Actif</span>
+                                        {% else %}
+                                            <span class="badge badge-danger">Inactif</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ user.created_at|date:"d/m/Y" }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" onclick="editUser({{ user.id }}, '{{ user.role }}', '{{ user.region }}')">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <a href="{% url 'admin:accounts_user_change' user.id %}" class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-cog"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">
+                                        Aucun utilisateur trouvé
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal d'édition -->
+<div class="modal fade" id="editUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier le Rôle et la Région</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <input type="hidden" id="userId">
+                    
+                    <div class="form-group">
+                        <label for="userRole">Rôle</label>
+                        <select class="form-control" id="userRole">
+                            {% for value, label in role_choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userRegion">Région</label>
+                        <select class="form-control" id="userRegion">
+                            <option value="">Aucune</option>
+                            {% for value, label in region_choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" onclick="saveUser()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .badge-role-charge_projet { background-color: #17a2b8; }
+    .badge-role-coordonnateur { background-color: #28a745; }
+    .badge-role-evaluateur { background-color: #ffc107; color: #000; }
+    .badge-role-admin { background-color: #dc3545; }
+</style>
+
+<script>
+function editUser(userId, role, region) {
+    document.getElementById('userId').value = userId;
+    document.getElementById('userRole').value = role;
+    document.getElementById('userRegion').value = region || '';
+    $('#editUserModal').modal('show');
+}
+
+async function saveUser() {
+    const userId = document.getElementById('userId').value;
+    const role = document.getElementById('userRole').value;
+    const region = document.getElementById('userRegion').value;
+    
+    try {
+        const response = await fetch('{% url "accounts:update-user-role" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                role: role,
+                region: region
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Rôle mis à jour avec succès!');
+            location.reload();
+        } else {
+            alert('Erreur: ' + data.error);
+        }
+    } catch (error) {
+        alert('Erreur lors de la mise à jour');
+    }
+}
+</script>
+{% endblock %}

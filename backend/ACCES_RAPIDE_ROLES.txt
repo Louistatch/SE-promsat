@@ -1,0 +1,148 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║           ACCÈS RAPIDE - GESTION DES RÔLES FIREBASE                  ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📌 URLS IMPORTANTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Interface Web (Admin uniquement):
+→ http://127.0.0.1:8000/accounts/manage-users/
+
+Django Admin (Staff uniquement):
+→ http://127.0.0.1:8000/admin/accounts/user/
+
+Connexion Firebase:
+→ http://127.0.0.1:8000/accounts/login/
+
+
+📌 COMMANDES RAPIDES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Tester le système:
+→ python tester_roles.py
+
+Attribuer des rôles (script):
+→ python attribuer_roles.py
+
+Vérifier la configuration:
+→ python manage.py check
+
+Démarrer le serveur:
+→ python manage.py runserver
+
+
+📌 RÔLES DISPONIBLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. CHARGE_PROJET    → Chargé de Projet (défaut)
+2. COORDONNATEUR    → Coordonnateur
+3. EVALUATEUR       → Évaluateur
+4. ADMIN            → Administrateur
+
+
+📌 RÉGIONS DISPONIBLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. MARITIME         → Région Maritime
+2. PLATEAUX         → Région des Plateaux
+3. CENTRALE         → Région Centrale
+4. KARA             → Région de la Kara
+5. SAVANES          → Région des Savanes
+
+
+📌 PERMISSIONS PAR RÔLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHARGE_PROJET:
+  ✓ Voir sa région uniquement
+  ✓ Saisir des réalisations
+  ✗ Dashboard Exécutif
+  ✗ Synthèse Nationale
+
+COORDONNATEUR / EVALUATEUR:
+  ✓ Voir toutes les régions
+  ✓ Dashboard Exécutif
+  ✓ Synthèse Nationale
+  ✓ Contrôle Qualité
+  ✓ Exports (Excel/PDF)
+  ✗ Gérer les utilisateurs
+
+ADMIN:
+  ✓ Tous les accès
+  ✓ Gérer les utilisateurs
+  ✓ Django Admin
+
+
+📌 WORKFLOW NOUVEAU UTILISATEUR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Utilisateur s'inscrit via Firebase
+2. Première connexion → Compte Django créé automatiquement
+3. Rôle par défaut: CHARGE_PROJET
+4. Admin attribue le bon rôle + région
+5. Utilisateur se reconnecte → Accès selon son rôle
+
+
+📌 STATISTIQUES ACTUELLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total utilisateurs: 15
+
+Par rôle:
+  • Chargé de Projet: 12
+  • Coordonnateur: 1
+  • Évaluateur: 1
+  • Administrateur: 1
+
+Par région:
+  • Maritime: 2
+  • Plateaux: 2
+  • Centrale: 2
+  • Kara: 2
+  • Savanes: 2
+
+
+📌 DÉPANNAGE RAPIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problème: Accès refusé à /accounts/manage-users/
+Solution: Vérifier que vous êtes ADMIN avec python tester_roles.py
+
+Problème: Utilisateur ne voit pas les bonnes données
+Solution: Vérifier rôle et région, puis se reconnecter
+
+Problème: Nouveau compte n'apparaît pas
+Solution: L'utilisateur doit se connecter au moins une fois
+
+
+📌 COMPTE ADMIN DE TEST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Email: admin@prosmat.tg
+Rôle: ADMIN
+Accès: Tous les menus et fonctionnalités
+
+
+📌 FICHIERS IMPORTANTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Documentation complète:
+→ GUIDE_COMPLET_ROLES.md
+
+Guide rapide:
+→ GUIDE_RAPIDE_ROLES.txt
+
+Scripts:
+→ attribuer_roles.py
+→ tester_roles.py
+
+Code source:
+→ accounts/models.py (modèle User)
+→ accounts/views.py (vues de gestion)
+→ accounts/admin.py (admin Django)
+→ templates/accounts/manage_users.html (interface web)
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║  Pour plus d'informations, consultez GUIDE_COMPLET_ROLES.md         ║
+╚══════════════════════════════════════════════════════════════════════╝

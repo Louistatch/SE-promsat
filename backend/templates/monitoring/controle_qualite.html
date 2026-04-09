@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block title %}Contrôle Qualité - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-shield-check"></i> Contrôle Qualité</h1>
+            <p class="text-muted">Détection et résolution des anomalies</p>
+        </div>
+    </div>
+
+    <!-- Statistiques des Alertes -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h6 class="card-title">⚠️ Excès</h6>
+                    <h3>{{ rapport.par_type.EXCES|default:0 }}</h3>
+                    <small class="text-muted">Réalisé > Cible</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-danger">
+                <div class="card-body">
+                    <h6 class="card-title">🔴 Négatif</h6>
+                    <h3>{{ rapport.par_type.NEGATIF|default:0 }}</h3>
+                    <small class="text-muted">Valeurs négatives</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body">
+                    <h6 class="card-title">❓ Vide</h6>
+                    <h3>{{ rapport.par_type.VIDE|default:0 }}</h3>
+                    <small class="text-muted">Données manquantes</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h6 class="card-title">⚠️ Incohérent</h6>
+                    <h3>{{ rapport.par_type.INCOHERENT|default:0 }}</h3>
+                    <small class="text-muted">Incohérence genre</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alertes par Région -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0"><i class="bi bi-geo-alt"></i> Alertes par Région</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for region, count in rapport.par_region.items %}
+                <div class="col-md-2">
+                    <div class="text-center">
+                        <h4>{{ count }}</h4>
+                        <small>{{ region }}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtres -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label for="periode" class="form-label">Période</label>
+                    <select class="form-select" id="periode" name="periode">
+                        <option value="">Toutes les périodes</option>
+                        {% for p in periodes %}
+                        <option value="{{ p.id }}">{{ p }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="region" class="form-label">Région</label>
+                    <select class="form-select" id="region" name="region">
+                        <option value="">Toutes les régions</option>
+                        {% for r in regions %}
+                        <option value="{{ r }}">{{ r }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="type" class="form-label">Type d'alerte</label>
+                    <select class="form-select" id="type" name="type">
+                        <option value="">Tous les types</option>
+                        {% for value, label in type_alertes %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Filtrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Liste des Alertes -->
+    <div class="card">
+        <div class="card-header bg-warning">
+            <h5 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Alertes Non Résolues ({{ alertes.count }})</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Sévérité</th>
+                            <th>Indicateur</th>
+                            <th>Période</th>
+                            <th>Région</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alerte in alertes %}
+                        <tr>
+                            <td>{{ alerte.get_type_alerte_display }}</td>
+                            <td>
+                                {% if alerte.severite == 'CRITIQUE' %}
+                                <span class="badge bg-danger">{{ alerte.get_severite_display }}</span>
+                                {% elif alerte.severite == 'IMPORTANT' %}
+                                <span class="badge bg-warning">{{ alerte.get_severite_display }}</span>
+                                {% else %}
+                                <span class="badge bg-info">{{ alerte.get_severite_display }}</span>
+                                {% endif %}
+                            </td>
+                            <td><strong>{{ alerte.realisation.indicateur.code }}</strong></td>
+                            <td>{{ alerte.realisation.periode }}</td>
+                            <td>{{ alerte.realisation.get_region_display }}</td>
+                            <td>{{ alerte.message }}</td>
+                            <td>{{ alerte.date_detection|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <a href="{% url 'monitoring:modifier_realisation' alerte.realisation.pk %}" 
+                                   class="btn btn-sm btn-outline-primary" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form method="post" action="{% url 'monitoring:resoudre_alerte' alerte.pk %}" 
+                                      style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-success" 
+                                            title="Marquer comme résolu"
+                                            onclick="return confirm('Marquer cette alerte comme résolue ?')">
+                                        <i class="bi bi-check-lg"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center text-success py-4">
+                                <i class="bi bi-check-circle" style="font-size: 2rem;"></i>
+                                <p>✅ Aucune alerte ! Toutes les données sont conformes.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-3">
+        <a href="{% url 'monitoring:synthese_nationale' %}" class="btn btn-primary">
+            <i class="bi bi-globe"></i> Synthèse Nationale
+        </a>
+        <button class="btn btn-success" onclick="window.print()">
+            <i class="bi bi-printer"></i> Imprimer Rapport
+        </button>
+    </div>
+</div>
+{% endblock %}

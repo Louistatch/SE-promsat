@@ -1,0 +1,129 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║           DÉPLOIEMENT RAPIDE SUR RENDER                              ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📋 PRÉREQUIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Code sur GitHub: https://github.com/Louistatch/SE-promsat
+✅ Base de données Neon configurée
+✅ Firebase configuré
+✅ Fichier firebase-credentials.json disponible
+
+
+🚀 ÉTAPES RAPIDES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ ENCODER FIREBASE CREDENTIALS
+   → Double-cliquez sur: encoder_firebase.ps1
+   → Le base64 est copié automatiquement
+
+2️⃣ CRÉER LE WEB SERVICE
+   → Allez sur: https://dashboard.render.com/
+   → New + → Web Service
+   → Connectez: Louistatch/SE-promsat
+   
+3️⃣ CONFIGURATION
+   Name: prosmat
+   Region: Frankfurt (EU Central)
+   Branch: main
+   Build Command: ./build.sh
+   Start Command: gunicorn config.wsgi:application
+   Plan: Free (ou Starter $7/mois)
+
+4️⃣ VARIABLES D'ENVIRONNEMENT
+   Cliquez sur "Advanced" et ajoutez:
+   
+   PYTHON_VERSION = 3.10.0
+   DEBUG = False
+   DATABASE_URL = (depuis Neon Console)
+   
+   FIREBASE_API_KEY = (depuis Firebase Console)
+   FIREBASE_AUTH_DOMAIN = prosmat-auth.firebaseapp.com
+   FIREBASE_PROJECT_ID = prosmat-auth
+   FIREBASE_STORAGE_BUCKET = prosmat-auth.appspot.com
+   FIREBASE_MESSAGING_SENDER_ID = (depuis Firebase)
+   FIREBASE_APP_ID = (depuis Firebase)
+   FIREBASE_CREDENTIALS_BASE64 = (Ctrl+V le base64 copié)
+
+5️⃣ DÉPLOYER
+   → Cliquez sur "Create Web Service"
+   → Attendez 5-10 minutes
+   → Surveillez les logs
+
+6️⃣ CONFIGURER FIREBASE
+   → Firebase Console → Authentication → Settings
+   → Authorized domains → Add domain
+   → Ajoutez: prosmat.onrender.com
+
+7️⃣ CRÉER UN ADMIN
+   → Render Dashboard → Shell
+   → python manage.py createsuperuser
+
+
+📍 RÉCUPÉRER LES INFORMATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATABASE_URL (Neon):
+→ https://console.neon.tech/
+→ Votre projet → Connection Details
+→ Copiez la "Connection string"
+
+Firebase Variables:
+→ https://console.firebase.google.com/
+→ Project Settings → General
+→ Copiez toutes les valeurs du SDK
+
+
+✅ VÉRIFICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Votre URL: https://prosmat.onrender.com
+
+Testez:
+→ https://prosmat.onrender.com/
+→ https://prosmat.onrender.com/accounts/login/
+→ https://prosmat.onrender.com/admin/
+
+
+🔄 DÉPLOIEMENTS FUTURS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Automatique à chaque push sur main:
+git add .
+git commit -m "Description"
+git push origin main
+
+
+⚠️ PROBLÈMES COURANTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Build Failed:
+→ Vérifiez les logs
+→ Vérifiez que build.sh est exécutable
+
+Application Crash:
+→ Vérifiez DATABASE_URL
+→ Vérifiez FIREBASE_CREDENTIALS_BASE64
+
+Firebase Auth Failed:
+→ Ajoutez le domaine Render dans Firebase
+→ Vérifiez les variables Firebase
+
+
+💰 COÛTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Free: $0/mois (se met en veille après 15 min)
+Starter: $7/mois (recommandé, toujours actif)
+Standard: $25/mois (2 GB RAM)
+
+
+📚 DOCUMENTATION COMPLÈTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Voir: DEPLOIEMENT_RENDER.md
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    BONNE CHANCE! 🚀                                  ║
+╚══════════════════════════════════════════════════════════════════════╝
