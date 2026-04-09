@@ -6,17 +6,27 @@ import streamlit as st
 from typing import Optional, Dict, Any, List
 
 API_BASE = st.secrets.get("API_BASE_URL", "http://localhost:8000/api")
+BASE_URL  = API_BASE.replace("/api", "")
 
 
 def _headers(token: str) -> Dict:
     return {"Authorization": f"Token {token}", "Content-Type": "application/json"}
 
 
+def check_backend() -> bool:
+    """Vérifie que le backend Django est accessible."""
+    try:
+        r = requests.get(f"{BASE_URL}/api/auth/token/", timeout=3)
+        return r.status_code in (200, 400, 405)  # 400/405 = endpoint existe mais mauvaise méthode
+    except requests.RequestException:
+        return False
+
+
 def login(username: str, password: str) -> Optional[str]:
     """Retourne le token si succès, None sinon."""
     try:
         r = requests.post(
-            f"{API_BASE.replace('/api', '')}/api/auth/token/",
+            f"{BASE_URL}/api/auth/token/",
             json={"username": username, "password": password},
             timeout=10,
         )
@@ -25,6 +35,48 @@ def login(username: str, password: str) -> Optional[str]:
     except requests.RequestException:
         pass
     return None
+
+
+def login_full(username: str, password: str) -> Dict:
+    """Login complet — retourne token + infos utilisateur."""
+    try:
+        r = requests.post(
+            f"{BASE_URL}/api/auth/token/",
+            json={"username": username, "password": password},
+            timeout=10,
+        )
+        if r.status_code == 200:
+            token = r.json().get("token")
+            # Récupérer les infos user
+            user_info = {"username": username, "role": "—", "region": "—"}
+            try:
+                ru = requests.get(
+                    f"{API_BASE}/users/me/",
+                    headers=_headers(token),
+                    timeout=5,
+                )
+                if ru.status_code == 200:
+                    d = ru.json()
+                    user_info = {
+                        "username":   d.get("username", username),
+                        "full_name":  f"{d.get('first_name','')} {d.get('last_name','')}".strip() or username,
+                        "email":      d.get("email", ""),
+                        "role":       d.get("role", "—"),
+                        "region":     d.get("region", "—"),
+                    }
+            except Exception:
+                pass
+            return {"success": True, "token": token, "user": user_info}
+        elif r.status_code == 400:
+            return {"success": False, "message": "Identifiants incorrects."}
+        else:
+            return {"success": False, "message": f"Erreur serveur ({r.status_code})."}
+    except requests.ConnectionError:
+        return {"success": False, "message": "Impossible de joindre le serveur Django."}
+    except requests.Timeout:
+        return {"success": False, "message": "Le serveur met trop de temps à répondre."}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 
 def get(endpoint: str, token: str, params: Dict = None) -> Optional[Any]:

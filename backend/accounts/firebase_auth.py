@@ -37,8 +37,11 @@ def initialize_firebase():
         logger.error(f"Erreur lors de l'initialisation de Firebase: {e}")
         return False
 
-# Initialiser au chargement du module
-initialize_firebase()
+# Initialiser au chargement du module (silencieux si pas configuré en dev)
+try:
+    initialize_firebase()
+except Exception:
+    pass
 
 
 class FirebaseAuthenticationBackend(BaseBackend):

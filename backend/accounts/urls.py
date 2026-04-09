@@ -11,12 +11,12 @@ urlpatterns = [
     path('firebase-login/', firebase_login_api, name='firebase-login-api'),
     path('logout/', firebase_logout_view, name='logout'),
     path('logout-firebase/', firebase_logout_view, name='logout-firebase'),
-    
+
     # Authentification Django classique (backup)
     path('login-django/', views.login_view, name='login-django'),
     path('logout-django/', views.logout_view, name='logout-django'),
     path('profile/', views.profile_view, name='profile'),
-    
+
     # Gestion des utilisateurs et rôles
     path('manage-users/', views.manage_users_view, name='manage-users'),
     path('update-user-role/', views.update_user_role, name='update-user-role'),

@@ -12,7 +12,7 @@ from accounts.models import User
 class ComposanteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Composante
-        fields = ['id', 'code', 'nom', 'description', 'ordre']
+        fields = ['id', 'nom', 'description', 'ordre']
 
 
 class SousComposanteSerializer(serializers.ModelSerializer):
@@ -40,8 +40,8 @@ class IndicateurSerializer(serializers.ModelSerializer):
         model = Indicateur
         fields = [
             'id', 'code', 'libelle', 'type_indicateur', 'niveau',
-            'unite', 'valeur_reference', 'cible_finale', 'source_verification',
-            'frequence_collecte', 'responsable_collecte', 'sous_composante',
+            'unite_mesure', 'valeur_reference', 'cible_finale', 'source_verification',
+            'frequence_collecte', 'responsable', 'sous_composante',
             'sous_composante_id', 'actif'
         ]
 
@@ -84,7 +84,7 @@ class RealisationSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'indicateur', 'indicateur_id', 'periode', 'periode_id',
             'region', 'valeur_realisee', 'hommes', 'femmes', 'commentaire',
-            'fichier_justificatif', 'valide', 'date_validation', 'valide_par',
+            'fichier_justificatif', 'valide', 'valide_par',
             'valide_par_nom', 'saisi_par', 'saisi_par_nom', 'date_saisie',
             'cumul', 'pourcentage_atteinte', 'ecart', 'pourcentage_femmes'
         ]
@@ -135,7 +135,7 @@ class ActiviteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Activite
         fields = [
-            'id', 'code', 'libelle', 'description', 'sous_composante',
+            'id', 'titre', 'description', 'sous_composante',
             'sous_composante_id', 'region', 'date_debut_prevue',
             'date_fin_prevue', 'date_debut_reelle', 'date_fin_reelle',
             'statut', 'budget_prevu', 'budget_execute', 'responsable',
@@ -149,11 +149,11 @@ class RapportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rapport
         fields = [
-            'id', 'titre', 'type_rapport', 'periode_debut', 'periode_fin',
-            'region', 'contenu', 'fichier', 'cree_par', 'cree_par_nom',
+            'id', 'titre', 'type_rapport', 'periode',
+            'region', 'contenu', 'fichier', 'auteur',
             'date_creation'
         ]
-        read_only_fields = ['date_creation', 'cree_par']
+        read_only_fields = ['date_creation', 'auteur']
 
 
 class UserSerializer(serializers.ModelSerializer):

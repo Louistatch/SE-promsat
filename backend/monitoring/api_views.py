@@ -243,18 +243,15 @@ class RapportViewSet(viewsets.ModelViewSet):
     """
     API endpoint pour les rapports
     """
-    queryset = Rapport.objects.all().select_related('cree_par')
+    queryset = Rapport.objects.all().select_related('auteur')
     serializer_class = RapportSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['type_rapport', 'region']
     ordering_fields = ['date_creation']
-    
+
     def perform_create(self, serializer):
-        """
-        Définir l'utilisateur qui a créé le rapport
-        """
-        serializer.save(cree_par=self.request.user)
+        serializer.save(auteur=self.request.user)
 
 
 class StatistiquesViewSet(viewsets.ViewSet):

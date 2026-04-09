@@ -49,34 +49,84 @@ if "page" not in st.session_state:
 # ════════════════════════════════════════════════════════════════════════════
 
 def page_login():
-    col1, col2, col3 = st.columns([1, 1.4, 1])
-    with col2:
+    # Fond plein écran
+    st.markdown("""
+    <style>
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1a2f4a 50%, #0d1b2a 100%);
+    }
+    .login-box {
+        background: #1a202c;
+        border: 1px solid #2d3748;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        max-width: 420px;
+        margin: 4rem auto 0;
+    }
+    .login-logo { font-size: 3.5rem; text-align: center; margin-bottom: .5rem; }
+    .login-title { color: #e2e8f0; font-size: 1.8rem; font-weight: 800; text-align: center; margin: 0; }
+    .login-sub { color: #718096; font-size: .85rem; text-align: center; margin-bottom: 1.5rem; }
+    .login-badge {
+        display: flex; gap: .5rem; justify-content: center;
+        margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .badge-item {
+        background: #2d3748; color: #90cdf4;
+        padding: .2rem .7rem; border-radius: 999px;
+        font-size: .72rem; font-weight: 600;
+    }
+    .login-footer { color: #4a5568; font-size: .75rem; text-align: center; margin-top: 1.5rem; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    _, col, _ = st.columns([1, 1.6, 1])
+    with col:
         st.markdown("""
-        <div style='text-align:center; padding: 2rem 0 1rem;'>
-            <div style='font-size:3rem;'>🌾</div>
-            <h1 style='color:#e2e8f0; font-size:1.8rem; margin:.5rem 0;'>ProSMAT</h1>
-            <p style='color:#718096; font-size:.9rem;'>Plateforme de Suivi & Évaluation — Togo</p>
+        <div class="login-box">
+            <div class="login-logo">🌾</div>
+            <h1 class="login-title">ProSMAT</h1>
+            <p class="login-sub">Plateforme Intégrée de Suivi & Évaluation</p>
+            <div class="login-badge">
+                <span class="badge-item">📊 S&E</span>
+                <span class="badge-item">🗺️ SIG</span>
+                <span class="badge-item">📈 Analytics</span>
+                <span class="badge-item">🌍 Togo</span>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
-        with st.form("login_form"):
-            username = st.text_input("Identifiant", placeholder="nom.utilisateur")
-            password = st.text_input("Mot de passe", type="password")
-            submitted = st.form_submit_button("Se connecter", use_container_width=True)
+        # Vérifier si le backend est accessible
+        backend_ok = api.check_backend()
+
+        if not backend_ok:
+            st.error("⚠️ Backend Django inaccessible. Vérifiez que le serveur tourne sur `http://localhost:8000`.")
+            st.code("cd backend\npy manage.py runserver", language="bash")
+            st.stop()
+
+        with st.form("login_form", clear_on_submit=False):
+            st.markdown("<br>", unsafe_allow_html=True)
+            username = st.text_input("👤 Identifiant", placeholder="ex: admin")
+            password = st.text_input("🔒 Mot de passe", type="password")
+            submitted = st.form_submit_button("→ Se connecter", use_container_width=True)
 
         if submitted:
-            with st.spinner("Connexion..."):
-                token = api.login(username, password)
-            if token:
-                st.session_state.token = token
-                st.session_state.user_info = {"username": username}
-                st.rerun()
+            if not username or not password:
+                st.warning("Remplis les deux champs.")
             else:
-                st.error("Identifiants incorrects ou serveur inaccessible.")
+                with st.spinner("Authentification..."):
+                    result = api.login_full(username, password)
+                if result["success"]:
+                    st.session_state.token    = result["token"]
+                    st.session_state.user_info = result["user"]
+                    st.rerun()
+                else:
+                    st.error(f"❌ {result['message']}")
 
         st.markdown("""
-        <p style='text-align:center; color:#4a5568; font-size:.8rem; margin-top:2rem;'>
-        ProSMAT · GAFSP/FIDA · Togo · © 2026
+        <p class="login-footer">
+            ProSMAT · GAFSP/FIDA · République du Togo · © 2026<br>
+            <span style="color:#2d3748;">Accès admin Django : <code>:8000/admin</code></span>
         </p>""", unsafe_allow_html=True)
 
 
@@ -109,11 +159,27 @@ def sidebar_nav():
                 st.rerun()
 
         st.markdown("<div style='border-top:1px solid #2d3748; margin-top:1rem; padding-top:1rem;'>", unsafe_allow_html=True)
-        user = st.session_state.user_info.get("username", "—")
-        st.markdown(f"<p style='color:#718096; font-size:.8rem; text-align:center;'>👤 {user}</p>", unsafe_allow_html=True)
+
+        # Infos utilisateur
+        u = st.session_state.user_info
+        name     = u.get("full_name") or u.get("username", "—")
+        role     = u.get("role", "—")
+        region   = u.get("region") or "National"
+        role_labels = {
+            "ADMIN": "🔴 Admin", "COORDONNATEUR": "🟠 Coordonnateur",
+            "EVALUATEUR": "🟡 Évaluateur", "CHARGE_PROJET": "🟢 Chargé Projet",
+        }
+        st.markdown(f"""
+        <div style='background:#2d3748; border-radius:10px; padding:.8rem; margin-bottom:.8rem;'>
+            <p style='color:#e2e8f0; font-weight:600; margin:0; font-size:.9rem;'>👤 {name}</p>
+            <p style='color:#a0aec0; font-size:.75rem; margin:.2rem 0 0;'>{role_labels.get(role, role)}</p>
+            <p style='color:#718096; font-size:.72rem; margin:.1rem 0 0;'>📍 {region}</p>
+        </div>""", unsafe_allow_html=True)
+
         if st.button("🚪 Déconnexion", use_container_width=True):
             st.session_state.token = None
             st.session_state.user_info = {}
+            st.session_state.page = "dashboard"
             st.rerun()
 
 
