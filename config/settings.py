@@ -30,16 +30,27 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-*%b%9fw_)g-969c9m#6_*
 DEBUG = config('DEBUG', default='True', cast=bool)
 
 # ALLOWED_HOSTS - Configurable via variable d'environnement
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='localhost,127.0.0.1',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
+# Railway injecte RAILWAY_PUBLIC_DOMAIN automatiquement
+RAILWAY_HOST = os.environ.get('RAILWAY_PUBLIC_DOMAIN', '')
+if RAILWAY_HOST and RAILWAY_HOST not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(RAILWAY_HOST)
 
 # CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
     'https://*.ngrok-free.app',
     'https://*.ngrok.io',
     'https://*.onrender.com',
+    'https://*.railway.app',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
+if RAILWAY_HOST:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RAILWAY_HOST}')
 
 
 # Application definition
@@ -184,6 +195,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:8080",
     "http://127.0.0.1:8501",
+]
+
+# Autoriser tous les sous-domaines Railway
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.railway\.app$",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
