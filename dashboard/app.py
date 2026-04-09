@@ -17,7 +17,6 @@ from plotly.subplots import make_subplots
 import folium
 from folium.plugins import MarkerCluster, HeatMap
 from streamlit_folium import st_folium
-import geopandas as gpd
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -562,19 +561,28 @@ def page_realisations():
 # PAGE : CARTE SIG
 # ════════════════════════════════════════════════════════════════════════════
 
+# Coordonnées fixes des régions du Togo (pas besoin de geopandas)
+REGION_COORDS = {
+    "MARITIME": [6.2, 1.2],
+    "PLATEAUX": [7.0, 1.1],
+    "CENTRALE": [8.5, 1.1],
+    "KARA":     [9.5, 1.2],
+    "SAVANES":  [10.5, 0.5],
+}
+
+REGION_ZOOM_CENTER = {
+    "MARITIME": ([6.2, 1.2], 9),
+    "PLATEAUX": ([7.0, 1.1], 9),
+    "CENTRALE": ([8.5, 1.1], 9),
+    "KARA":     ([9.5, 1.2], 9),
+    "SAVANES":  ([10.5, 0.5], 9),
+}
+
+
 def page_carte():
     token = st.session_state.token
     header("🗺️ Carte SIG", "Visualisation géospatiale — Coopératives & Indicateurs")
 
-    # Charger les données géographiques
-    try:
-        gdf_regions = gpd.read_file("gadm41_TGO.gpkg", layer=1)
-        gdf_prefectures = gpd.read_file("gadm41_TGO.gpkg", layer=2)
-        geo_ok = True
-    except Exception:
-        geo_ok = False
-
-    # Charger les réalisations depuis l'API
     with st.spinner("Chargement des données..."):
         realisations = api.fetch_realisations(token)
 
@@ -582,85 +590,63 @@ def page_carte():
 
     with col_ctrl:
         section_title("Contrôles")
-        map_type = st.radio("Type de carte", ["Réalisations S&E", "Coopératives (Excel)"])
+        map_type   = st.radio("Type de carte", ["Réalisations S&E", "Coopératives (Excel)"])
         zoom_level = st.selectbox("Zoom", ["Pays", "Région"])
+        region_zoom = None
         if zoom_level == "Région":
             region_zoom = st.selectbox("Région", REGIONS, format_func=lambda r: REGION_LABELS.get(r, r))
 
-        if map_type == "Réalisations S&E" and realisations:
-            df_r = pd.DataFrame(realisations)
-            if "indicateur" in df_r.columns:
-                ind_opts = {
-                    f"{i.get('code','?')} — {i.get('libelle','?')[:40]}": i.get("id")
-                    for r in realisations
-                    if isinstance(r.get("indicateur"), dict)
-                    for i in [r["indicateur"]]
-                }
-                ind_sel = st.selectbox("Indicateur", list(ind_opts.keys()) or ["—"])
-
+        uploaded = None
         if map_type == "Coopératives (Excel)":
             uploaded = st.file_uploader("Charger Excel coopératives", type=["xlsx"])
 
     with col_map:
-        # ── Carte Folium ──
-        center = [8.6, 0.8]
-        zoom_start = 7
-
-        if zoom_level == "Région" and geo_ok:
-            region_map = {
-                "MARITIME": "Maritime", "PLATEAUX": "Plateaux",
-                "CENTRALE": "Centrale", "KARA": "Kara", "SAVANES": "Savanes"
-            }
-            r_name = region_map.get(region_zoom, "")
-            sub = gdf_regions[gdf_regions["NAME_1"].str.upper().str.contains(r_name.upper(), na=False)]
-            if not sub.empty:
-                bounds = sub.total_bounds
-                center = [(bounds[1] + bounds[3]) / 2, (bounds[0] + bounds[2]) / 2]
-                zoom_start = 9
+        # Centre et zoom
+        if zoom_level == "Région" and region_zoom and region_zoom in REGION_ZOOM_CENTER:
+            center, zoom_start = REGION_ZOOM_CENTER[region_zoom]
+        else:
+            center, zoom_start = [8.6, 0.8], 7
 
         m = folium.Map(location=center, zoom_start=zoom_start, tiles="CartoDB dark_matter")
 
-        # Couche régions
-        if geo_ok:
-            folium.GeoJson(
-                gdf_regions.__geo_interface__,
-                style_function=lambda f: {
-                    "fillColor": "#2b6cb0", "color": "#63b3ed",
-                    "weight": 1.5, "fillOpacity": 0.15,
-                },
-                tooltip=folium.GeoJsonTooltip(fields=["NAME_1"], aliases=["Région:"]),
+        # Cercles régions (contours approximatifs)
+        for reg, coords in REGION_COORDS.items():
+            folium.Circle(
+                location=coords,
+                radius=80000,
+                color=REGION_COLORS.get(reg, "#3182ce"),
+                fill=True,
+                fill_opacity=0.08,
+                weight=1.5,
+                tooltip=REGION_LABELS.get(reg, reg),
             ).add_to(m)
 
-        # Couche réalisations S&E (cercles proportionnels par région)
+        # Couche réalisations S&E
         if map_type == "Réalisations S&E" and realisations:
             df_r = pd.DataFrame(realisations)
             df_r["valeur_realisee"] = pd.to_numeric(df_r["valeur_realisee"], errors="coerce")
             by_region = df_r.groupby("region")["valeur_realisee"].sum().reset_index()
-
-            region_coords = {
-                "MARITIME": [6.2, 1.2], "PLATEAUX": [7.0, 1.1],
-                "CENTRALE": [8.5, 1.1], "KARA": [9.5, 1.2], "SAVANES": [10.5, 0.5],
-            }
             max_val = by_region["valeur_realisee"].max() or 1
+
             for _, row in by_region.iterrows():
-                coords = region_coords.get(row["region"])
+                coords = REGION_COORDS.get(row["region"])
                 if coords:
-                    radius = 10 + 40 * (row["valeur_realisee"] / max_val)
+                    radius = 15 + 45 * (row["valeur_realisee"] / max_val)
                     folium.CircleMarker(
                         location=coords,
                         radius=radius,
                         color=REGION_COLORS.get(row["region"], "#3182ce"),
                         fill=True,
-                        fill_opacity=0.7,
+                        fill_opacity=0.75,
                         popup=folium.Popup(
                             f"<b>{REGION_LABELS.get(row['region'], row['region'])}</b><br>"
-                            f"Total réalisé: {row['valeur_realisee']:,.0f}",
-                            max_width=200,
+                            f"Total réalisé : <b>{row['valeur_realisee']:,.0f}</b>",
+                            max_width=220,
                         ),
                     ).add_to(m)
 
         # Couche coopératives (Excel uploadé)
-        if map_type == "Coopératives (Excel)" and "uploaded" in dir() and uploaded:
+        if map_type == "Coopératives (Excel)" and uploaded:
             try:
                 df_coop = pd.read_excel(uploaded)
                 lat_col = next((c for c in df_coop.columns if "lat" in c.lower()), None)
@@ -682,13 +668,15 @@ def page_carte():
                         ).add_to(cluster)
                     st.success(f"{len(df_coop)} coopératives chargées.")
                 else:
-                    st.warning("Colonnes latitude/longitude non trouvées dans le fichier.")
+                    st.warning("Colonnes latitude/longitude non trouvées.")
             except Exception as e:
-                st.error(f"Erreur lecture fichier : {e}")
+                st.error(f"Erreur : {e}")
 
         folium.LayerControl().add_to(m)
         st_folium(m, width=None, height=520, returned_objects=[])
-
+                        ).add_to(cluster)
+                    st.success(f"{len(df_coop)} coopératives chargées.")
+                else:
 
 
 # ════════════════════════════════════════════════════════════════════════════

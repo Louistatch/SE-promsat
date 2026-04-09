@@ -1,0 +1,3360 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add Utilisateur",
+    "content_type": 6,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change Utilisateur",
+    "content_type": 6,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete Utilisateur",
+    "content_type": 6,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view Utilisateur",
+    "content_type": 6,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add Composante",
+    "content_type": 7,
+    "codename": "add_composante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change Composante",
+    "content_type": 7,
+    "codename": "change_composante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete Composante",
+    "content_type": 7,
+    "codename": "delete_composante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view Composante",
+    "content_type": 7,
+    "codename": "view_composante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add Période",
+    "content_type": 8,
+    "codename": "add_periode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change Période",
+    "content_type": 8,
+    "codename": "change_periode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete Période",
+    "content_type": 8,
+    "codename": "delete_periode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view Période",
+    "content_type": 8,
+    "codename": "view_periode"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Rapport",
+    "content_type": 9,
+    "codename": "add_rapport"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Rapport",
+    "content_type": 9,
+    "codename": "change_rapport"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Rapport",
+    "content_type": 9,
+    "codename": "delete_rapport"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Rapport",
+    "content_type": 9,
+    "codename": "view_rapport"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add Sous-composante",
+    "content_type": 10,
+    "codename": "add_souscomposante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change Sous-composante",
+    "content_type": 10,
+    "codename": "change_souscomposante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete Sous-composante",
+    "content_type": 10,
+    "codename": "delete_souscomposante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view Sous-composante",
+    "content_type": 10,
+    "codename": "view_souscomposante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add Indicateur",
+    "content_type": 11,
+    "codename": "add_indicateur"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change Indicateur",
+    "content_type": 11,
+    "codename": "change_indicateur"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete Indicateur",
+    "content_type": 11,
+    "codename": "delete_indicateur"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view Indicateur",
+    "content_type": 11,
+    "codename": "view_indicateur"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add Activité",
+    "content_type": 12,
+    "codename": "add_activite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change Activité",
+    "content_type": 12,
+    "codename": "change_activite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete Activité",
+    "content_type": 12,
+    "codename": "delete_activite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view Activité",
+    "content_type": 12,
+    "codename": "view_activite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Réalisation",
+    "content_type": 13,
+    "codename": "add_realisation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Réalisation",
+    "content_type": 13,
+    "codename": "change_realisation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Réalisation",
+    "content_type": 13,
+    "codename": "delete_realisation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Réalisation",
+    "content_type": 13,
+    "codename": "view_realisation"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add Alerte Qualité",
+    "content_type": 14,
+    "codename": "add_alertequalite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change Alerte Qualité",
+    "content_type": 14,
+    "codename": "change_alertequalite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete Alerte Qualité",
+    "content_type": 14,
+    "codename": "delete_alertequalite"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view Alerte Qualité",
+    "content_type": 14,
+    "codename": "view_alertequalite"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "accounts",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "composante"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "periode"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "rapport"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "souscomposante"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "indicateur"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "activite"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "realisation"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "monitoring",
+    "model": "alertequalite"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0ul17fjya10y052ghx53ceh0f6vio4ru",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyGwBQoevfcbyAKLVA0kpT0Z_92Q9KDXNzPvzTwee_FHp82viV2ZZZffLWB8Uh0gPbDeG4-t7tsa-FD4STtfWqLX7XT_Dgr2MmrpAGYpcwpgyboMGgKAAWdSkqTJKKGjQYiYjbLRzhNpo0AKEFPWmX2-znc3GA:1vpR2V:hQlyAgpB9yG2eJ-LclGOoDzqrxYH4LgETvo0m536ZEM",
+    "expire_date": "2026-02-23T13:10:55.351Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2u4i1d5s1el4hcv8jc7hhasvlwp8zykn",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyGwBQoevfcbyAKLVA0kpT0Z_92Q9KDXNzPvzTwee_FHp82viV2ZZZffLWB8Uh0gPbDeG4-t7tsa-FD4STtfWqLX7XT_Dgr2MmrpAGYpcwpgyboMGgKAAWdSkqTJKKGjQYiYjbLRzhNpo0AKEFPWmX2-znc3GA:1vpT68:fEqCHC9OvqxstFM21_tOcnQp0Paeo67DYbODyt2gta0",
+    "expire_date": "2026-02-23T15:22:48.912Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3gwcn26j8gn59i7yg1gh2mnu07eytlbq",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQBe9CHSHA5pcyvc-All0ITiKQjF1FuXtsyUXSvpl5bxZgW0vYelrCTOzKLLv8bhHwmeoB6AH13ji2ui5z5IfCT9r51Ci9bqf7d1Cgl70epKWctSOIILWS1qjBS7BostLZ2dGBF0lgdlITReVxTB7tYNDtkhfs8wXkNjfp:1vpR5g:YmcxyVNGyAtRxmLZ_v4CebM0cX5_1vpOkjcXYY2_75g",
+    "expire_date": "2026-02-23T13:14:12.083Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5gvli22du0ojy8omg2p8586c97u2vecm",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyGwBQoevfcbyAKLVA0kpT0Z_92Q9KDXNzPvzTwee_FHp82viV2ZZZffLWB8Uh0gPbDeG4-t7tsa-FD4STtfWqLX7XT_Dgr2MmrpAGYpcwpgyboMGgKAAWdSkqTJKKGjQYiYjbLRzhNpo0AKEFPWmX2-znc3GA:1vpuvT:75oxbalDX7WKVt5wvjfli93XGixRZooak-x8Rc5fROM",
+    "expire_date": "2026-02-24T21:05:39.488Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "fb9wmkredk246e17ea0zft31j3pmoqge",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyGwBQoevfcbyAKLVA0kpT0Z_92Q9KDXNzPvzTwee_FHp82viV2ZZZffLWB8Uh0gPbDeG4-t7tsa-FD4STtfWqLX7XT_Dgr2MmrpAGYpcwpgyboMGgKAAWdSkqTJKKGjQYiYjbLRzhNpo0AKEFPWmX2-znc3GA:1vpQy0:1ivqXoiogthl3IbBkEwZHBKrduZqNtk-s8m0QUHvms4",
+    "expire_date": "2026-02-23T13:06:16.302Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "t5l5ropo7mi3dpf4wxljp2vinzy1mybm",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQAP_C2ZBC2YV69N43kF1YbNW0SWlPxr8bkh70OjOZt4p07FM8qmxxzuqqrLr8Mqb0lKWJ_KDlvuq0Lvs2s26JPm3V45rldTvbv8FEdWpbZ8hDCb4QdgOgNWEATz0UEZPZOtcXkzAloNxZjyCSkUtAZoEenfp8AdFVN94:1vpkf6:UJ2KgIYd_kNhbh_GD09dwwwBVI15cL50Hw_6gAlcSYc",
+    "expire_date": "2026-02-24T10:08:04.520Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "tijdrtegjv7wfoa41xz184wb2ti3l29q",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQBe9CHSFAfFOmzxnQ7oKDkwgkY1dW7h4suUjamXlvZxG2tcSt5yXOiV2ZYZdfhkCvXA-RnlAfjVOr6zIjPxJ-2s7vLeX37Wz_Dgr0MtYOpQXURuM0BSAPNmmlJJESpBMFGQxq7UP2Tjg7lBdGDWyVt5hCZp8v5Wk3UA:1vp6oe:O03pQ1y7RT2vWLhDjBlPrmYw8wAfxQs5G3LJo2iFzYQ",
+    "expire_date": "2026-02-22T15:35:16.929Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uzrjtoben0j5umfnhs2s3fhxtox7if78",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQBe9CHSFAfFOmzxnQ7oKDkwgkY1dW7h4suUjamXlvZxG2tcSt5yXOiV2ZYZdfhkCvXA-RnlAfjVOr6zIjPxJ-2s7vLeX37Wz_Dgr0MtYOpQXURuM0BSAPNmmlJJESpBMFGQxq7UP2Tjg7lBdGDWyVt5hCZp8v5Wk3UA:1vqDNs:EsgB0MfDLGeeIFhtTGNcUyK0Ta7Nz8hVSfXRHxMnHps",
+    "expire_date": "2026-02-25T16:48:12.176Z"
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$clGg9FL5ufNO4z1ixnAdEv$7C00S/R7EfwzOQfpZu/98YYIsyJroNtQjS+eOemMjgs=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Administrateur",
+    "last_name": "ProSMAT",
+    "email": "admin@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:30:53.746Z",
+    "role": "ADMIN",
+    "region": null,
+    "telephone": "",
+    "created_at": "2026-02-08T13:30:54.442Z",
+    "updated_at": "2026-02-08T13:30:54.442Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$YmeGIuHvpmLCz6IwpHwBF9$G2n50p4UqNi8gYv8LbaD8HNDuxXpOd/v1lTI6V5r0TE=",
+    "last_login": "2026-02-10T10:08:03.768Z",
+    "is_superuser": false,
+    "username": "charge_maritime",
+    "first_name": "Chargé",
+    "last_name": "Maritime",
+    "email": "charge_maritime@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:30:54.702Z",
+    "role": "CHARGE_PROJET",
+    "region": "MARITIME",
+    "telephone": "",
+    "created_at": "2026-02-08T13:30:55.421Z",
+    "updated_at": "2026-02-08T13:30:55.421Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$eNTcOOK1H6e90cimJPKCvK$xLJjoA4Z8iR/5MZCCSJ40Vc3DDCAZtGs94gWYKsLZFY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "charge_plateaux",
+    "first_name": "Chargé",
+    "last_name": "Plateaux",
+    "email": "charge_plateaux@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:30:55.669Z",
+    "role": "CHARGE_PROJET",
+    "region": "PLATEAUX",
+    "telephone": "",
+    "created_at": "2026-02-08T13:30:56.314Z",
+    "updated_at": "2026-02-08T13:30:56.314Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$lSzxdqAWrpXoMdTjtcRP13$UT8opyiRcakvR74mR2eP4xdUec8JjdfMDAUNUfSV5ck=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "charge_centrale",
+    "first_name": "Chargé",
+    "last_name": "Centrale",
+    "email": "charge_centrale@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:30:56.655Z",
+    "role": "CHARGE_PROJET",
+    "region": "CENTRALE",
+    "telephone": "",
+    "created_at": "2026-02-08T13:30:57.262Z",
+    "updated_at": "2026-02-08T13:30:57.262Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$FHcc9QEd5pqC550Gl3JKAz$iX+Zm3jlaAnyPDjwBj8/Txyb0dkLeeNW3XP1QrzJ4Os=",
+    "last_login": "2026-02-11T16:48:12.066Z",
+    "is_superuser": false,
+    "username": "charge_kara",
+    "first_name": "Chargé",
+    "last_name": "Kara",
+    "email": "charge_kara@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:30:57.511Z",
+    "role": "CHARGE_PROJET",
+    "region": "KARA",
+    "telephone": "",
+    "created_at": "2026-02-08T13:30:58.345Z",
+    "updated_at": "2026-02-08T13:30:58.345Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$3A6O22exqp8TXj4e4TlU4J$0JwZhHxFSyCpuEbYOYUrUrt8QmUzurkdZFYQSoZrkaI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "charge_savanes",
+    "first_name": "Chargé",
+    "last_name": "Savanes",
+    "email": "charge_savanes@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:30:59.188Z",
+    "role": "CHARGE_PROJET",
+    "region": "SAVANES",
+    "telephone": "",
+    "created_at": "2026-02-08T13:30:59.776Z",
+    "updated_at": "2026-02-08T13:30:59.776Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$xTitF6UoiMg7WeFl22RGk6$UzErXzd6cgb8Gh0kLHRyjTNXPpf7D6qkJKkILCYO4zE=",
+    "last_login": "2026-02-10T09:20:39.540Z",
+    "is_superuser": false,
+    "username": "coordonnateur",
+    "first_name": "Coordonnateur",
+    "last_name": "National",
+    "email": "coordonnateur@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:31:00.023Z",
+    "role": "COORDONNATEUR",
+    "region": null,
+    "telephone": "",
+    "created_at": "2026-02-08T13:31:00.809Z",
+    "updated_at": "2026-02-08T13:31:00.809Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$z7ijmRM2ng1oWDNqStdbao$Gvk5O/qhV8fu/f8Msx8yJIn0+P+eYuVArHAi70Sw5JA=",
+    "last_login": "2026-02-10T21:05:39.410Z",
+    "is_superuser": false,
+    "username": "evaluateur",
+    "first_name": "Évaluateur",
+    "last_name": "S&E",
+    "email": "evaluateur@prosmat.tg",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-08T13:31:00.990Z",
+    "role": "EVALUATEUR",
+    "region": null,
+    "telephone": "",
+    "created_at": "2026-02-08T13:31:01.596Z",
+    "updated_at": "2026-02-08T13:31:01.596Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$niVQvtsFIHZuSFp4hwwNgN$xkO2zbHKNYiqLwZPGoxgyqM0+CVcNP+XVta/vNCV6S4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coord_national",
+    "first_name": "Coordinateur",
+    "last_name": "National",
+    "email": "national@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:14:14.476Z",
+    "role": "CHARGE_PROJET",
+    "region": "NATIONAL",
+    "telephone": "",
+    "created_at": "2026-02-09T12:14:14.477Z",
+    "updated_at": "2026-02-09T12:14:16.095Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ddMaiDoQNkFBXWzkt8PDCZ$wuet1MUQoGTpWG0nWf+C6wITtT3VmRmIoXkn8b9LFkw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coord_maritime",
+    "first_name": "Coordinateur",
+    "last_name": "Maritime",
+    "email": "maritime@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:14:16.815Z",
+    "role": "CHARGE_PROJET",
+    "region": "MARITIME",
+    "telephone": "",
+    "created_at": "2026-02-09T12:14:16.815Z",
+    "updated_at": "2026-02-09T12:14:18.763Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$PFiZZKwGbYdIQ6WWaxbQmr$DjmzjJ6FwwTcqB9tA3aHDjLRacA/wTitROQTdQBf2TQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coord_plateaux",
+    "first_name": "Coordinateur",
+    "last_name": "Plateaux",
+    "email": "plateaux@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:14:18.926Z",
+    "role": "CHARGE_PROJET",
+    "region": "PLATEAUX",
+    "telephone": "",
+    "created_at": "2026-02-09T12:14:18.926Z",
+    "updated_at": "2026-02-09T12:14:20.596Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$elCnjaotAwEPTnsjICUzUX$4zDJCs82R8OIyMkE24ozpJ0uGp/RzgnFpH/kHkFJodk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coord_centrale",
+    "first_name": "Coordinateur",
+    "last_name": "Centrale",
+    "email": "centrale@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:14:20.725Z",
+    "role": "CHARGE_PROJET",
+    "region": "CENTRALE",
+    "telephone": "",
+    "created_at": "2026-02-09T12:14:20.725Z",
+    "updated_at": "2026-02-09T12:14:22.678Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 13,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$G16CqRDFlVLc7UvnatyeGY$yE1sBxw3XyJx386bZ9DBjdSAZ5VJuUxCilACvliTfEI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coord_kara",
+    "first_name": "Coordinateur",
+    "last_name": "Kara",
+    "email": "kara@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:14:22.856Z",
+    "role": "CHARGE_PROJET",
+    "region": "KARA",
+    "telephone": "",
+    "created_at": "2026-02-09T12:14:22.856Z",
+    "updated_at": "2026-02-09T12:14:24.509Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6Kg56KdtFKcNnZ8lC96s8S$sYCWbIKgiUgEE35CANhmO8/YfDg07295BRZ/UWGIuCA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coord_savanes",
+    "first_name": "Coordinateur",
+    "last_name": "Savanes",
+    "email": "savanes@prosmat.tg",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:14:24.609Z",
+    "role": "CHARGE_PROJET",
+    "region": "SAVANES",
+    "telephone": "",
+    "created_at": "2026-02-09T12:14:24.609Z",
+    "updated_at": "2026-02-09T12:14:26.466Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 1,
+  "fields": {
+    "nom": "Composante 1: Renforcement des capacités",
+    "description": "",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 2,
+  "fields": {
+    "nom": "Composante 2: Amélioration des infrastructures",
+    "description": "",
+    "ordre": 2
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 3,
+  "fields": {
+    "nom": "Composante 3: Développement économique",
+    "description": "",
+    "ordre": 3
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 4,
+  "fields": {
+    "nom": "Indicateurs GAFSP",
+    "description": "Indicateurs du Global Agriculture and Food Security Program",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 5,
+  "fields": {
+    "nom": "Indicateurs DEV",
+    "description": "Indicateurs de développement",
+    "ordre": 2
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 6,
+  "fields": {
+    "nom": "Indicateurs PROD",
+    "description": "Indicateurs de production",
+    "ordre": 3
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 7,
+  "fields": {
+    "nom": "Indicateurs RES",
+    "description": "Indicateurs de résultats",
+    "ordre": 4
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 8,
+  "fields": {
+    "nom": "Composante 1",
+    "description": "Données importées depuis Composante 1 - Production",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 9,
+  "fields": {
+    "nom": "Composante 2",
+    "description": "Données importées depuis Composante 2 - Valorisation",
+    "ordre": 2
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 10,
+  "fields": {
+    "nom": "Composante 3",
+    "description": "Données importées depuis Composante 3 - Capacités",
+    "ordre": 3
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 11,
+  "fields": {
+    "nom": "Genre et Inclusion Sociale",
+    "description": "Indicateurs transversaux de genre et inclusion",
+    "ordre": 4
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 12,
+  "fields": {
+    "nom": "Composante 1: Production Agroécologique",
+    "description": "Données de Composante 1 - Production",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 13,
+  "fields": {
+    "nom": "Composante 2: Valorisation",
+    "description": "Données de Composante 2 - Valorisation",
+    "ordre": 2
+  }
+},
+{
+  "model": "monitoring.composante",
+  "pk": 14,
+  "fields": {
+    "nom": "Composante 3: Renforcement des Capacités",
+    "description": "Données de Composante 3 - Capacités",
+    "ordre": 3
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 1,
+  "fields": {
+    "composante": 4,
+    "nom": "Indicateurs principaux GAFSP",
+    "description": "",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 2,
+  "fields": {
+    "composante": 5,
+    "nom": "Indicateurs de développement",
+    "description": "",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 3,
+  "fields": {
+    "composante": 6,
+    "nom": "Indicateurs de production",
+    "description": "",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 4,
+  "fields": {
+    "composante": 7,
+    "nom": "Indicateurs de résultats",
+    "description": "",
+    "ordre": 1
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 5,
+  "fields": {
+    "composante": 11,
+    "nom": "Indicateurs Genre",
+    "description": "Suivi des aspects genre",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 6,
+  "fields": {
+    "composante": 12,
+    "nom": "Indicateurs Composante 1: Production Agroécologique",
+    "description": "Indicateurs principaux",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 7,
+  "fields": {
+    "composante": 12,
+    "nom": "1. PRODUCTION ET SURFACES",
+    "description": "1. PRODUCTION ET SURFACES",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 8,
+  "fields": {
+    "composante": 12,
+    "nom": "2. FORMATION ET RENFORCEMENT DES CAPACITÉS",
+    "description": "2. FORMATION ET RENFORCEMENT DES CAPACITÉS",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 9,
+  "fields": {
+    "composante": 13,
+    "nom": "Indicateurs Composante 2: Valorisation",
+    "description": "Indicateurs principaux",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 10,
+  "fields": {
+    "composante": 13,
+    "nom": "1. INFRASTRUCTURES DE MARCHÉ",
+    "description": "1. INFRASTRUCTURES DE MARCHÉ",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 11,
+  "fields": {
+    "composante": 13,
+    "nom": "2. TRANSFORMATION",
+    "description": "2. TRANSFORMATION",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 12,
+  "fields": {
+    "composante": 14,
+    "nom": "Indicateurs Composante 3: Renforcement des Capacités",
+    "description": "Indicateurs principaux",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 13,
+  "fields": {
+    "composante": 14,
+    "nom": "1. STRUCTURATION DES ORGANISATIONS",
+    "description": "1. STRUCTURATION DES ORGANISATIONS",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 14,
+  "fields": {
+    "composante": 14,
+    "nom": "2. LEADERSHIP ET GESTION",
+    "description": "2. LEADERSHIP ET GESTION",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 15,
+  "fields": {
+    "composante": 12,
+    "nom": "1.1 Production et Surfaces",
+    "description": "Indicateurs de production et surfaces cultivées",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 16,
+  "fields": {
+    "composante": 12,
+    "nom": "1.2 Formation et Renforcement des Capacités",
+    "description": "Formation des acteurs",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 17,
+  "fields": {
+    "composante": 13,
+    "nom": "2.1 Infrastructures de Marché",
+    "description": "Développement des infrastructures",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 18,
+  "fields": {
+    "composante": 13,
+    "nom": "2.2 Transformation",
+    "description": "Unités de transformation",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 19,
+  "fields": {
+    "composante": 14,
+    "nom": "3.1 Structuration des Organisations",
+    "description": "Organisations de producteurs",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 20,
+  "fields": {
+    "composante": 14,
+    "nom": "3.2 Leadership et Gestion",
+    "description": "Formation en leadership",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.souscomposante",
+  "pk": 21,
+  "fields": {
+    "composante": 4,
+    "nom": "Indicateurs GAFSP",
+    "description": "Cadre de résultats GAFSP",
+    "ordre": 0
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 1,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#1",
+    "libelle": "Nombre de personnes bénéficiant d'avantages directs",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "9885.00",
+    "source_verification": "Enquêtes",
+    "frequence_collecte": "Annuel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 2,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#1.F",
+    "libelle": "Dont femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "5720.00",
+    "source_verification": "Enquêtes",
+    "frequence_collecte": "Annuel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 3,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#9",
+    "libelle": "Emploi direct fourni - équivalent temps plein (ETP)",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "ETP",
+    "valeur_reference": "0.00",
+    "cible_finale": "5467.00",
+    "source_verification": "Rapports",
+    "frequence_collecte": "Annuel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 4,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#9.F",
+    "libelle": "Dont emplois féminins",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "ETP",
+    "valeur_reference": "0.00",
+    "cible_finale": "2414.00",
+    "source_verification": "Rapports",
+    "frequence_collecte": "Annuel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 5,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#2",
+    "libelle": "Superficie des terres bénéficiant d'un soutien à la production améliorée",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EFFET",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "1250.00",
+    "source_verification": "Terrain",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 6,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#2.IR",
+    "libelle": "Dont superficie irriguée",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EFFET",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "50.00",
+    "source_verification": "Terrain",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 7,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#13",
+    "libelle": "Nombre d'agriculteurs recevant des intrants/services pratiques agricoles durables",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Agriculteurs",
+    "valeur_reference": "360.00",
+    "cible_finale": "5000.00",
+    "source_verification": "Registres",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 8,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#13.F",
+    "libelle": "Dont agricultrices",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Agricultrices",
+    "valeur_reference": "158.00",
+    "cible_finale": "2000.00",
+    "source_verification": "Registres",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 9,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#13.T",
+    "libelle": "Dont adoptant des technologies",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Agriculteurs",
+    "valeur_reference": "202.00",
+    "cible_finale": "3500.00",
+    "source_verification": "Registres",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 10,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#5",
+    "libelle": "Personnes soutenues accédant aux services financiers",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "2250.00",
+    "source_verification": "Rapports IMF",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Finance",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 11,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#5.F",
+    "libelle": "Dont femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Femmes",
+    "valeur_reference": "0.00",
+    "cible_finale": "2250.00",
+    "source_verification": "Rapports IMF",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Finance",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 12,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#7",
+    "libelle": "Nombre d'installations transformation/stockage/marché construites/réhabilitées",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Installations",
+    "valeur_reference": "0.00",
+    "cible_finale": "40.00",
+    "source_verification": "PV réception",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Infra",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 13,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#8",
+    "libelle": "Agriculteurs soutenus dans l'accès aux opportunités de commercialisation",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Agriculteurs",
+    "valeur_reference": "0.00",
+    "cible_finale": "5000.00",
+    "source_verification": "Registres",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 14,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#8.F",
+    "libelle": "Dont agricultrices",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Agricultrices",
+    "valeur_reference": "0.00",
+    "cible_finale": "2000.00",
+    "source_verification": "Registres",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 15,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#12",
+    "libelle": "Personnes bénéficiant de services et produits nutritionnels améliorés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "4000.00",
+    "source_verification": "Enquêtes",
+    "frequence_collecte": "Annuel",
+    "responsable": "Nutrition",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 16,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#12.F",
+    "libelle": "Dont femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Femmes",
+    "valeur_reference": "0.00",
+    "cible_finale": "3000.00",
+    "source_verification": "Enquêtes",
+    "frequence_collecte": "Annuel",
+    "responsable": "Nutrition",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 17,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#10",
+    "libelle": "Personnes bénéficiant d'un soutien au développement des capacités",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "9885.00",
+    "source_verification": "Listes formation",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Formation",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 18,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#10.F",
+    "libelle": "Dont femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Femmes",
+    "valeur_reference": "0.00",
+    "cible_finale": "5720.00",
+    "source_verification": "Listes formation",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Formation",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 19,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#4",
+    "libelle": "Nombre d'organisations de producteurs soutenues",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "OP",
+    "valeur_reference": "0.00",
+    "cible_finale": "286.00",
+    "source_verification": "Registres OP",
+    "frequence_collecte": "Semestriel",
+    "responsable": "OP",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 20,
+  "fields": {
+    "sous_composante": 1,
+    "code": "GAFSP#11",
+    "libelle": "Nombre de produits politiques achevés dans le cadre du projet",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Produits",
+    "valeur_reference": "1.00",
+    "cible_finale": "4.00",
+    "source_verification": "Rapports",
+    "frequence_collecte": "Annuel",
+    "responsable": "Coord",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 21,
+  "fields": {
+    "sous_composante": 2,
+    "code": "DEV#1",
+    "libelle": "Niveau d'augmentation des revenus pour exploitants/entreprises bénéficiaires (%)",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EFFET",
+    "unite_mesure": "%",
+    "valeur_reference": "0.00",
+    "cible_finale": "20.00",
+    "source_verification": "Enquêtes",
+    "frequence_collecte": "Annuel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 22,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#1",
+    "libelle": "Nombre de fermes mises à niveau délivrant des formations sur l'AE",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Fermes",
+    "valeur_reference": "6.00",
+    "cible_finale": "20.00",
+    "source_verification": "Rapports",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 23,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#3",
+    "libelle": "Nombre d'entreprises de production d'intrants agroécologiques mises en place",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Entreprises",
+    "valeur_reference": "6.00",
+    "cible_finale": "16.00",
+    "source_verification": "Registres",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 24,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#4",
+    "libelle": "Nombre d'hectares de terres irriguées utilisées par maraîchers",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "50.00",
+    "source_verification": "Terrain",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Technique",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 25,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#6",
+    "libelle": "Nombre d'infrastructures de marché et commercialisation construites",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Infra",
+    "valeur_reference": "0.00",
+    "cible_finale": "15.00",
+    "source_verification": "PV réception",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Infra",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 26,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#7",
+    "libelle": "Nombre d'unités de transformation construites",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Unités",
+    "valeur_reference": "0.00",
+    "cible_finale": "25.00",
+    "source_verification": "PV réception",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Infra",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 27,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#10",
+    "libelle": "Personnes bénéficiant soutien développement capacités leadership/gestion",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "5250.00",
+    "source_verification": "Listes formation",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Formation",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 28,
+  "fields": {
+    "sous_composante": 3,
+    "code": "PROD#11",
+    "libelle": "Personnes bénéficiant soutien développement capacités de plaidoyer",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "100.00",
+    "cible_finale": "185.00",
+    "source_verification": "Listes formation",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "Formation",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 29,
+  "fields": {
+    "sous_composante": 4,
+    "code": "RES#4",
+    "libelle": "Qualité des ouvrages",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Qualitative",
+    "valeur_reference": "0.00",
+    "cible_finale": "0.00",
+    "source_verification": "Inspections",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Qualité",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 30,
+  "fields": {
+    "sous_composante": 4,
+    "code": "RES#4.2",
+    "libelle": "Taux de réalisation",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "%",
+    "valeur_reference": "0.00",
+    "cible_finale": "100.00",
+    "source_verification": "Rapports",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 31,
+  "fields": {
+    "sous_composante": 4,
+    "code": "RES#4.3",
+    "libelle": "Qualité des livrables",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Qualitative",
+    "valeur_reference": "0.00",
+    "cible_finale": "0.00",
+    "source_verification": "Évaluations",
+    "frequence_collecte": "Semestriel",
+    "responsable": "Qualité",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 32,
+  "fields": {
+    "sous_composante": 1,
+    "code": "LÉGENDE:",
+    "libelle": "DEV",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "PROD",
+    "valeur_reference": "0.00",
+    "cible_finale": "0.00",
+    "source_verification": "",
+    "frequence_collecte": "Trimestriel",
+    "responsable": "S&E",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 33,
+  "fields": {
+    "sous_composante": 5,
+    "code": "",
+    "libelle": "1. VENTILATION PAR GENRE - OBJECTIFS GLOBAUX",
+    "type_indicateur": "IMPACT",
+    "niveau": "",
+    "unite_mesure": "",
+    "valeur_reference": null,
+    "cible_finale": null,
+    "source_verification": "",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 34,
+  "fields": {
+    "sous_composante": 5,
+    "code": "IND-GENRE-001",
+    "libelle": "Bénéficiaires directs - Total",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "9885.00",
+    "source_verification": "GAFSP #1",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 35,
+  "fields": {
+    "sous_composante": 5,
+    "code": "IND-GENRE-002",
+    "libelle": "Bénéficiaires directs - Femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "5720.00",
+    "source_verification": "57-59% du total",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 36,
+  "fields": {
+    "sous_composante": 5,
+    "code": "IND-GENRE-003",
+    "libelle": "Services financiers pour femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Femmes",
+    "valeur_reference": "0.00",
+    "cible_finale": "2250.00",
+    "source_verification": "100% femmes",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 37,
+  "fields": {
+    "sous_composante": 15,
+    "code": "IND-1-001",
+    "libelle": "Superficie sous pratiques agroécologiques",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "1250.00",
+    "source_verification": "GAFSP #2",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 38,
+  "fields": {
+    "sous_composante": 15,
+    "code": "IND-1-002",
+    "libelle": "Superficie irriguée",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "50.00",
+    "source_verification": "GAFSP #2",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 39,
+  "fields": {
+    "sous_composante": 15,
+    "code": "IND-1-003",
+    "libelle": "Pratiques résilientes mises en œuvre",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "1062.50",
+    "source_verification": "GAFSP #14",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 40,
+  "fields": {
+    "sous_composante": 16,
+    "code": "IND-1-004",
+    "libelle": "Fermes écoles agroécologiques",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Fermes",
+    "valeur_reference": "6.00",
+    "cible_finale": "20.00",
+    "source_verification": "",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 41,
+  "fields": {
+    "sous_composante": 16,
+    "code": "IND-1-005",
+    "libelle": "Maîtres formateurs recyclés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "40.00",
+    "source_verification": "2 par ferme école",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 42,
+  "fields": {
+    "sous_composante": 16,
+    "code": "IND-1-006",
+    "libelle": "Paysans relais formés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "500.00",
+    "source_verification": "2 par coopérative",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 43,
+  "fields": {
+    "sous_composante": 16,
+    "code": "IND-1-007",
+    "libelle": "Maraîchers formés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "360.00",
+    "cible_finale": "5000.00",
+    "source_verification": "GAFSP #3 - dont 2000 femmes",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 44,
+  "fields": {
+    "sous_composante": 16,
+    "code": "IND-1-008",
+    "libelle": "Taux d'adoption des pratiques",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Pourcentage",
+    "valeur_reference": "0.00",
+    "cible_finale": "70.00",
+    "source_verification": "3500 maraîchers",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 45,
+  "fields": {
+    "sous_composante": 17,
+    "code": "IND-2-001",
+    "libelle": "Espaces de vente aménagés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Espaces",
+    "valeur_reference": "0.00",
+    "cible_finale": "5.00",
+    "source_verification": "GAFSP #7 - Lomé, Atakpamé, Sokodé, Kara, Dapaong",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 46,
+  "fields": {
+    "sous_composante": 17,
+    "code": "IND-2-002",
+    "libelle": "Installations totales",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Installations",
+    "valeur_reference": "0.00",
+    "cible_finale": "40.00",
+    "source_verification": "GAFSP #7 - Transformation, stockage, marché",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 47,
+  "fields": {
+    "sous_composante": 17,
+    "code": "IND-2-003",
+    "libelle": "Chambres froides traditionnelles",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Chambres",
+    "valeur_reference": "0.00",
+    "cible_finale": "5.00",
+    "source_verification": "3 tonnes par chambre",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 48,
+  "fields": {
+    "sous_composante": 17,
+    "code": "IND-2-004",
+    "libelle": "Agriculteurs avec accès marché",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Agriculteurs",
+    "valeur_reference": "0.00",
+    "cible_finale": "5000.00",
+    "source_verification": "GAFSP #8 - dont 2000 femmes",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 49,
+  "fields": {
+    "sous_composante": 17,
+    "code": "IND-2-005",
+    "libelle": "Commerçantes appuyées",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "150.00",
+    "source_verification": "Mise en marché",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 50,
+  "fields": {
+    "sous_composante": 18,
+    "code": "IND-2-006",
+    "libelle": "Unités de transformation renforcées",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Unités",
+    "valeur_reference": "0.00",
+    "cible_finale": "25.00",
+    "source_verification": "Coopératives de femmes (90%+)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 51,
+  "fields": {
+    "sous_composante": 18,
+    "code": "IND-2-007",
+    "libelle": "Subvention par unité",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "USD",
+    "valeur_reference": "0.00",
+    "cible_finale": "7500.00",
+    "source_verification": "Plafond",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 52,
+  "fields": {
+    "sous_composante": 18,
+    "code": "IND-2-008",
+    "libelle": "Production par unité",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Tonnes/mois",
+    "valeur_reference": "0.00",
+    "cible_finale": "3.30",
+    "source_verification": "Tomates transformées",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 53,
+  "fields": {
+    "sous_composante": 19,
+    "code": "IND-3-001",
+    "libelle": "Organisations de producteurs soutenues",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Organisations",
+    "valeur_reference": "0.00",
+    "cible_finale": "286.00",
+    "source_verification": "GAFSP #4",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 54,
+  "fields": {
+    "sous_composante": 19,
+    "code": "IND-3-002",
+    "libelle": "Coopératives structurées",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Coopératives",
+    "valeur_reference": "0.00",
+    "cible_finale": "275.00",
+    "source_verification": "250 producteurs + 25 transformatrices",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 55,
+  "fields": {
+    "sous_composante": 19,
+    "code": "IND-3-003",
+    "libelle": "Unions régionales renforcées",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Unions",
+    "valeur_reference": "0.00",
+    "cible_finale": "5.00",
+    "source_verification": "Gouvernance",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 56,
+  "fields": {
+    "sous_composante": 20,
+    "code": "IND-3-004",
+    "libelle": "Personnes formées en leadership",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "9885.00",
+    "source_verification": "GAFSP #10 - dont 5720 femmes",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 57,
+  "fields": {
+    "sous_composante": 20,
+    "code": "IND-3-005",
+    "libelle": "Leaders et techniciens formés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "185.00",
+    "source_verification": "Leadership et gestion CTOP",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 58,
+  "fields": {
+    "sous_composante": 20,
+    "code": "IND-3-006",
+    "libelle": "Jeunes et femmes leaders",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "100.00",
+    "source_verification": "Parcours spécifique leadership",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 59,
+  "fields": {
+    "sous_composante": 20,
+    "code": "IND-3-007",
+    "libelle": "Directeurs et comptables formés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "EXTRANT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "20.00",
+    "source_verification": "Faîtières membres",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 60,
+  "fields": {
+    "sous_composante": 5,
+    "code": "IND-GENRE-004",
+    "libelle": "Emplois créés pour les femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "ETP",
+    "valeur_reference": "0.00",
+    "cible_finale": "2414.00",
+    "source_verification": "44% des emplois totaux",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 61,
+  "fields": {
+    "sous_composante": 5,
+    "code": "IND-GENRE-005",
+    "libelle": "Coopératives de transformation dirigées par femmes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Coopératives",
+    "valeur_reference": "0.00",
+    "cible_finale": "25.00",
+    "source_verification": "Composante 2",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 62,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-01",
+    "libelle": "Nombre de bénéficiaires directs",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "9885.00",
+    "source_verification": "5720 femmes (58%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 63,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-02",
+    "libelle": "Superficie avec soutien production améliorée",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "1250.00",
+    "source_verification": "",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 64,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-02-IRR",
+    "libelle": "Superficie avec nouveaux services irrigation",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "50.00",
+    "source_verification": "",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 65,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-03",
+    "libelle": "Petits producteurs/transformateurs soutenus",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "5250.00",
+    "source_verification": "2250 femmes (43%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 66,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-04",
+    "libelle": "Organisations de producteurs soutenues",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Organisations",
+    "valeur_reference": "0.00",
+    "cible_finale": "286.00",
+    "source_verification": "",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 67,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-05",
+    "libelle": "Personnes avec accès services financiers",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "2250.00",
+    "source_verification": "2250 femmes (100%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 68,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-07",
+    "libelle": "Installations transformation/stockage/marché",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Installations",
+    "valeur_reference": "0.00",
+    "cible_finale": "40.00",
+    "source_verification": "",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 69,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-08",
+    "libelle": "Agriculteurs avec accès marchés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Agriculteurs",
+    "valeur_reference": "0.00",
+    "cible_finale": "5000.00",
+    "source_verification": "2000 femmes (40%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 70,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-09",
+    "libelle": "Emploi direct fourni (ETP)",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "ETP",
+    "valeur_reference": "0.00",
+    "cible_finale": "5467.00",
+    "source_verification": "2414 femmes (44%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 71,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-10",
+    "libelle": "Personnes avec renforcement capacités",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "9885.00",
+    "source_verification": "5720 femmes (58%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 72,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-11",
+    "libelle": "Produits politiques/notes connaissances",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Documents",
+    "valeur_reference": "1.00",
+    "cible_finale": "4.00",
+    "source_verification": "Perspective genre intégrée",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 73,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-12",
+    "libelle": "Personnes avec produits nutritionnels améliorés",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Personnes",
+    "valeur_reference": "0.00",
+    "cible_finale": "4000.00",
+    "source_verification": "3000 femmes (75%)",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 74,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-13",
+    "libelle": "Agriculteurs recevant intrants/services durables",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Agriculteurs",
+    "valeur_reference": "0.00",
+    "cible_finale": "5000.00",
+    "source_verification": "dont 2000 femmes",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.indicateur",
+  "pk": 75,
+  "fields": {
+    "sous_composante": 21,
+    "code": "GAFSP-14",
+    "libelle": "Pratiques agricoles résilientes",
+    "type_indicateur": "QUANTITATIF",
+    "niveau": "IMPACT",
+    "unite_mesure": "Hectares",
+    "valeur_reference": "0.00",
+    "cible_finale": "1062.50",
+    "source_verification": "Surfaces avec pratiques durables",
+    "frequence_collecte": "",
+    "responsable": "",
+    "actif": true
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 1,
+  "fields": {
+    "annee": 2026,
+    "trimestre": "T1",
+    "date_debut": "2026-01-01",
+    "date_fin": "2026-03-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 2,
+  "fields": {
+    "annee": 2026,
+    "trimestre": "T2",
+    "date_debut": "2026-04-01",
+    "date_fin": "2026-06-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 3,
+  "fields": {
+    "annee": 2026,
+    "trimestre": "T3",
+    "date_debut": "2026-07-01",
+    "date_fin": "2026-09-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 4,
+  "fields": {
+    "annee": 2026,
+    "trimestre": "T4",
+    "date_debut": "2026-10-01",
+    "date_fin": "2026-12-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 5,
+  "fields": {
+    "annee": 2024,
+    "trimestre": "T1",
+    "date_debut": "2024-01-01",
+    "date_fin": "2024-03-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 6,
+  "fields": {
+    "annee": 2024,
+    "trimestre": "T2",
+    "date_debut": "2024-04-01",
+    "date_fin": "2024-06-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 7,
+  "fields": {
+    "annee": 2024,
+    "trimestre": "T3",
+    "date_debut": "2024-07-01",
+    "date_fin": "2024-09-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 8,
+  "fields": {
+    "annee": 2024,
+    "trimestre": "T4",
+    "date_debut": "2024-10-01",
+    "date_fin": "2024-12-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 9,
+  "fields": {
+    "annee": 2025,
+    "trimestre": "T1",
+    "date_debut": "2025-01-01",
+    "date_fin": "2025-03-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 10,
+  "fields": {
+    "annee": 2025,
+    "trimestre": "T2",
+    "date_debut": "2025-04-01",
+    "date_fin": "2025-06-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 11,
+  "fields": {
+    "annee": 2025,
+    "trimestre": "T3",
+    "date_debut": "2025-07-01",
+    "date_fin": "2025-09-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 12,
+  "fields": {
+    "annee": 2025,
+    "trimestre": "T4",
+    "date_debut": "2025-10-01",
+    "date_fin": "2025-12-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 13,
+  "fields": {
+    "annee": 2027,
+    "trimestre": "T1",
+    "date_debut": "2027-01-01",
+    "date_fin": "2027-03-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 14,
+  "fields": {
+    "annee": 2027,
+    "trimestre": "T2",
+    "date_debut": "2027-04-01",
+    "date_fin": "2027-06-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 15,
+  "fields": {
+    "annee": 2027,
+    "trimestre": "T3",
+    "date_debut": "2027-07-01",
+    "date_fin": "2027-09-30",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.periode",
+  "pk": 16,
+  "fields": {
+    "annee": 2027,
+    "trimestre": "T4",
+    "date_debut": "2027-10-01",
+    "date_fin": "2027-12-31",
+    "cloture": false
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 1,
+  "fields": {
+    "indicateur": 21,
+    "periode": 1,
+    "region": "MARITIME",
+    "valeur_realisee": "4.40",
+    "hommes": "1.98",
+    "femmes": "2.42",
+    "commentaire": "Données de test pour MARITIME",
+    "fichier_justificatif": "",
+    "saisi_par": 2,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:29.075Z",
+    "date_modification": "2026-02-08T14:23:29.075Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 2,
+  "fields": {
+    "indicateur": 21,
+    "periode": 1,
+    "region": "PLATEAUX",
+    "valeur_realisee": "3.60",
+    "hommes": "1.62",
+    "femmes": "1.98",
+    "commentaire": "Données de test pour PLATEAUX",
+    "fichier_justificatif": "",
+    "saisi_par": 3,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:32.469Z",
+    "date_modification": "2026-02-08T14:23:32.469Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 3,
+  "fields": {
+    "indicateur": 21,
+    "periode": 1,
+    "region": "CENTRALE",
+    "valeur_realisee": "3.20",
+    "hommes": "1.44",
+    "femmes": "1.76",
+    "commentaire": "Données de test pour CENTRALE",
+    "fichier_justificatif": "",
+    "saisi_par": 4,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:32.617Z",
+    "date_modification": "2026-02-08T14:23:32.617Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 4,
+  "fields": {
+    "indicateur": 21,
+    "periode": 1,
+    "region": "KARA",
+    "valeur_realisee": "4.00",
+    "hommes": "1.80",
+    "femmes": "2.20",
+    "commentaire": "Données de test pour KARA",
+    "fichier_justificatif": "",
+    "saisi_par": 5,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:35.910Z",
+    "date_modification": "2026-02-08T14:23:35.911Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 5,
+  "fields": {
+    "indicateur": 21,
+    "periode": 1,
+    "region": "SAVANES",
+    "valeur_realisee": "2.80",
+    "hommes": "1.26",
+    "femmes": "1.54",
+    "commentaire": "Données de test pour SAVANES",
+    "fichier_justificatif": "",
+    "saisi_par": 6,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:40.794Z",
+    "date_modification": "2026-02-08T14:23:40.794Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 6,
+  "fields": {
+    "indicateur": 1,
+    "periode": 1,
+    "region": "MARITIME",
+    "valeur_realisee": "2174.70",
+    "hommes": "978.62",
+    "femmes": "1196.09",
+    "commentaire": "Données de test pour MARITIME",
+    "fichier_justificatif": "",
+    "saisi_par": 2,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:41.341Z",
+    "date_modification": "2026-02-08T14:23:41.341Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 7,
+  "fields": {
+    "indicateur": 1,
+    "periode": 1,
+    "region": "PLATEAUX",
+    "valeur_realisee": "1779.30",
+    "hommes": "800.68",
+    "femmes": "978.62",
+    "commentaire": "Données de test pour PLATEAUX",
+    "fichier_justificatif": "",
+    "saisi_par": 3,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:41.502Z",
+    "date_modification": "2026-02-08T14:23:41.502Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 8,
+  "fields": {
+    "indicateur": 1,
+    "periode": 1,
+    "region": "CENTRALE",
+    "valeur_realisee": "1581.60",
+    "hommes": "711.72",
+    "femmes": "869.88",
+    "commentaire": "Données de test pour CENTRALE",
+    "fichier_justificatif": "",
+    "saisi_par": 4,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:41.706Z",
+    "date_modification": "2026-02-08T14:23:41.706Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 9,
+  "fields": {
+    "indicateur": 1,
+    "periode": 1,
+    "region": "KARA",
+    "valeur_realisee": "1977.00",
+    "hommes": "889.65",
+    "femmes": "1087.35",
+    "commentaire": "Données de test pour KARA",
+    "fichier_justificatif": "",
+    "saisi_par": 5,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:41.855Z",
+    "date_modification": "2026-02-08T14:23:41.855Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 10,
+  "fields": {
+    "indicateur": 1,
+    "periode": 1,
+    "region": "SAVANES",
+    "valeur_realisee": "1383.90",
+    "hommes": "622.75",
+    "femmes": "761.14",
+    "commentaire": "Données de test pour SAVANES",
+    "fichier_justificatif": "",
+    "saisi_par": 6,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:42.095Z",
+    "date_modification": "2026-02-08T14:23:42.095Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 11,
+  "fields": {
+    "indicateur": 2,
+    "periode": 1,
+    "region": "MARITIME",
+    "valeur_realisee": "1258.40",
+    "hommes": "566.28",
+    "femmes": "692.12",
+    "commentaire": "Données de test pour MARITIME",
+    "fichier_justificatif": "",
+    "saisi_par": 2,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:42.297Z",
+    "date_modification": "2026-02-08T14:23:42.297Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 12,
+  "fields": {
+    "indicateur": 2,
+    "periode": 1,
+    "region": "PLATEAUX",
+    "valeur_realisee": "1029.60",
+    "hommes": "463.32",
+    "femmes": "566.28",
+    "commentaire": "Données de test pour PLATEAUX",
+    "fichier_justificatif": "",
+    "saisi_par": 3,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:42.770Z",
+    "date_modification": "2026-02-08T14:23:42.770Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 13,
+  "fields": {
+    "indicateur": 2,
+    "periode": 1,
+    "region": "CENTRALE",
+    "valeur_realisee": "915.20",
+    "hommes": "411.84",
+    "femmes": "503.36",
+    "commentaire": "Données de test pour CENTRALE",
+    "fichier_justificatif": "",
+    "saisi_par": 4,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:43.191Z",
+    "date_modification": "2026-02-08T14:23:43.191Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 14,
+  "fields": {
+    "indicateur": 2,
+    "periode": 1,
+    "region": "KARA",
+    "valeur_realisee": "1144.00",
+    "hommes": "514.80",
+    "femmes": "629.20",
+    "commentaire": "Données de test pour KARA",
+    "fichier_justificatif": "",
+    "saisi_par": 5,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:43.474Z",
+    "date_modification": "2026-02-08T14:23:43.474Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 15,
+  "fields": {
+    "indicateur": 2,
+    "periode": 1,
+    "region": "SAVANES",
+    "valeur_realisee": "800.80",
+    "hommes": "360.36",
+    "femmes": "440.44",
+    "commentaire": "Données de test pour SAVANES",
+    "fichier_justificatif": "",
+    "saisi_par": 6,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:43.769Z",
+    "date_modification": "2026-02-08T14:23:43.769Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 16,
+  "fields": {
+    "indicateur": 17,
+    "periode": 1,
+    "region": "MARITIME",
+    "valeur_realisee": "2174.70",
+    "hommes": "978.62",
+    "femmes": "1196.09",
+    "commentaire": "Données de test pour MARITIME",
+    "fichier_justificatif": "",
+    "saisi_par": 2,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:43.933Z",
+    "date_modification": "2026-02-08T14:23:43.933Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 17,
+  "fields": {
+    "indicateur": 17,
+    "periode": 1,
+    "region": "PLATEAUX",
+    "valeur_realisee": "1779.30",
+    "hommes": "800.68",
+    "femmes": "978.62",
+    "commentaire": "Données de test pour PLATEAUX",
+    "fichier_justificatif": "",
+    "saisi_par": 3,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:44.085Z",
+    "date_modification": "2026-02-08T14:23:44.085Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 18,
+  "fields": {
+    "indicateur": 17,
+    "periode": 1,
+    "region": "CENTRALE",
+    "valeur_realisee": "1581.60",
+    "hommes": "711.72",
+    "femmes": "869.88",
+    "commentaire": "Données de test pour CENTRALE",
+    "fichier_justificatif": "",
+    "saisi_par": 4,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:44.244Z",
+    "date_modification": "2026-02-08T14:23:44.244Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 19,
+  "fields": {
+    "indicateur": 17,
+    "periode": 1,
+    "region": "KARA",
+    "valeur_realisee": "1977.00",
+    "hommes": "889.65",
+    "femmes": "1087.35",
+    "commentaire": "Données de test pour KARA",
+    "fichier_justificatif": "",
+    "saisi_par": 5,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:44.475Z",
+    "date_modification": "2026-02-08T14:23:44.475Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 20,
+  "fields": {
+    "indicateur": 17,
+    "periode": 1,
+    "region": "SAVANES",
+    "valeur_realisee": "1383.90",
+    "hommes": "622.75",
+    "femmes": "761.14",
+    "commentaire": "Données de test pour SAVANES",
+    "fichier_justificatif": "",
+    "saisi_par": 6,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:44.735Z",
+    "date_modification": "2026-02-08T14:23:44.735Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 21,
+  "fields": {
+    "indicateur": 18,
+    "periode": 1,
+    "region": "MARITIME",
+    "valeur_realisee": "1258.40",
+    "hommes": "566.28",
+    "femmes": "692.12",
+    "commentaire": "Données de test pour MARITIME",
+    "fichier_justificatif": "",
+    "saisi_par": 2,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:45.016Z",
+    "date_modification": "2026-02-08T14:23:45.016Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 22,
+  "fields": {
+    "indicateur": 18,
+    "periode": 1,
+    "region": "PLATEAUX",
+    "valeur_realisee": "1029.60",
+    "hommes": "463.32",
+    "femmes": "566.28",
+    "commentaire": "Données de test pour PLATEAUX",
+    "fichier_justificatif": "",
+    "saisi_par": 3,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:45.161Z",
+    "date_modification": "2026-02-08T14:23:45.161Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 23,
+  "fields": {
+    "indicateur": 18,
+    "periode": 1,
+    "region": "CENTRALE",
+    "valeur_realisee": "915.20",
+    "hommes": "411.84",
+    "femmes": "503.36",
+    "commentaire": "Données de test pour CENTRALE",
+    "fichier_justificatif": "",
+    "saisi_par": 4,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:45.332Z",
+    "date_modification": "2026-02-08T14:23:45.332Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 24,
+  "fields": {
+    "indicateur": 18,
+    "periode": 1,
+    "region": "KARA",
+    "valeur_realisee": "10.00",
+    "hommes": "514.80",
+    "femmes": "629.20",
+    "commentaire": "Données de test pour KARA",
+    "fichier_justificatif": "",
+    "saisi_par": 5,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:45.879Z",
+    "date_modification": "2026-02-10T09:26:17.086Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 25,
+  "fields": {
+    "indicateur": 18,
+    "periode": 1,
+    "region": "SAVANES",
+    "valeur_realisee": "800.80",
+    "hommes": "360.36",
+    "femmes": "440.44",
+    "commentaire": "Données de test pour SAVANES",
+    "fichier_justificatif": "",
+    "saisi_par": 6,
+    "valide": true,
+    "valide_par": null,
+    "date_saisie": "2026-02-08T14:23:46.044Z",
+    "date_modification": "2026-02-08T14:23:46.044Z"
+  }
+},
+{
+  "model": "monitoring.realisation",
+  "pk": 26,
+  "fields": {
+    "indicateur": 23,
+    "periode": 1,
+    "region": "MARITIME",
+    "valeur_realisee": "2.00",
+    "hommes": "0.00",
+    "femmes": "0.00",
+    "commentaire": "",
+    "fichier_justificatif": "",
+    "saisi_par": 2,
+    "valide": false,
+    "valide_par": null,
+    "date_saisie": "2026-02-10T10:11:40.885Z",
+    "date_modification": "2026-02-10T10:11:40.885Z"
+  }
+}
+]

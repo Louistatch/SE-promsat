@@ -3,11 +3,9 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-.Python
 *.egg-info/
 dist/
 build/
-.eggs/
 
 # Environnements virtuels
 venv/
@@ -29,18 +27,19 @@ staticfiles/
 firebase-credentials.json
 firebase-credentials-base64.txt
 
-# Streamlit
-.streamlit/
+# Streamlit secrets (ne jamais pousser)
+.streamlit/secrets.toml
+dashboard_app/.streamlit/secrets.toml
 
 # Données sensibles
 *.xlsx
 *.csv
+*.gpkg
 
 # IDE
 .vscode/
 .idea/
 *.swp
-*.swo
 
 # OS
 .DS_Store
@@ -48,3 +47,7 @@ Thumbs.db
 
 # Docker
 *.override.yml
+
+# Anciens dossiers (remplacés par la structure à plat)
+backend/
+dashboard/

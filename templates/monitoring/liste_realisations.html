@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Réalisations - ProSMAT{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1><i class="bi bi-table"></i> Liste des Réalisations</h1>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'monitoring:saisie_realisation' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nouvelle Saisie
+            </a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label for="periode" class="form-label">Période</label>
+                    <select class="form-select" id="periode" name="periode">
+                        <option value="">Toutes les périodes</option>
+                        {% for periode in periodes %}
+                        <option value="{{ periode.id }}">{{ periode }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="valide" class="form-label">Statut</label>
+                    <select class="form-select" id="valide" name="valide">
+                        <option value="">Tous</option>
+                        <option value="oui">Validé</option>
+                        <option value="non">En attente</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Filtrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Code</th>
+                            <th>Indicateur</th>
+                            <th>Période</th>
+                            <th>Région</th>
+                            <th>Valeur</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for realisation in realisations %}
+                        <tr>
+                            <td><strong>{{ realisation.indicateur.code }}</strong></td>
+                            <td>{{ realisation.indicateur.libelle|truncatewords:8 }}</td>
+                            <td>{{ realisation.periode }}</td>
+                            <td>{{ realisation.get_region_display }}</td>
+                            <td><strong>{{ realisation.valeur_realisee }}</strong></td>
+                            <td>
+                                {% if realisation.valide %}
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i> Validé
+                                </span>
+                                {% else %}
+                                <span class="badge bg-warning">
+                                    <i class="bi bi-clock"></i> En attente
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td>{{ realisation.date_saisie|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <a href="{% url 'monitoring:modifier_realisation' realisation.pk %}" 
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                {% if user.has_full_access and not realisation.valide %}
+                                <form method="post" action="{% url 'monitoring:valider_realisation' realisation.pk %}" 
+                                      style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-success" 
+                                            onclick="return confirm('Valider cette réalisation ?')">
+                                        <i class="bi bi-check-lg"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">
+                                <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                                <p>Aucune réalisation trouvée</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
